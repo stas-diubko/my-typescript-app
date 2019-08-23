@@ -6,7 +6,7 @@ export function* doInit({}): IterableIterator<any> {
      let {name, email, pass} =  action.data;
 
 
-     try{
+     try {
       const data = yield call(() => {
         return fetch('http://localhost:3000/users', {
           method: 'POST', 

@@ -14,7 +14,7 @@ export function loginReducer(state: LoginState = initialState, action: any) {
         case 'DO_LOGIN': {
             return {
                 ...state,
-                loading: true
+                isLoading: true
               };
         }
         case 'LOGIN_FAILED': {

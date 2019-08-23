@@ -5,9 +5,12 @@ export class LoginComponent extends React.Component<any,any> {
         error: '',
         email: '',
         pass: '',
-        isLoading: false
+        isLoading: false,
+       
     }
   
+    
+
     handle = (event: any) =>
     this.setState({ [event.target.name]: event.target.value 
     } as any)
@@ -17,8 +20,15 @@ export class LoginComponent extends React.Component<any,any> {
         const { doLogin } = this.props;
         doLogin({ email: this.state.email, pass: this.state.pass });
         // console.log({ name: this.state.email,  pass: this.state.pass })
+        if (this.state.isLoading === true){
+          document.location.href = 'http://localhost:3001/home';
+        }
     }
-
+    // redir = (e:any) => {
+    //   if (this.state.isLoading === true){
+    //     document.location.href = 'http://localhost:3001/home';
+    //   }
+    // }
     render () {
       return (
         <div >
@@ -28,6 +38,7 @@ export class LoginComponent extends React.Component<any,any> {
               <input type="password" name="pass" placeholder="User Pass" onChange={this.handle} value={this.state.pass}/> 
               <button onClick={(e:any)=>this.handleSubmit(e)}>Log In</button>
           </form>
+          {/* <button onClick={this.redir}>click</button> */}
         </div>
       );
     }
