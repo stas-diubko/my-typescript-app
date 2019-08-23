@@ -1,0 +1,37 @@
+
+import { Store, createStore, applyMiddleware  } from "redux";
+import { composeWithDevTools } from "redux-devtools-extension";
+import rootReducer, { RootState } from "./rootReducer";
+import {doInit} from "./registration/registrationSagas";
+import createSagaMiddleware from "redux-saga";
+import { all } from "redux-saga/effects";
+import { any } from "prop-types";
+import { doLogin } from "./login/loginSagas";
+
+export default function configureStore(
+    initialState?: RootState
+  ): Store<RootState> {
+    
+    const sagaMiddleware = createSagaMiddleware();
+    const middlewares = [sagaMiddleware];
+
+    const composeEnhancers = composeWithDevTools({});
+
+  const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+  
+    const store = createStore(rootReducer, initialState!, enhancer);
+    
+    if (module.hot) {
+      module.hot.accept("./rootReducer", () => {
+          const nextRootReducer = require("./rootReducer").default;
+          store.replaceReducer(nextRootReducer);
+        });
+      }
+    sagaMiddleware.run(function*() {
+        yield all([
+          doInit({}),
+          doLogin()
+        ]);
+      });
+    return store;
+  }
