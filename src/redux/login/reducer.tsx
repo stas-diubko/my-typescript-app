@@ -17,6 +17,15 @@ export function loginReducer(state: LoginState = initialState, action: any) {
                 isLoading: true
               };
         }
+
+        case 'LOGIN_SUCCESS': {
+            const { data } = action.payload;
+            return {
+            ...state,
+            isLoading: true
+            };
+        }
+
         case 'LOGIN_FAILED': {
             const { data } = action.payload;
             return {
@@ -27,19 +36,10 @@ export function loginReducer(state: LoginState = initialState, action: any) {
             };
           }
 
-        case `@@login/LOGIN_SUCCESS`: {
-            const { data } = action.payload;
-            return {
-            ...state,
-            token: data,
-            loading: false
-            };
-        }
-    
         default:
             return state;
         
     }
 }
 
-// export const login = (state: RootState) => state.login;
+export const login = (state: RootState) => state.login;
