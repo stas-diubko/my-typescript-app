@@ -20,13 +20,13 @@ export class App extends React.Component {
         <header className="App-header">
               <Router>
               <ul id='shed'>
-                <li><Link to="/">Registration</Link></li>
-                <li><Link to="/login">Log In</Link></li>
+                <li><Link to="/registration">Registration</Link></li>
+                <li><Link to="/">Log In</Link></li>
                 <li><Link to="/home">Home</Link></li>
                 <li><Link to="/about">About</Link></li>
               </ul>
-              <Route exact path="/" component={Register} />
-              <Route path="/login" component={Login} />
+              <Route exact path="/" component={Login} />
+              <Route path="/registration" component={Register} />
               <Route path="/home" component={Home} />
               <Route path="/about" component={About} />  
             </Router>

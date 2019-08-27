@@ -26,13 +26,28 @@ export function* doLogin(): IterableIterator<any> {
                     // })
                     
             } )
-            yield console.log(dataLogin[0].name)
-            yield put({
-                type: 'LOGIN_SUCCESS',
-                payload: {
-                    isLoading: true
-                }
-            })
+            let targetUserLog = dataLogin.filter((i:any) => i.email === email);
+            yield console.log(targetUserLog)
+
+             if (targetUserLog.length === 0) {
+                alert('User with this email does not exist, go to registration form')
+                
+            }  
+            else if (pass === targetUserLog[0].pass) {
+                yield put({
+                    type: 'LOGIN_SUCCESS',
+                    payload: {
+                        isLoading: true
+                    }
+                })
+                localStorage.setItem('token', 'qwerty');
+            } 
+            else {
+                alert('password is not correct, try again')
+            }
+
+            // yield console.log(targetUserLog)
+            
         } 
         
         catch (error) {

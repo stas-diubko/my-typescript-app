@@ -2,19 +2,43 @@ import React from 'react';
 import { LoginState, LoginRequest } from '../../redux/login/types';
 
 import { login } from '../../redux/login/reducer';
+import {Redirect} from 'react-router-dom'
 
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
   email: string;
   pass: any;
   isLoading: boolean;
+  passError: any;
+  emailError: any; 
 }
 export class LoginComponent extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
         error: '',
         email: '',
         pass: '',
-        isLoading: false      
+        isLoading: false,
+        passError: '',
+        emailError: '',      
+    }
+
+    validate = () => {
+      
+      let passError = '';
+      let emailError = '';
+      let regEmail = /^\w+([\.-]?\w+)*@(((([a-z0-9]{2,})|([a-z0-9][-][a-z0-9]+))[\.][a-z0-9])|([a-z0-9]+[-]?))+[a-z0-9]+\.([a-z]{2}|(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum))$/i;
+      if (!regEmail.test(this.state.email)){
+        emailError = 'Email is invalid'
+      }
+      if (this.state.pass.length < 5){
+        passError = 'Pass must be more than four characters'
+      }
+      
+      if ( passError || emailError) {
+        this.setState({passError, emailError})
+        return false;
+      }
+      return true;
     }
   
     handle = (event: any) =>
@@ -23,26 +47,42 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
      
     handleSubmit = (e:any) => { 
         e.preventDefault();
-        const { doLogin } = this.props;
-        doLogin({ email: this.state.email, pass: this.state.pass });
-        
-        
+        const isValidLogin = this.validate();
+        if (isValidLogin) {
+          const { doLogin } = this.props;
+          doLogin({ email: this.state.email, pass: this.state.pass });
+          this.setState({
+            email: '',
+            pass: '',
+            passError: '',
+            emailError: '',
+          })
+        }   
     }
    
     render () {
-      // console.log(this.props.isLoading)
-      // if (this.props.isLoading === true){
-      //       document.location.href = 'http://localhost:3001/home';
+      
+      // if (this.props.isLoading){
+      //       return <Redirect to="/home"/>
       // }
+
+
+      let token = localStorage.getItem('token');
+      if (token === 'qwerty'){
+        return <Redirect to="/home"/>
+      }
+
       return (
         <div >
             <h3>Login</h3>
             <form >
-              <input type="email" name="email" placeholder="User Email" onChange={this.handle} value={this.state.email}/>              
-              <input type="password" name="pass" placeholder="User Pass" onChange={this.handle} value={this.state.pass}/> 
+              <input type="email" name="email" placeholder="User Email" onChange={this.handle} value={this.state.email}/>
+              <div className="form-error">{this.state.emailError}</div>              
+              <input type="password" name="pass" placeholder="User Pass" onChange={this.handle} value={this.state.pass}/>
+              <div className="form-error">{this.state.passError}</div>  
               <button onClick={(e:any)=>this.handleSubmit(e)}>Log In</button>
           </form>
-          {/* <button onClick={this.redir}>click</button> */}
+         
         </div>
       );
     }

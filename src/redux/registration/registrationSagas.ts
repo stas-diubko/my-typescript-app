@@ -4,24 +4,34 @@ import { put, takeEvery, call } from "redux-saga/effects";
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
      let {name, email, pass} =  action.data;
-
-
      try {
-      const data = yield call(() => {
-        return fetch('http://localhost:3000/users', {
-          method: 'POST', 
-          headers: {
-              'Content-Type': 'application/json',
-            },
-          body: JSON.stringify({name, email, pass}),
-        })      
-        })
-        // console.log(data);
-        // console.log({name, email, pass})
+      let dataRegister = yield call (() => { 
+        return fetch('http://localhost:3000/users')
+              .then(res => res.json())
+       })
+        let targetUser = dataRegister.filter((i:any) => i.email === email);
+        // console.log(targetUser.length)
+        
+        if (targetUser.length === 0) {
+              const data = yield call(() => {
+              return fetch('http://localhost:3000/users', {
+                method: 'POST', 
+                headers: {
+                    'Content-Type': 'application/json',
+                  },
+                body: JSON.stringify({name, email, pass}),
+              })      
+              })
+              alert('User created');
+              document.location.href = 'http://localhost:3001';
+        }
+        else {
+          alert('User with this email already exists, enter another email')
+        } 
       yield put({
         type: `@@register/SUCCESSFULL`,
         payload: {
-          data: data
+          // data: data
         }
       });
      }
@@ -33,7 +43,6 @@ export function* doInit({}): IterableIterator<any> {
         }
       });
      }
-
     });
   }
 

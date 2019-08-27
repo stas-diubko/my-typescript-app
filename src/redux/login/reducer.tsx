@@ -6,7 +6,9 @@ export const initialState: LoginState = {
     email: "",
     pass: "",
     error: "",
-    isLoading: false
+    isLoading: false,
+    passError: '',
+    emailError: '',
 };
 
 export function loginReducer(state: LoginState = initialState, action: any) {
@@ -14,7 +16,7 @@ export function loginReducer(state: LoginState = initialState, action: any) {
         case 'DO_LOGIN': {
             return {
                 ...state,
-                isLoading: true
+                
               };
         }
 
@@ -22,7 +24,7 @@ export function loginReducer(state: LoginState = initialState, action: any) {
             const { data } = action.payload;
             return {
             ...state,
-            isLoading: true
+            isLoading: true,
             };
         }
 
@@ -31,10 +33,10 @@ export function loginReducer(state: LoginState = initialState, action: any) {
             return {
               ...state,
               data,
-              loading: false,
+              isLoading: false,
               error: "error"
             };
-          }
+        }
 
         default:
             return state;

@@ -14,6 +14,8 @@ export enum LoginActions {
     pass: string;
     isLoading: boolean;
     error: string;
+    passError: any;
+    emailError: any;
   }
   
 //   export interface DoLoginProps {
