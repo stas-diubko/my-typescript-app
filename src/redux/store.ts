@@ -17,7 +17,7 @@ export default function configureStore(
 
     const composeEnhancers = composeWithDevTools({});
 
-  const enhancer = composeEnhancers(applyMiddleware(...middlewares));
+    const enhancer = composeEnhancers(applyMiddleware(...middlewares));
   
     const store = createStore(rootReducer, initialState!, enhancer);
     

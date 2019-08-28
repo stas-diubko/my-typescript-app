@@ -1,7 +1,11 @@
 import React from 'react';
 import './registration.css';
+import { Redirect } from 'react-router';
+import { RegisterState, RegisterRequest } from '../../redux/registration/types';
+import LinearDeterminate from '../loader/loader';
 
-const initialState = {
+export interface RegisterProps {
+  doInit: (data: RegisterRequest) => object;
   error: '',
   name: '',
   pass: '',
@@ -9,10 +13,23 @@ const initialState = {
   nameError: '',
   passError: '',
   emailError: '',
+  isRegister: boolean,
+  isLoader: boolean,
 }
 
-export class Register extends React.Component<any,any>  {
-  state = initialState;
+export class Register extends React.Component<RegisterProps, RegisterState>  {
+  state: RegisterState = {
+    users: {},
+    error: '',
+    name: '',
+    pass: '',
+    email: '',
+    nameError: '',
+    passError: '',
+    emailError: '',
+    isRegister: false,
+    isLoader: false,
+  };
   handle = (event: any) =>
     this.setState({ [event.target.name]: event.target.value 
     } as any)
@@ -44,14 +61,38 @@ export class Register extends React.Component<any,any>  {
     if (isValid) {
       const { doInit } = this.props;
       doInit({ name: this.state.name, email: this.state.email, pass: this.state.pass });
-      this.setState(initialState)
+      this.setState(this.state)
     }
   }
-   
+
+//   timeout() {
+//     setTimeout(function(){
+//         // console.log('Test');
+//         return {<Redirect to="/"/>}
+//     }, 2000);
+// }
+
+
+style = {
+  display: 'none',
+}
   render () {
+    // console.log(this.props.isRegister);
+    
+
+    if (this.props.isLoader){
+     
+      setTimeout(function(){
+        console.log('Test');
+        return <Redirect to="/"/>
+    }, 2000);
+      // return <Redirect to="/"/>
+    }
+
     return (
       <div className="Registr">
-          <h3>Registration</h3>
+        <div className="loader" style={this.style}><LinearDeterminate/></div>  
+          <h3>Registration</h3>          
           <form >
               <input type="text" name="name" placeholder="Your Name" onChange={this.handle} value={this.state.name}/>   
               <div className="form-error">{this.state.nameError}</div>           

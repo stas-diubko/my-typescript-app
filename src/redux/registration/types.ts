@@ -9,8 +9,22 @@ export enum RegisterActions {
 
   
 export interface RegisterState {
+    name: string;
+    nameError: string;
+    passError: string;
+    emailError: string;
     users: {};
     error: string;
+    email: any;
+    pass: any;
+    isRegister:boolean;
+    isLoader: boolean,
+  }
+
+  export interface RegisterRequest {
+    name: string;
+    email: string;
+    pass: string;
   }
 
 // export interface RegisterState extends BaseState {

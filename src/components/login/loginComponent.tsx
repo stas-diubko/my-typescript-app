@@ -2,7 +2,9 @@ import React from 'react';
 import { LoginState, LoginRequest } from '../../redux/login/types';
 
 import { login } from '../../redux/login/reducer';
-import {Redirect} from 'react-router-dom'
+import {Redirect, Link} from 'react-router-dom'
+import configureStore from '../../redux/store';
+// import HomeComponent from '../home/homeComponent';
 
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
@@ -11,12 +13,14 @@ export interface LoginProps {
   isLoading: boolean;
   passError: any;
   emailError: any; 
+  emailFromRegister: any;
+  passFromRegister: any;
 }
 export class LoginComponent extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
         error: '',
-        email: '',
-        pass: '',
+        email: this.props.emailFromRegister,
+        pass: this.props.passFromRegister,
         isLoading: false,
         passError: '',
         emailError: '',      
@@ -59,35 +63,27 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
           })
         }   
     }
-   
+
     render () {
-      
-      // if (this.props.isLoading){
-      //       return <Redirect to="/home"/>
-      // }
-
-
-      let token = localStorage.getItem('token');
-      if (token === 'qwerty'){
-        return <Redirect to="/home"/>
-      }
-
-      return (
+      if (this.props.isLoading){
+            return <Redirect to="/home"/>        
+      }   
+      return (       
         <div >
-            <h3>Login</h3>
-            <form >
+          <ul>
+            <li><Link to="/registration">Registration</Link></li>
+          </ul>
+          <h3>Login</h3>
+          <form >
               <input type="email" name="email" placeholder="User Email" onChange={this.handle} value={this.state.email}/>
               <div className="form-error">{this.state.emailError}</div>              
               <input type="password" name="pass" placeholder="User Pass" onChange={this.handle} value={this.state.pass}/>
               <div className="form-error">{this.state.passError}</div>  
               <button onClick={(e:any)=>this.handleSubmit(e)}>Log In</button>
-          </form>
-         
+          </form> 
         </div>
       );
     }
-    
-   
   }
   
   export default LoginComponent;

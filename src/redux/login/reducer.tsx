@@ -2,7 +2,7 @@ import { LoginState } from "./types";
 import { RootState } from "../rootReducer";
 
 
-export const initialState: LoginState = {
+export const initialStateLog: LoginState = {
     email: "",
     pass: "",
     error: "",
@@ -11,7 +11,7 @@ export const initialState: LoginState = {
     emailError: '',
 };
 
-export function loginReducer(state: LoginState = initialState, action: any) {
+export function loginReducer(state: LoginState = initialStateLog, action: any) {
     switch (action.type) {
         case 'DO_LOGIN': {
             return {
@@ -21,10 +21,13 @@ export function loginReducer(state: LoginState = initialState, action: any) {
         }
 
         case 'LOGIN_SUCCESS': {
-            const { data } = action.payload;
+            const dataLog = action.payload
+            // console.log(dataLog.email)
             return {
             ...state,
+            email: dataLog.email,
             isLoading: true,
+            
             };
         }
 

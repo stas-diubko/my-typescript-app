@@ -11,23 +11,10 @@ export function* doLogin(): IterableIterator<any> {
             let dataLogin = yield call (() => {
                 return fetch('http://localhost:3000/users')
                         .then(res => res.json())
-                    // .then(function(response) {
-                    //     return response.json();
-                    // })
-                    // .then(function(myJson) {
-                    //     let dataUsers = JSON.stringify(myJson);
-                    //     let arrUsers  = JSON.parse(dataUsers);
-                    //     let one = arrUsers.filter((i:any) => i.email === email);                   
-                    //     console.log(one[0]) 
-                    //     if (one[0].pass === pass) {
-                    //         // isLoading = true
-                    //         // document.location.href = 'http://localhost:3001/home';
-                    //     }
-                    // })
                     
             } )
             let targetUserLog = dataLogin.filter((i:any) => i.email === email);
-            yield console.log(targetUserLog)
+            // yield console.log(targetUserLog)
 
              if (targetUserLog.length === 0) {
                 alert('User with this email does not exist, go to registration form')
@@ -37,17 +24,14 @@ export function* doLogin(): IterableIterator<any> {
                 yield put({
                     type: 'LOGIN_SUCCESS',
                     payload: {
-                        isLoading: true
+                        isLoading: true,
+                        email: targetUserLog[0].email
                     }
                 })
-                localStorage.setItem('token', 'qwerty');
             } 
             else {
                 alert('password is not correct, try again')
-            }
-
-            // yield console.log(targetUserLog)
-            
+            }   
         } 
         
         catch (error) {

@@ -6,7 +6,9 @@ import { doLogin } from "../redux/login/actions";
 const mapStateToProps = (state: RootState) => ({
     email: state.login.email,
     pass: state.login.pass,
-    isLoading: state.login.isLoading
+    isLoading: state.login.isLoading,
+    emailFromRegister: state.register.email,
+    passFromRegister: state.register.pass,
   });
   
   export default connect(

@@ -2,3 +2,21 @@
     display: flex;
     flex-direction: column;
 }
+
+.home-header {
+    /* width: 100%; */
+    display: flex;
+    background-color: bisque;
+    justify-content: space-between;
+    padding: 10px;
+}
+
+.user-data {
+    background-color: lightyellow;
+    min-width: 100px;
+    /* border: 1px solid yellowgreen; */
+    border-radius: 5px;
+    padding: 5px;
+    display: flex;
+    align-items: center;
+}

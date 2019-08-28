@@ -23,17 +23,20 @@ export function* doInit({}): IterableIterator<any> {
               })      
               })
               alert('User created');
-              document.location.href = 'http://localhost:3001';
+              yield put({
+                type: `@@register/SUCCESSFULL`,
+                payload: {
+                  email: email,
+                  pass: pass,
+                  isRegister: true,
+                  isLoader: true
+                }
+              });
         }
         else {
           alert('User with this email already exists, enter another email')
         } 
-      yield put({
-        type: `@@register/SUCCESSFULL`,
-        payload: {
-          // data: data
-        }
-      });
+     
      }
      catch(e){
       yield put({

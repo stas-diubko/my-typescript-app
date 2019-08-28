@@ -7,7 +7,8 @@ import { doInit } from "../redux/registration/actions";
 const mapStateToProps = (state: RootState) => ({
    
     users: state.register.users,
-    
+    isRegister: state.register.isRegister,
+    isLoader: state.register.isLoader
   });
 
 

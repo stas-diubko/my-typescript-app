@@ -2,8 +2,16 @@ import { RegisterState } from "./types";
 import { RootState } from "../rootReducer";
 
 export const initialState: RegisterState = {   
-    users:{},
-    error: "",
+    users: {},
+    error: '',
+    name: '',
+    pass: '',
+    email: '',
+    nameError: '',
+    passError: '',
+    emailError: '',
+    isRegister: false,
+    isLoader: false,
   };
 
 export function registerReducer (state: RegisterState = initialState, action: any) {
@@ -12,10 +20,14 @@ export function registerReducer (state: RegisterState = initialState, action: an
             return initialState;
         }
         case '@@register/SUCCESSFULL': {
-            const {data} = action.payload
+            const data = action.payload;
+            // console.log(data)
             return {
                 ...state,
-                users: data 
+                email: data.email,
+                pass: data.pass,
+                isRegister: data.isRegister,
+                isLoader: data.isLoader
             };
         }
         case '@@register/ERROR_OCCURED': {
