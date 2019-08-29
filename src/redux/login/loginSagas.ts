@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { any } from "prop-types";
+import { delay } from "q";
 
  
 export function* doLogin(): IterableIterator<any> {
@@ -13,14 +14,28 @@ export function* doLogin(): IterableIterator<any> {
                         .then(res => res.json())
                     
             } )
+            
             let targetUserLog = dataLogin.filter((i:any) => i.email === email);
             // yield console.log(targetUserLog)
 
              if (targetUserLog.length === 0) {
-                alert('User with this email does not exist, go to registration form')
-                
+                // alert('User with this email does not exist, go to registration form')
+                yield put ({
+                    type: 'ERROR_OCCURED',
+                    payload: {
+                      error: 'User with this email does not exist'
+                      
+                    }
+                  })
             }  
             else if (pass === targetUserLog[0].pass) {
+                yield put({
+                    type: 'DO_LOADER',
+                    payload: {
+                      isLoader: true
+                    }
+                  });
+                yield call(delay, 3000);
                 yield put({
                     type: 'LOGIN_SUCCESS',
                     payload: {
@@ -30,7 +45,14 @@ export function* doLogin(): IterableIterator<any> {
                 })
             } 
             else {
-                alert('password is not correct, try again')
+                // alert('password is not correct, try again')
+                yield put ({
+                    type: 'ERROR_OCCURED',
+                    payload: {
+                      error: 'password is not correct, try again'
+                      
+                    }
+                  })
             }   
         } 
         

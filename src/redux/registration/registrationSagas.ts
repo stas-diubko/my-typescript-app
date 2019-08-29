@@ -1,4 +1,5 @@
 import { put, takeEvery, call } from "redux-saga/effects";
+import { delay } from "q";
 // import { push } from 'react-router-redux';
 
 export function* doInit({}): IterableIterator<any> {
@@ -22,19 +23,36 @@ export function* doInit({}): IterableIterator<any> {
                 body: JSON.stringify({name, email, pass}),
               })      
               })
-              alert('User created');
+              // alert('User created');
+              yield put({
+                type: 'DO_LOADER',
+                payload: {
+                  isLoader: true
+                }
+              });
+              yield call(delay, 3000);
+              
               yield put({
                 type: `@@register/SUCCESSFULL`,
                 payload: {
                   email: email,
                   pass: pass,
                   isRegister: true,
-                  isLoader: true
+                  // isLoader: true
                 }
               });
+              
         }
         else {
-          alert('User with this email already exists, enter another email')
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: 'User with this data already exist, enter another data'
+              
+            }
+          })
+
+          // alert('User with this email already exists, enter another email')
         } 
      
      }

@@ -10,6 +10,8 @@ import { Store } from "redux";
 import configureStore from "./redux/store";
 import Login from './containers/loginContainer';
 import homeContainer from './containers/homeContainer';
+import Loader from './containers/loaderContainer';
+import ErrorComponent from './containers/errorContainer';
 
 const store: Store<RootState> = configureStore();
 
@@ -18,6 +20,10 @@ export class App extends React.Component {
     return (
       <Provider store={store}>
       <div className="App">
+      <div className="loader-wrap">
+        <div className="loader"> <Loader/></div>
+        <ErrorComponent/>      
+      </div>
         <header className="App-header">
               <Router>
               {/* <ul id='shed'>

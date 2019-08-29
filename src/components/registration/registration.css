@@ -19,6 +19,6 @@ input {
     margin-left: 10px;
 }
 
-/* .loader {
-    display: none;
-} */
+.loader {
+    display: block;
+}

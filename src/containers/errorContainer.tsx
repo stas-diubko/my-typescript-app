@@ -1,19 +1,17 @@
 import { RootState } from "../redux/rootReducer";
 import { connect } from "react-redux";
 import { Register } from "../components/registration/registration";
-import { doInit } from "../redux/registration/actions";
+import ErrorComponent from "../components/error/errorComponent";
+
 
 
 const mapStateToProps = (state: RootState) => ({
+   error: state.error.error,
    
-    users: state.register.users,
-    isRegister: state.register.isRegister,
-    isLoader: state.register.isLoader,
-    error: state.error.error
   });
 
 
 export default connect(
     mapStateToProps,
-    { doInit }
-  )(Register);
+  )(ErrorComponent);
+

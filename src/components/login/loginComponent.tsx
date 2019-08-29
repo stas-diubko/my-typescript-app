@@ -5,6 +5,7 @@ import { login } from '../../redux/login/reducer';
 import {Redirect, Link} from 'react-router-dom'
 import configureStore from '../../redux/store';
 // import HomeComponent from '../home/homeComponent';
+// import ErrorComponent from '../../containers/errorContainer';
 
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
@@ -55,12 +56,13 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
         if (isValidLogin) {
           const { doLogin } = this.props;
           doLogin({ email: this.state.email, pass: this.state.pass });
-          this.setState({
-            email: '',
-            pass: '',
-            passError: '',
-            emailError: '',
-          })
+          // this.setState({
+          //   email: '',
+          //   pass: '',
+          //   passError: '',
+          //   emailError: '',
+          // })
+          this.setState(this.state)
         }   
     }
 
@@ -70,6 +72,7 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
       }   
       return (       
         <div >
+          {/* <ErrorComponent/> */}
           <ul>
             <li><Link to="/registration">Registration</Link></li>
           </ul>

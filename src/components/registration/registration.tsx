@@ -2,11 +2,13 @@ import React from 'react';
 import './registration.css';
 import { Redirect } from 'react-router';
 import { RegisterState, RegisterRequest } from '../../redux/registration/types';
-import LinearDeterminate from '../loader/loader';
+// import LinearDeterminate, { Loader } from '../loader/loader';
+// import ErrorComponent from '../../containers/errorContainer';
+// import Loader from '../../containers/loaderContainer';
 
 export interface RegisterProps {
   doInit: (data: RegisterRequest) => object;
-  error: '',
+  error: string,
   name: '',
   pass: '',
   email: '',
@@ -65,33 +67,22 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
     }
   }
 
-//   timeout() {
-//     setTimeout(function(){
-//         // console.log('Test');
-//         return {<Redirect to="/"/>}
-//     }, 2000);
-// }
-
-
-style = {
-  display: 'none',
-}
+  // loader:any
+  
   render () {
-    // console.log(this.props.isRegister);
-    
-
-    if (this.props.isLoader){
-     
-      setTimeout(function(){
-        console.log('Test');
-        return <Redirect to="/"/>
-    }, 2000);
-      // return <Redirect to="/"/>
+    if (this.props.isRegister){
+      return <Redirect to="/"/>
     }
-
+    // if (this.state.isLoader){
+    //   this.loader = <div className="loader"><LinearDeterminate/></div>
+    // } 
     return (
+      
       <div className="Registr">
-        <div className="loader" style={this.style}><LinearDeterminate/></div>  
+        {/* <ErrorComponent/> */}
+        {/* <div className="loader"><LinearDeterminate/></div>   */}
+        {/* {this.loader} */}
+        {/* <Loader/> */}
           <h3>Registration</h3>          
           <form >
               <input type="text" name="name" placeholder="Your Name" onChange={this.handle} value={this.state.name}/>   

@@ -27,7 +27,7 @@ export function registerReducer (state: RegisterState = initialState, action: an
                 email: data.email,
                 pass: data.pass,
                 isRegister: data.isRegister,
-                isLoader: data.isLoader
+                // isLoader: data.isLoader
             };
         }
         case '@@register/ERROR_OCCURED': {

@@ -36,7 +36,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
             <li><Link to="/about">About</Link></li>
             <li><Link to="/">Log Out</Link></li>
           </ul>
-          <div className="user-data">{this.props.email}</div>
+          <div className="user-data">Hello: {this.props.email}</div>
         </div>
         
         <h3>Home page</h3>      

@@ -15,4 +15,15 @@ a {
   font-size: 20px;
 }
 
+.App {
+  position: relative;
+}
 
+.loader-wrap {
+  /* position: absolute; */
+  /* margin-top: 50px; */
+}
+
+/* .loader {
+  position: absolute;
+} */

@@ -1,39 +1,36 @@
 import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
+import LinearDeterminate from './linear';
 
-const useStyles = makeStyles({
-  root: {
-    flexGrow: 1,
-  },
-});
 
-export default function LinearDeterminate() {
-  const classes = useStyles();
-  const [completed, setCompleted] = React.useState(0);
+export interface LoaderProps {
+  isLoader: boolean;
+}
+export class Loader extends React.Component<LoaderProps, any> {
 
-  React.useEffect(() => {
-    function progress() {
-      setCompleted(oldCompleted => {
-        if (oldCompleted === 100) {
-          return 0;
-        }
-        const diff = Math.random() * 10;
-        return Math.min(oldCompleted + diff, 100);
-      });
+  // leaner = LinearDeterminate;
+
+  state = {
+    isLoader: true
+  }
+
+  loader:any
+  render () {
+
+    if (this.props.isLoader) {
+      this.loader = <LinearDeterminate/>
+    } else {
+      this.loader = <div></div>
     }
 
-    const timer = setInterval(progress, 500);
-    return () => {
-      clearInterval(timer);
-    };
-  }, []);
+    return (
+      <div >
+        {this.loader}
+      </div>
+    )
+  }
 
-  return (
-    <div className={classes.root}>
-      <LinearProgress variant="determinate" value={completed} />
-      <br />
-      <LinearProgress color="secondary" variant="determinate" value={completed} />
-    </div>
-  );
 }
+
+export default Loader; 

@@ -7,6 +7,8 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import { any } from "prop-types";
 import { doLogin } from "./login/loginSagas";
+import { onError } from "./error/errorSagas";
+import { onLoaderOccured } from "./loader/loaderSagas";
 
 export default function configureStore(
     initialState?: RootState
@@ -30,7 +32,9 @@ export default function configureStore(
     sagaMiddleware.run(function*() {
         yield all([
           doInit({}),
-          doLogin()
+          doLogin(),
+          onError(),
+          onLoaderOccured()
         ]);
       });
     return store;
