@@ -35,6 +35,8 @@ export function* doLogin(): IterableIterator<any> {
                       isLoader: true
                     }
                   });
+                  let dataUser = JSON.stringify({email, pass, isLoading})
+                  localStorage.setItem('dataUser', dataUser)
                 yield call(delay, 3000);
                 yield put({
                     type: 'LOGIN_SUCCESS',

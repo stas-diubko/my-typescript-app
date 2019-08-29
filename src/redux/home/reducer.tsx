@@ -9,6 +9,7 @@ import { RootState } from "../rootReducer";
 
 export const initialState: HomeState = {
     email: "",
+    name: ""
    
 };
 

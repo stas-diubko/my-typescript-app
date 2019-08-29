@@ -15,11 +15,15 @@ export interface HomeProps {
 }
 export class HomeComponent extends React.Component<HomeProps, HomeState> {
   state: HomeState = {
-    
-    email: ''
-         
+    email: '',
+    name: ''    
 }
 
+dataUserStr:any = localStorage.getItem('dataUser');
+dataUser:any = JSON.parse(this.dataUserStr);
+componentDidMount() {
+  this.setState({email: this.dataUser.email, name: this.dataUser.name})
+}
 
 // dataEm:any = configureStore().getState().login
 
@@ -27,8 +31,9 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
 
   render () {
     // console.log(this.props.email);
-    
+    console.log(this.dataUser);
     // console.log(configureStore().getState().login)
+    
     return (
       <div className="Home">
         <div className="home-header">
@@ -36,7 +41,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
             <li><Link to="/about">About</Link></li>
             <li><Link to="/">Log Out</Link></li>
           </ul>
-          <div className="user-data">Hello: {this.props.email}</div>
+          <div className="user-data">Hello: {this.state.email}</div>
         </div>
         
         <h3>Home page</h3>      
