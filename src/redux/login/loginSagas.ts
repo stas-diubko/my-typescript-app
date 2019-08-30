@@ -35,16 +35,27 @@ export function* doLogin(): IterableIterator<any> {
                       isLoader: true
                     }
                   });
+
                   let dataUser = JSON.stringify({email, pass, isLoading})
                   localStorage.setItem('dataUser', dataUser)
-                yield call(delay, 3000);
+                  let isLoadi = JSON.stringify(true)
+                  localStorage.setItem('load', isLoadi)
+
+                yield call(delay, 2000);
                 yield put({
                     type: 'LOGIN_SUCCESS',
                     payload: {
-                        isLoading: true,
-                        email: targetUserLog[0].email
+                        // isLoading: true,
+                        // email: targetUserLog[0].email
                     }
                 })
+                
+                yield put({
+                  type: 'GET_DATA_HOME',
+                  // payload: {
+                  //   isLoader: true
+                  // }
+                });
             } 
             else {
                 // alert('password is not correct, try again')

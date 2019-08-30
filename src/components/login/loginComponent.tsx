@@ -65,11 +65,13 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
           this.setState(this.state)
         }   
     }
-
+    
     render () {
+      
       if (this.props.isLoading){
             return <Redirect to="/home"/>        
       }   
+
       return (       
         <div >
           {/* <ErrorComponent/> */}

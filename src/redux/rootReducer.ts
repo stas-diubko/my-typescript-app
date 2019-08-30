@@ -16,7 +16,8 @@ export interface RootState {
     login: LoginState;
     home: HomeState;
     error: ErrortState;
-    loader: LoaderState
+    loader: LoaderState;
+    
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({

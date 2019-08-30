@@ -1,5 +1,6 @@
 import { HomeState } from "./types";
 import { RootState } from "../rootReducer";
+import { Redirect } from "react-router";
 // import { LoginState } from "../login/types";
 
 // export const initialState: HomeState = {
@@ -9,12 +10,40 @@ import { RootState } from "../rootReducer";
 
 export const initialState: HomeState = {
     email: "",
-    name: ""
-   
+    name: "",
+    logOut: false,
+    isModal: false, 
 };
 
 export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
+        case 'GET_DATA_HOME': {
+           const dataUserStr:any = localStorage.getItem('dataUser');
+           const dataUser:any = JSON.parse(dataUserStr);
+            return {
+                ...state,
+                email: dataUser.email,
+                name: dataUser.name
+
+            }
+        }
+        // case 'DO_LOGOUT': {
+        //     return {
+        //         ...state,              
+        //       };
+        // }
+        case 'LOGOUT': {
+            // localStorage.removeItem('load');
+            // localStorage.removeItem('dataUser');
+            return {
+                ...state,
+                logOut: true,
+                
+            }
+           
+        }
+
+
         
         default:
             return state;

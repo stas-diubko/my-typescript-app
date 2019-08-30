@@ -9,6 +9,7 @@ import { any } from "prop-types";
 import { doLogin } from "./login/loginSagas";
 import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
+import { doLogout } from "./home/homeSagas";
 
 export default function configureStore(
     initialState?: RootState
@@ -34,7 +35,8 @@ export default function configureStore(
           doInit({}),
           doLogin(),
           onError(),
-          onLoaderOccured()
+          onLoaderOccured(),
+          doLogout()
         ]);
       });
     return store;

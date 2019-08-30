@@ -12,7 +12,7 @@ export function* onLoaderOccured(): IterableIterator<any> {
           }
         });
 
-        yield call(delay, 3000);
+        yield call(delay, 2000);
         yield put({
           type: `LOADER_HIDE`
         });

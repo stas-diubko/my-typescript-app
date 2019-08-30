@@ -21,14 +21,18 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
         }
 
         case 'LOGIN_SUCCESS': {
-            const dataLog = action.payload
-            // console.log(dataLog.email)
+            // const dataLog = action.payload
+
+            const load:any = localStorage.getItem('load')
+            const isLoad = JSON.parse(load)
+            // console.log(isLoad)
             return {
             ...state,
-            email: dataLog.email,
-            isLoading: true,
+            // email: dataLog.email,
+            isLoading: isLoad,
             
             };
+            
         }
 
         case 'LOGIN_FAILED': {
@@ -38,6 +42,15 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
               data,
               isLoading: false,
               error: "error"
+            };
+        }
+
+        case 'REMOOVE_ISLOADING': {
+            const { data } = action.payload;
+            return {
+              ...state,
+              isLoading: false,
+              
             };
         }
 
