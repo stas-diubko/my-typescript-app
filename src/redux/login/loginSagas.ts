@@ -36,7 +36,7 @@ export function* doLogin(): IterableIterator<any> {
                     }
                   });
 
-                  let dataUser = JSON.stringify({email, pass, isLoading})
+                  let dataUser = JSON.stringify({email, isLoading})
                   localStorage.setItem('dataUser', dataUser)
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)

@@ -67,8 +67,9 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
     }
     
     render () {
-      
-      if (this.props.isLoading){
+      const load:any = localStorage.getItem('load')
+      const isLoad = JSON.parse(load)
+      if (this.props.isLoading || isLoad){
             return <Redirect to="/home"/>        
       }   
 
