@@ -25,7 +25,7 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
 
             const load:any = localStorage.getItem('load')
             const isLoad = JSON.parse(load)
-            console.log(isLoad)
+            // console.log(isLoad)
             return {
             ...state,
             email: dataLog.email,

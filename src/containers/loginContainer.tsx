@@ -9,7 +9,7 @@ const mapStateToProps = (state: RootState) => ({
     isLoading: state.login.isLoading,
     emailFromRegister: state.register.email,
     passFromRegister: state.register.pass,
-  });
+});
   
   export default connect(
     mapStateToProps,

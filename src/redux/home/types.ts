@@ -6,8 +6,8 @@ export enum LogoutActions {
 }
 
 export interface HomeState {
-    email: any;
-    name: any;
-    logOut: boolean; 
-    isModal: boolean 
-  }
+  email: any;
+  name: any;
+  logOut: boolean; 
+  isModal: boolean 
+}

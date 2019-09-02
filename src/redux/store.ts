@@ -10,6 +10,7 @@ import { doLogin } from "./login/loginSagas";
 import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout } from "./home/homeSagas";
+import { doUserModalChange } from "./modalUser/modalUsersSagas"
 
 export default function configureStore(
     initialState?: RootState
@@ -36,7 +37,8 @@ export default function configureStore(
           doLogin(),
           onError(),
           onLoaderOccured(),
-          doLogout()
+          doLogout(),
+          doUserModalChange()
         ]);
       });
     return store;

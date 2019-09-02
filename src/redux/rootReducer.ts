@@ -9,6 +9,8 @@ import { ErrortState } from "./error/types";
 import { errorReducer } from "./error/reducer";
 import { LoaderState } from "./loader/types";
 import { loaderReducer } from "./loader/reducer";
+import { UserModalState } from "./modalUser/types";
+import { userModalReducer } from "./modalUser/reducer";
 
 
 export interface RootState {
@@ -17,6 +19,7 @@ export interface RootState {
     home: HomeState;
     error: ErrortState;
     loader: LoaderState;
+    userModal: UserModalState;
     
   }
 
@@ -25,9 +28,12 @@ export interface RootState {
     login: loginReducer,
     home: homeReducer,
     error: errorReducer,
-    loader: loaderReducer
+    loader: loaderReducer,
+    userModal: userModalReducer
   });
 
   
   
 export default rootReducer;
+
+

@@ -7,6 +7,9 @@ import { HomeState } from '../../redux/home/types';
 import { initialStateLog, login } from '../../redux/login/reducer';
 import configureStore from '../../redux/store';
 import { object } from 'prop-types';
+import ModalUserComponent from '../../containers/modalUserContainer';
+import avaDefault from '../../img/avaDefault.jpg' 
+
 
 
 export interface HomeProps {
@@ -69,7 +72,7 @@ el:any = null
       this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
     }
 
-    const modal = this.state.isModal && <div className="user-modal"><div onClick={this.onModal}> &times; </div> modal</div>
+    const modal = this.state.isModal && <div className="user-modal"><div className="close" onClick={this.onModal}> &times; </div><ModalUserComponent /></div>
   
     return (
       <div className="Home">       
@@ -79,7 +82,7 @@ el:any = null
           </ul>
           <div className="user-data-wrap" onClick={this.onModal}>          
             {this.el}
-            <div className="user-data">Hello: {this.state.email}</div>
+            <div className="user-data">Hello: {this.state.email} <div className="user-ava"><img src={avaDefault} alt="userAva"/></div> </div>
           </div>
         </div>    
         <div className="home-wrap">

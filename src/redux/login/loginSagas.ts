@@ -7,7 +7,7 @@ export function* doLogin(): IterableIterator<any> {
     yield takeEvery('DO_LOGIN', function*(action: any) {
         // const url = 'http://localhost:3000/users';
         try {
-            let {email, pass, isLoading} =  action.data;
+            let {email, pass, name, isLoading} =  action.data;
            
             let dataLogin = yield call (() => {
                 return fetch('http://localhost:3000/users')
@@ -36,7 +36,8 @@ export function* doLogin(): IterableIterator<any> {
                     }
                   });
 
-                  let dataUser = JSON.stringify({email, isLoading})
+                  let dataUser = JSON.stringify(targetUserLog[0])
+                  // let dataUser = JSON.stringify({email, name, isLoading})
                   localStorage.setItem('dataUser', dataUser)
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)
@@ -55,6 +56,13 @@ export function* doLogin(): IterableIterator<any> {
                   // payload: {
                   //   isLoader: true
                   // }
+                });
+
+                yield put({
+                  type: 'GET_USER_DATA',
+                  payload: {
+                    // name: targetUserLog[0].name
+                  }
                 });
             } 
             else {
