@@ -20,7 +20,8 @@ export interface RootState {
     error: ErrortState;
     loader: LoaderState;
     userModal: UserModalState;
-    
+    books: LoginState;
+    users: LoginState
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({
@@ -29,7 +30,9 @@ export interface RootState {
     home: homeReducer,
     error: errorReducer,
     loader: loaderReducer,
-    userModal: userModalReducer
+    userModal: userModalReducer,
+    users: loginReducer,
+    books: loginReducer
   });
 
   

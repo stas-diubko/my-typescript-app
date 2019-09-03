@@ -8,7 +8,8 @@ import { doLogout } from "../redux/home/actions";
 const mapStateToProps = (state: RootState) => ({
     email: state.home.email,
     name: state.home.name,
-    logOut: state.home.logOut
+    logOut: state.home.logOut,
+    isAdmin: state.home.isAdmin
   });
 
   export default connect(

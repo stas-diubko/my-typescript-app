@@ -16,6 +16,8 @@ export interface LoginProps {
   emailError: any; 
   emailFromRegister: any;
   passFromRegister: any;
+  users: any;
+  books: any;
 }
 export class LoginComponent extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
@@ -24,7 +26,9 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
         pass: this.props.passFromRegister,
         isLoading: false,
         passError: '',
-        emailError: '',      
+        emailError: '',    
+        books: '',
+        users: []  
     }
 
     validate = () => {

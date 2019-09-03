@@ -9,6 +9,8 @@ export const initialStateLog: LoginState = {
     isLoading: false,
     passError: '',
     emailError: '',
+    books: "",
+    users: []
 };
 
 export function loginReducer(state: LoginState = initialStateLog, action: any) {
@@ -21,16 +23,18 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
         }
 
         case 'LOGIN_SUCCESS': {
+            // const {dataLog, books, users } = action.payload
             const dataLog = action.payload
-
             const load:any = localStorage.getItem('load')
             const isLoad = JSON.parse(load)
-            // console.log(isLoad)
+            // console.log(dataLog.users)
+
             return {
             ...state,
             email: dataLog.email,
             isLoading: isLoad,
-            
+            users: dataLog.users,
+            // books: books
             };
             
         }

@@ -13,6 +13,8 @@ export const initialState: HomeState = {
     name: "",
     logOut: false,
     isModal: false, 
+    img: '',
+    isAdmin: false
 };
 
 export function homeReducer(state: HomeState = initialState, action: any) {
@@ -27,11 +29,13 @@ export function homeReducer(state: HomeState = initialState, action: any) {
 
             }
         }
-        // case 'DO_LOGOUT': {
-        //     return {
-        //         ...state,              
-        //       };
-        // }
+        case 'GET_ADMIN': {
+            let isAdmin = action.payload 
+            return {
+                ...state, 
+                isAdmin: isAdmin.isAdmin             
+              };
+        }
         case 'LOGOUT': {
             // localStorage.removeItem('load');
             // localStorage.removeItem('dataUser');

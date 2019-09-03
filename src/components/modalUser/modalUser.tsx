@@ -1,7 +1,7 @@
 import React from 'react';
 import { UserModalState, UserChange } from '../../redux/modalUser/types';
 import avaDefault from '../../img/avaDefault.jpg' // relative path to image 
-
+import './modalUser.css';
 
 export interface ModalUserProps {
     doUserModalChange: (data: UserChange) => object;
@@ -25,8 +25,14 @@ export class ModalUserComponent extends React.Component<ModalUserProps, UserModa
   
     async componentDidMount() {
         if (this.dataUserStr) {
-        this.setState({name: this.dataUser.name})
-        } else {
+            this.setState({name: this.dataUser.name})
+            this.setState({imgChange: this.dataUser.imgChange})
+        } 
+        // else if (this.dataUserStr.imgChange){
+        //     this.setState({img: this.dataUser.imgChange})
+        // }
+        
+        else {
         this.setState({name: ''});
         }
         
@@ -73,8 +79,11 @@ export class ModalUserComponent extends React.Component<ModalUserProps, UserModa
         </form>
 
         return(
-            <div>    
-                <img src={avaDefault} alt="userAva"/>
+            <div className="Modal">    
+                <div className="user-img">
+                    <img src={this.state.imgChange} alt="userAva"/>
+                </div>
+                
                 {/* <img className="img" src="" /> */}
                 <div><b>User's name: </b>{this.state.name}</div>
                 <button onClick={this.onChangeData}>Change user's data</button>

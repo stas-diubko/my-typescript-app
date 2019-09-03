@@ -5,7 +5,7 @@ import { delay } from "q";
  
 export function* doLogin(): IterableIterator<any> {
     yield takeEvery('DO_LOGIN', function*(action: any) {
-        // const url = 'http://localhost:3000/users';
+        
         try {
             let {email, pass, name, isLoading} =  action.data;
            
@@ -19,7 +19,6 @@ export function* doLogin(): IterableIterator<any> {
             // yield console.log(targetUserLog)
 
              if (targetUserLog.length === 0) {
-                // alert('User with this email does not exist, go to registration form')
                 yield put ({
                     type: 'ERROR_OCCURED',
                     payload: {
@@ -29,6 +28,15 @@ export function* doLogin(): IterableIterator<any> {
                   })
             }  
             else if (pass === targetUserLog[0].pass) {
+              let adminEmail = 'admin@admin.com'
+              if (targetUserLog[0].email === adminEmail) {
+                yield put({
+                  type: 'GET_ADMIN',
+                  payload: {
+                    isAdmin: true
+                  }
+                });
+              }
                 yield put({
                     type: 'DO_LOADER',
                     payload: {
@@ -41,16 +49,19 @@ export function* doLogin(): IterableIterator<any> {
                   localStorage.setItem('dataUser', dataUser)
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)
-
+                  
+                                    
                 yield call(delay, 2000);
+
                 yield put({
                     type: 'LOGIN_SUCCESS',
                     payload: {
+                      users: dataLogin
                         // isLoading: true,
                         // email: targetUserLog[0].email
                     }
                 })
-                
+
                 yield put({
                   type: 'GET_DATA_HOME',
                   // payload: {
@@ -65,6 +76,7 @@ export function* doLogin(): IterableIterator<any> {
                   }
                 });
             } 
+
             else {
                 // alert('password is not correct, try again')
                 yield put ({

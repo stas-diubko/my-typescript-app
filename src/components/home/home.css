@@ -1,3 +1,7 @@
+/* .Home {
+    position: relative;
+} */
+
 .home-ul {
     display: flex;
     flex-direction: column;
@@ -89,4 +93,9 @@
 .user-ava img {
     height: 50px;
     width: 50px;
+}
+
+.modal {
+    position: absolute;
+    margin: 0px 25%;
 }

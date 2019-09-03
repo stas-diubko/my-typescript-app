@@ -1,0 +1,17 @@
+.user-img {
+    height: 150px;
+    width: 150px;
+    overflow: hidden;
+    border-radius: 50%;
+    border: 1px solid blue;
+    margin: 0 auto;
+}
+
+.user-img img {
+    height: 150px;
+    width: 150px;
+}
+
+.Modal {
+    position: absolute;
+}
