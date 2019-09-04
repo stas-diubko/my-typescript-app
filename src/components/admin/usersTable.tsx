@@ -26,73 +26,81 @@ import FilterListIcon from "@material-ui/icons/FilterList";
 import { RootState } from "../../redux/rootReducer";
 import { connect } from "react-redux"
 import './adminComponent.css';
-import { deleteUser } from "../../redux/admin/actions"
+import  { deleteUser }  from "../../redux/admin/actions"
 
 
-// const componentDidMount = () => {
-//   console.log('test')
-// }
-
-// const testFoo = () => {
-//   console.log('test Foo')
-// }
 
 
-const EnhancedTableUsers:React.FC = (props:any) =>  {
-  
-  const onDeleteUser = (e:any):any => {
-    
-    deleteUser('ccc')
-    // console.log('click')
-    console.log(e.currentTarget.id)
-    // console.log(deleteUser(e.currentTarget.id))
-    deleteUser(e.currentTarget.id)
 
-    // testFoo()
-  }
-
-  
-  let dataUsers:any = props.users
-
-  function UserList(props:any){
-    const users = props.users;
-    // console.log(users);
-    
-    const items = users.map((user:any) => <TableRow className="user-row">
-      <TableCell >
-        {user.name}
-      </TableCell>
-      <TableCell >
-        {user.email}
-      </TableCell>
-      <TableCell className="delete">
-        <div id={user.id} key={user.email} onClick={(e:any)=>onDeleteUser(e)}>x</div> 
-      </TableCell>
-  </TableRow>);
-    return (<ul>{items}</ul>)
-  }
-// console.log(dataUsers);
-
-
-  return (
-    <div >
-      <Paper >
-          <Table>
-            <TableBody>  
-              <UserList 
-                users={dataUsers}
-              />
-            </TableBody>
-          </Table>
-      </Paper> 
-    </div>
-  );
+export interface TableUsersProps {
+  users: any;
 }
 
 
+export class TableUsersComponent extends React.Component<TableUsersProps> {
 
-const mapStateToProps = (state: RootState) => ({
-    users: state.admin.users
-});
+  EnhancedTableUsers = () =>  {
+ 
+    // onDeleteUser = (e:any) => {
+     
+    // }
   
-  export default connect(mapStateToProps, {deleteUser})(EnhancedTableUsers)
+    
+    // dataUsers:any = this.props
+  
+    
+  }
+  // console.log(dataUsers);
+      render () {
+//         function UserList(props:any){
+//           const users = props.users;
+//           // console.log(users);
+          
+//           const items = users.map((user:any) => <TableRow className="user-row">
+//             <TableCell >
+//               {user.name} 
+//             </TableCell>
+//             <TableCell >
+//               {user.email}
+//             </TableCell>
+//             <TableCell className="delete">
+//               <div id={user.id} key={user.email} 
+//               // onClick={(e:any)=>this.onDeleteUser(e)}
+//               >x</div> 
+//             </TableCell>
+//         </TableRow>);
+//     return (<ul>{items}</ul>)
+// }
+        return (
+          <div >
+            <Paper >
+                <Table>
+                  <TableBody>  
+                    {/* <UserList 
+                      // users={this.dataUsers}
+                    /> */}
+                  </TableBody>
+                </Table>
+            </Paper> 
+          </div>
+        );
+        
+      
+
+
+      
+      }
+
+   
+  
+}
+
+
+export default TableUsersComponent;
+
+
+// const mapStateToProps = (state: RootState) => ({
+//   users: state.admin.users
+// });
+
+// export default connect(mapStateToProps, deleteUser)(TableUsers)
