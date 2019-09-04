@@ -11,6 +11,8 @@ import { LoaderState } from "./loader/types";
 import { loaderReducer } from "./loader/reducer";
 import { UserModalState } from "./modalUser/types";
 import { userModalReducer } from "./modalUser/reducer";
+import { AdminState } from "./admin/types";
+import { adminReducer } from "./admin/reducer";
 
 
 export interface RootState {
@@ -21,7 +23,8 @@ export interface RootState {
     loader: LoaderState;
     userModal: UserModalState;
     books: LoginState;
-    users: LoginState
+    users: LoginState;
+    admin: AdminState;
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({
@@ -32,7 +35,8 @@ export interface RootState {
     loader: loaderReducer,
     userModal: userModalReducer,
     users: loginReducer,
-    books: loginReducer
+    books: loginReducer,
+    admin: adminReducer
   });
 
   

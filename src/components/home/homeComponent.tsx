@@ -35,7 +35,8 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
 
   dataUserStr:any = localStorage.getItem('dataUser');
   dataUser:any = JSON.parse(this.dataUserStr);
-
+  isAdminStr:any = localStorage.getItem('isAdmin');
+  isAdmin:boolean = JSON.parse(this.isAdminStr);
   async componentDidMount() {
   if (this.dataUserStr) {
     this.setState({email: this.dataUser.email})
@@ -45,10 +46,10 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     this.setState({email: ''});
     this.setState({img: avaDefault})
   }
-  console.log(this.props.isAdmin)
-  if (this.props.isAdmin){
-    this.setState({isAdmin: this.props.isAdmin})
-    console.log(this.state.isAdmin)
+  // console.log(this.props.isAdmin)
+  if (this.isAdmin){
+    this.setState({isAdmin: this.isAdmin})
+    // console.log(this.state.isAdmin)
   }
   
   // if ('imgChange' in this.dataUser) {
@@ -66,6 +67,7 @@ onLogout = (e:any) => {
   doLogout()
   localStorage.removeItem('load');
   localStorage.removeItem('dataUser');
+  localStorage.removeItem('isAdmin');
   document.location.href = 'http://localhost:3001/home';
          
 } 
@@ -95,7 +97,7 @@ adminComponent:any
     }
     
     if(this.state.isAdmin) {
-      this.adminComponent = <AdminComponent/>;
+      this.adminComponent = <li><Link to="/admin">Admin</Link></li>
     }
 
     
@@ -108,6 +110,7 @@ adminComponent:any
         <div className="home-header">
           <ul>
             {/* <li><Link to="/about">About</Link></li> */}
+            {this.adminComponent}
           </ul>
           <div className="user-data-wrap" onClick={this.onModal}>          
             {this.el}
@@ -116,7 +119,7 @@ adminComponent:any
         </div>    
         <div className="home-wrap">
           <div className="modal">{modal}</div>
-          {this.adminComponent}
+          
         
         </div>              
       </div>

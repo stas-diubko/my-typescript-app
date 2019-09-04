@@ -11,6 +11,8 @@ import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout } from "./home/homeSagas";
 import { doUserModalChange } from "./modalUser/modalUsersSagas"
+import { getUsers, deleteUser } from "./admin/adminSagas"
+
 
 export default function configureStore(
     initialState?: RootState
@@ -38,7 +40,9 @@ export default function configureStore(
           onError(),
           onLoaderOccured(),
           doLogout(),
-          doUserModalChange()
+          doUserModalChange(),
+          getUsers(),
+          deleteUser()
         ]);
       });
     return store;

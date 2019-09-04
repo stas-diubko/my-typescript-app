@@ -30,6 +30,8 @@ export function* doLogin(): IterableIterator<any> {
             else if (pass === targetUserLog[0].pass) {
               let adminEmail = 'admin@admin.com'
               if (targetUserLog[0].email === adminEmail) {
+                let isAdmin = JSON.stringify(true)
+                localStorage.setItem('isAdmin', isAdmin)
                 yield put({
                   type: 'GET_ADMIN',
                   payload: {
