@@ -19,14 +19,6 @@ export function* getUsers(): IterableIterator<any> {
                    
                 }
               })
-
-            //   yield put ({
-            //     type: "DELETE_USER",
-            //     payload: {
-            //     //   users: dataLogin
-                   
-            //     }
-            //   })
                       
         } 
         
@@ -37,28 +29,3 @@ export function* getUsers(): IterableIterator<any> {
     
 }
 
-export function* deleteUser(): IterableIterator<any> {
-    yield takeEvery('DELETE_USER', function*(action: any) {
-        
-        try {
-            let dataLogin = yield call (() => {
-                return fetch('http://localhost:3000/users')
-                        .then(res => res.json())
-
-            } )
-            
-            yield put ({
-                type: "DELETE_USER",
-                payload: {
-                //   users: dataLogin
-                   
-                }
-              })
-                      
-        } 
-        
-        catch (error) {
-
-        }
-    })
-}

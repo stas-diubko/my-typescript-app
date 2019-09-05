@@ -1,0 +1,21 @@
+
+
+#btn {
+    margin-top: 10px;
+}
+
+.form-to-add {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}
+
+.inp {
+    width: 50%;
+    margin-bottom: 25px;
+}
+
+#btn-send {
+    width: 40px;
+    margin-top: 10px;
+}

@@ -6,8 +6,9 @@ import Tabs from '@material-ui/core/Tabs';
 import Tab from '@material-ui/core/Tab';
 import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
-import EnhancedTableUsers from './usersTable'
-import EnhancedTableBooks from './booksTable'
+import TableUsersComponent from '../../containers/usersTableContainer';
+import TableBooksComponent from '../../containers/booksTableContainer'
+// import EnhancedTableBooks from './booksTable'
 import { Link, Redirect } from 'react-router-dom';
 
 
@@ -67,10 +68,10 @@ export default function SimpleTabs() {
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
-        <EnhancedTableUsers/>
+        <TableUsersComponent/>
       </TabPanel>
       <TabPanel value={value} index={1}>
-        <EnhancedTableBooks/>
+        <TableBooksComponent />
       </TabPanel>
       
     </div>

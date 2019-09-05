@@ -4,6 +4,7 @@ import { AdminState } from '../../redux/admin/types';
 
 export interface AdminProps {
   getUsers: () => object;
+  // getBooks: () => Object;
   books: any;
   users: any;
 }
@@ -17,6 +18,9 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
   componentDidMount () {
     const { getUsers } = this.props;
     getUsers() 
+    // const { getBooks } = this.props;
+    // getBooks()
+    
     // console.log('test')
   }
 

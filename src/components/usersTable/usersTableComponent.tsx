@@ -25,60 +25,76 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import FilterListIcon from "@material-ui/icons/FilterList";
 import { RootState } from "../../redux/rootReducer";
 import { connect } from "react-redux"
-import './adminComponent.css';
-import  { deleteUser }  from "../../redux/admin/actions"
+import '../admin/adminComponent.css';
+import { UsersTableState } from "../../redux/usersTable/types";
+// import  { deleteUser }  from "../../redux/admin/actions"
 
 
 
 
 
 export interface TableUsersProps {
+  deleteUser: (data:any) => any;
   users: any;
 }
 
 
-export class TableUsersComponent extends React.Component<TableUsersProps> {
+export class TableUsersComponent extends React.Component<TableUsersProps, UsersTableState> {
+    state: UsersTableState = {
+      users: ''   
+  }
 
-  EnhancedTableUsers = () =>  {
- 
-    // onDeleteUser = (e:any) => {
-     
-    // }
-  
-    
-    // dataUsers:any = this.props
-  
+
+  isResizeble = false;
+
+  onDeleteUser = (e:any) => {
+    const {deleteUser} = this.props;    
+    deleteUser(e.currentTarget.id)
+    // alert('user was deleted')
     
   }
-  // console.log(dataUsers);
+
+  
+  
       render () {
-//         function UserList(props:any){
-//           const users = props.users;
-//           // console.log(users);
+      // const  onDeleteUser = (e:any) => {
+      //     const {deleteUser} = this.props;
+      //     let userid = e.currentTarget.id
+      //     // deleteUser()
+      //     console.log(e.currentTarget.id);
           
-//           const items = users.map((user:any) => <TableRow className="user-row">
-//             <TableCell >
-//               {user.name} 
-//             </TableCell>
-//             <TableCell >
-//               {user.email}
-//             </TableCell>
-//             <TableCell className="delete">
-//               <div id={user.id} key={user.email} 
-//               // onClick={(e:any)=>this.onDeleteUser(e)}
-//               >x</div> 
-//             </TableCell>
-//         </TableRow>);
-//     return (<ul>{items}</ul>)
-// }
+      //   }
+        // console.log(this.props.users)
+        
+        // function UserList(props:any){
+        //       const users = props.users;
+        //       // console.log(users);
+              
+              const items = this.props.users.map((user:any) => <TableRow className="user-row">
+                <TableCell >
+                  {user.name} 
+                </TableCell>
+                <TableCell >
+                  {user.email}
+                </TableCell>
+                <TableCell className="delete">
+                  <div id={user.id} key={user.email} 
+                  onClick={(e:any)=>this.onDeleteUser(e)}
+                  >x</div> 
+                </TableCell>
+            </TableRow>);
+      //   return (<ul>{items}</ul>)
+      // }
+
         return (
           <div >
             <Paper >
                 <Table>
                   <TableBody>  
                     {/* <UserList 
-                      // users={this.dataUsers}
+                      users={this.props.users}
                     /> */}
+                    {items}
                   </TableBody>
                 </Table>
             </Paper> 

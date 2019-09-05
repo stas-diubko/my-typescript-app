@@ -13,6 +13,10 @@ import { UserModalState } from "./modalUser/types";
 import { userModalReducer } from "./modalUser/reducer";
 import { AdminState } from "./admin/types";
 import { adminReducer } from "./admin/reducer";
+import { UsersTableState } from "./usersTable/types";
+import { usersTableReducer } from "./usersTable/reducer";
+import { BooksTableState } from "./booksTable/types";
+import { booksTableReducer } from "./booksTable/reducer";
 
 
 export interface RootState {
@@ -25,6 +29,8 @@ export interface RootState {
     books: LoginState;
     users: LoginState;
     admin: AdminState;
+    usersTable: UsersTableState;
+    booksTable: BooksTableState
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({
@@ -36,7 +42,9 @@ export interface RootState {
     userModal: userModalReducer,
     users: loginReducer,
     books: loginReducer,
-    admin: adminReducer
+    admin: adminReducer,
+    usersTable: usersTableReducer,
+    booksTable: booksTableReducer
   });
 
   
