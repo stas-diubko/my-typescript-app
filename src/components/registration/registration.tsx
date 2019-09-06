@@ -2,6 +2,7 @@ import React from 'react';
 import './registration.css';
 import { Redirect } from 'react-router';
 import { RegisterState, RegisterRequest } from '../../redux/registration/types';
+import { tsThisType } from '@babel/types';
 // import LinearDeterminate, { Loader } from '../loader/loader';
 // import ErrorComponent from '../../containers/errorContainer';
 // import Loader from '../../containers/loaderContainer';
@@ -17,6 +18,7 @@ export interface RegisterProps {
   emailError: '',
   isRegister: boolean,
   isLoader: boolean,
+  isAdmin: boolean
 }
 
 export class Register extends React.Component<RegisterProps, RegisterState>  {
@@ -31,6 +33,7 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
     emailError: '',
     isRegister: false,
     isLoader: false,
+    isAdmin: false,
   };
   handle = (event: any) =>
     this.setState({ [event.target.name]: event.target.value 
@@ -62,7 +65,7 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
     const isValid = this.validate();
     if (isValid) {
       const { doInit } = this.props;
-      doInit({ name: this.state.name, email: this.state.email, pass: this.state.pass });
+      doInit({ name: this.state.name, email: this.state.email, pass: this.state.pass, isAdmin: this.state.isAdmin });
       this.setState(this.state)
     }
   }

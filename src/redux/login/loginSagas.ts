@@ -28,17 +28,17 @@ export function* doLogin(): IterableIterator<any> {
                   })
             }  
             else if (pass === targetUserLog[0].pass) {
-              let adminEmail = 'admin@admin.com'
-              if (targetUserLog[0].email === adminEmail) {
-                let isAdmin = JSON.stringify(true)
-                localStorage.setItem('isAdmin', isAdmin)
-                yield put({
-                  type: 'GET_ADMIN',
-                  payload: {
-                    isAdmin: true
-                  }
-                });
-              }
+              // let adminEmail = 'admin@admin.com'
+              // if (targetUserLog[0].email === adminEmail) {
+              //   let isAdmin = JSON.stringify(true)
+              //   localStorage.setItem('isAdmin', isAdmin)
+              //   yield put({
+              //     type: 'GET_ADMIN',
+              //     payload: {
+              //       isAdmin: true
+              //     }
+              //   });
+              // }
                 yield put({
                     type: 'DO_LOADER',
                     payload: {
@@ -46,11 +46,14 @@ export function* doLogin(): IterableIterator<any> {
                     }
                   });
 
-                  let dataUser = JSON.stringify(targetUserLog[0])
+                  // let dataUser = JSON.stringify(targetUserLog[0])
                   // let dataUser = JSON.stringify({email, name, isLoading})
-                  localStorage.setItem('dataUser', dataUser)
+                  // localStorage.setItem('dataUser', dataUser)
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)
+                  localStorage.setItem('id', targetUserLog[0].id)
+
+                  // yield console.log(targetUserLog[0].id);
                   
                                     
                 yield call(delay, 2000);
@@ -66,9 +69,9 @@ export function* doLogin(): IterableIterator<any> {
 
                 yield put({
                   type: 'GET_DATA_HOME',
-                  // payload: {
-                  //   isLoader: true
-                  // }
+                  payload: {
+                   isAdmin: targetUserLog[0]
+                  }
                 });
 
                 yield put({

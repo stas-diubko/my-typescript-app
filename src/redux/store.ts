@@ -9,9 +9,9 @@ import { any } from "prop-types";
 import { doLogin } from "./login/loginSagas";
 import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
-import { doLogout } from "./home/homeSagas";
+import { doLogout, getDataHome } from "./home/homeSagas";
 import { doUserModalChange } from "./modalUser/modalUsersSagas"
-import { getUsers } from "./admin/adminSagas"
+import { getUsers, getId } from "./admin/adminSagas"
 import { deleteUser } from "./usersTable/usersTableSagas"
 import { addBook, getBooks, deleteBook } from "./booksTable/booksTableSagas"
 
@@ -47,7 +47,9 @@ export default function configureStore(
           deleteUser(),
           addBook(),
           getBooks(),
-          deleteBook()
+          deleteBook(),
+          getDataHome(),
+          getId()
         ]);
       });
     return store;

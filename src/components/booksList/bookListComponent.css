@@ -1,0 +1,20 @@
+.book-item-wrap {
+    width: 300px;
+    height: 450px;
+    overflow: hidden;
+    padding: 15px;
+}
+
+.book-item-wrap img {
+    width: 150px;
+    height: 200px;
+    
+}
+
+.book-list-wrap {
+    padding: 10px;
+}
+
+.btn {
+    margin-top: 15px !important;
+}

@@ -6,7 +6,12 @@ import { addBook, getBooks, deleteBook } from "../redux/booksTable/actions"
 const mapStateToProps = (state: RootState) => ({
     bookToAdd: state.booksTable.bookToAdd,
     allBooks: state.booksTable.allBooks,
-    isOpenForm: state.booksTable.isOpenForm
+    isOpenForm: state.booksTable.isOpenForm,
+    bookTitle: state.booksTable.bookTitle,
+    bookAuthor: state.booksTable.bookAuthor,
+    bookDescript: state.booksTable.bookDescript,
+    bookPrice: state.booksTable.bookPrice,
+    bookImg: state.booksTable.bookImg
   });
  
   export default connect(

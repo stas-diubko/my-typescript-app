@@ -9,12 +9,13 @@ import configureStore from '../../redux/store';
 import { object } from 'prop-types';
 import ModalUserComponent from '../../containers/modalUserContainer';
 import AdminComponent from '../../containers/adminContainer';
-
+import BooksListComponent from '../../containers/bookListContainer'
 import avaDefault from '../../img/avaDefault.jpg' 
 
 
 
 export interface HomeProps {
+  getDataHome: () => Object;
   doLogout: any,
   email: any;
   name: any;
@@ -33,24 +34,33 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     isAdmin: false   
 }
 
-  dataUserStr:any = localStorage.getItem('dataUser');
-  dataUser:any = JSON.parse(this.dataUserStr);
-  isAdminStr:any = localStorage.getItem('isAdmin');
-  isAdmin:boolean = JSON.parse(this.isAdminStr);
+  
+  // dataUserStr:any = localStorage.getItem('dataUser');
+  // dataUser:any = JSON.parse(this.dataUserStr);
+  // isAdminStr:any = localStorage.getItem('isAdmin');
+  // isAdmin:boolean = JSON.parse(this.isAdminStr);
+  isLoadStr:any = localStorage.getItem('load');
+  isLoad:boolean = JSON.parse(this.isLoadStr);
   async componentDidMount() {
-  if (this.dataUserStr) {
-    this.setState({email: this.dataUser.email})
-    this.setState({img: this.dataUser.imgChange})
+    const { getDataHome } = this.props;
+    getDataHome() 
+  //   setTimeout(() => {
+  //     // console.log(this.props.isAdmin);
+      
+  // }, 2000);
+  // if (this.dataUserStr) {
+  //   this.setState({email: this.dataUser.email})
+  //   this.setState({img: this.dataUser.imgChange})
 
-  } else {
-    this.setState({email: ''});
-    this.setState({img: avaDefault})
-  }
-  // console.log(this.props.isAdmin)
-  if (this.isAdmin){
-    this.setState({isAdmin: this.isAdmin})
-    // console.log(this.state.isAdmin)
-  }
+  // } else {
+  //   this.setState({email: ''});
+  //   this.setState({img: avaDefault})
+  // }
+  // // console.log(this.props.isAdmin)
+  // if (this.isAdmin){
+  //   this.setState({isAdmin: this.isAdmin})
+  //   // console.log(this.state.isAdmin)
+  // }
   
   // if ('imgChange' in this.dataUser) {
   //   this.setState({img: this.dataUser.imgChange})
@@ -66,8 +76,10 @@ onLogout = (e:any) => {
   const { doLogout } = this.props;
   doLogout()
   localStorage.removeItem('load');
-  localStorage.removeItem('dataUser');
-  localStorage.removeItem('isAdmin');
+  localStorage.removeItem('id');
+
+  // localStorage.removeItem('dataUser');
+  // localStorage.removeItem('isAdmin');
   document.location.href = 'http://localhost:3001/home';
          
 } 
@@ -88,7 +100,7 @@ el:any = null
 // imgUser:any =null
 adminComponent:any
   render () {
-    if (!this.dataUserStr) {
+    if (!this.isLoad) {
       
       this.el = <div className="logout" onClick={this.toLogin}>Log in</div>
     }
@@ -96,9 +108,10 @@ adminComponent:any
       this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
     }
     
-    if(this.state.isAdmin) {
+    if(this.props.isAdmin) {
       this.adminComponent = <li><Link to="/admin">Admin</Link></li>
     }
+// console.log(this.props);
 
     
 
@@ -114,12 +127,12 @@ adminComponent:any
           </ul>
           <div className="user-data-wrap" onClick={this.onModal}>          
             {this.el}
-            <div className="user-data">Hello: {this.state.email} <div className="user-ava"><img src={this.state.img} alt="userAva"/></div> </div>
+            <div className="user-data">Hello: {this.props.email} <div className="user-ava"><img src={this.props.img} alt="userAva"/></div> </div>
           </div>
         </div>    
         <div className="home-wrap">
           <div className="modal">{modal}</div>
-          
+          <BooksListComponent/>
         
         </div>              
       </div>

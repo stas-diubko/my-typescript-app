@@ -3,7 +3,8 @@ import { RootState } from "../rootReducer";
 
 export const initialStateLog: AdminState = {
     books: "",
-    users: []
+    users: [],
+    isAdmin: false
 };
 
 export function adminReducer(state: AdminState = initialStateLog, action: any) {
@@ -27,6 +28,16 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
             return {
                 ...state, 
                  
+              };
+        }
+
+        case 'GOT_ID': {
+            const id = action.payload
+            // console.log(id.users.isAdmin);
+            
+            return {
+                ...state, 
+                isAdmin: id.users.isAdmin
               };
         }
 

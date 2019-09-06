@@ -19,12 +19,14 @@ export interface RegisterState {
     pass: any;
     isRegister:boolean;
     isLoader: boolean,
+    isAdmin: boolean
   }
 
   export interface RegisterRequest {
     name: string;
     email: string;
     pass: string;
+    isAdmin: boolean
   }
 
 // export interface RegisterState extends BaseState {
@@ -35,5 +37,6 @@ export interface DoRegister {
     name: string;
     email: string;
     pass: string;
+    isAdmin: boolean
     // payloadFunc: Function;
   }

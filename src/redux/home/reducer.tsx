@@ -19,23 +19,27 @@ export const initialState: HomeState = {
 
 export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
-        case 'GET_DATA_HOME': {
-           const dataUserStr:any = localStorage.getItem('dataUser');
-           const dataUser:any = JSON.parse(dataUserStr);
+        case 'GOT_DATA_HOME': {
+        //    const dataUserStr:any = localStorage.getItem('dataUser');
+        //    const dataUser:any = JSON.parse(dataUserStr);
+           let dataUser = action.payload
+        //    console.log(dataUser.dataHome);
+           
             return {
                 ...state,
-                email: dataUser.email,
-                name: dataUser.name
-
+                email: dataUser.dataHome.email,
+                name: dataUser.dataHome.name,
+                isAdmin: dataUser.dataHome.isAdmin,
+                img: dataUser.dataHome.imgChange
             }
         }
-        case 'GET_ADMIN': {
-            let isAdmin = action.payload 
-            return {
-                ...state, 
-                isAdmin: isAdmin.isAdmin             
-              };
-        }
+        // case 'GET_ADMIN': {
+        //     let isAdmin = action.payload 
+        //     return {
+        //         ...state, 
+        //         isAdmin: isAdmin.isAdmin             
+        //       };
+        // }
         case 'LOGOUT': {
             // localStorage.removeItem('load');
             // localStorage.removeItem('dataUser');

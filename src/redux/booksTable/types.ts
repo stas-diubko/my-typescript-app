@@ -11,5 +11,10 @@ export interface BooksTableState {
   bookToAdd: Object;
   allBooks: any;
   isOpenForm: boolean; 
+  bookTitle: string;
+  bookAuthor: string;
+  bookDescript: string;
+  bookPrice: string;
+  bookImg: any;
 }
   

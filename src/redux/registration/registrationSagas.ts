@@ -4,7 +4,7 @@ import { delay } from "q";
 
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
-     let {name, email, pass} =  action.data;
+     let {name, email, pass, isAdmin} =  action.data;
      try {
       let dataRegister = yield call (() => { 
         return fetch('http://localhost:3000/users')
@@ -20,7 +20,7 @@ export function* doInit({}): IterableIterator<any> {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify({name, email, pass}),
+                body: JSON.stringify({name, email, pass, isAdmin}),
               })      
               })
               // alert('User created');

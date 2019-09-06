@@ -12,6 +12,7 @@ export const initialState: RegisterState = {
     emailError: '',
     isRegister: false,
     isLoader: false,
+    isAdmin: false
   };
 
 export function registerReducer (state: RegisterState = initialState, action: any) {

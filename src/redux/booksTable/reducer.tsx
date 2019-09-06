@@ -4,7 +4,12 @@ import { RootState } from "../rootReducer";
 export const initialState: BooksTableState = {
     bookToAdd: {},
     allBooks: [],
-    isOpenForm:false
+    isOpenForm:false,
+    bookTitle: '',
+    bookAuthor: '',
+    bookDescript: '',
+    bookPrice: '',
+    bookImg: ''
 };
 
 

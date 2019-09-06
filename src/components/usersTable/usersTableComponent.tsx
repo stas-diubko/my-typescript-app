@@ -50,7 +50,7 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
   onDeleteUser = (e:any) => {
     const {deleteUser} = this.props;    
     deleteUser(e.currentTarget.id)
-    // alert('user was deleted')
+    alert('user was deleted')
     
   }
 

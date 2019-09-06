@@ -9,7 +9,8 @@ const mapStateToProps = (state: RootState) => ({
     users: state.register.users,
     isRegister: state.register.isRegister,
     isLoader: state.register.isLoader,
-    error: state.error.error
+    error: state.error.error,
+    isAdmin: state.register.isAdmin
   });
 
 

@@ -4,14 +4,19 @@ import { put, takeEvery, call } from "redux-saga/effects";
 
 export function* addBook(): IterableIterator<any> {
     yield takeEvery('ADD_BOOK', function*(action: any) {
+     let {bookTitle, bookAuthor, bookDescript, bookPrice, bookImg} =  action.data;
         
         try {
          
-          
-            yield call (() => {
-               
-
-            } )
+          yield call(() => {
+            return fetch('http://localhost:3000/books', {
+              method: 'POST', 
+              headers: {
+                  'Content-Type': 'application/json',
+                },
+              body: JSON.stringify({bookTitle, bookAuthor, bookDescript, bookPrice, bookImg}),
+            })      
+            })
                       
         } 
         

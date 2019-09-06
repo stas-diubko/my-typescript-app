@@ -2,6 +2,7 @@ export enum LogoutActions {
   DO_LOGOUT = "DO_LOGOUT",
   LOGOUT = "LOGOUT",
   GET_DATA_HOME = "GET_DATA_HOME",
+  GOT_DATA_HOME = "GOT_DATA_HOME",
   GET_ADMIN = "GET_ADMIN"
   
 }
