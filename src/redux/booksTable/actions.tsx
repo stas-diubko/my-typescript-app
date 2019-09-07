@@ -13,3 +13,7 @@ export function deleteBook(data:any) {
     return { type: BooksTableActions.DELETE_BOOK, data};
 }
 
+export function changeDataBook(data:any) {
+    return { type: BooksTableActions.CHANGE_DATA_BOOK, data};
+}
+

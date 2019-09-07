@@ -9,7 +9,13 @@ export const initialState: BooksTableState = {
     bookAuthor: '',
     bookDescript: '',
     bookPrice: '',
-    bookImg: ''
+    bookImg: '',
+    isOpenmodal: false,
+    newBookTitle: '',
+    newBookAuthor: '',
+    newBookDescript: '',
+    newBookPrice: '',
+    newBookImg: '',
 };
 
 

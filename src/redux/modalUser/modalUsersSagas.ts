@@ -18,7 +18,7 @@ export function* doUserModalChange(): IterableIterator<any> {
                 'Content-Type': 'application/json'
             },
             method: 'put',                                                              
-            body: JSON.stringify( { name: name, email: isLoad.email, pass: isLoad.pass, imgChange: imgChange } )                                        
+            body: JSON.stringify( { name: name, email: isLoad.email, pass: isLoad.pass, img: imgChange } )                                        
             })
            
         })

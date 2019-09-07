@@ -13,7 +13,7 @@ import { doLogout, getDataHome } from "./home/homeSagas";
 import { doUserModalChange } from "./modalUser/modalUsersSagas"
 import { getUsers, getId } from "./admin/adminSagas"
 import { deleteUser } from "./usersTable/usersTableSagas"
-import { addBook, getBooks, deleteBook } from "./booksTable/booksTableSagas"
+import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas"
 
 
 export default function configureStore(
@@ -49,7 +49,8 @@ export default function configureStore(
           getBooks(),
           deleteBook(),
           getDataHome(),
-          getId()
+          getId(),
+          changeDataBook()
         ]);
       });
     return store;

@@ -30,8 +30,10 @@ import { BooksTableState } from "../../redux/booksTable/types";
 import Button from '@material-ui/core/Button';
 import './booksTableComponent.css';
 import TextField from '@material-ui/core/TextField';
-
-
+import EditIcon from '@material-ui/icons/Edit';
+import Modal from '@material-ui/core/Modal';
+import Backdrop from '@material-ui/core/Backdrop';
+import Fade from '@material-ui/core/Fade';
 
 
 
@@ -39,6 +41,7 @@ export interface BooksProps {
   addBook: (data:any) => Object;
   getBooks: () => Object;
   deleteBook: (data:any) => any;
+  changeDataBook: (data:any) => Object;
   bookToAdd: Object;
   allBooks: any; 
   isOpenForm: boolean;
@@ -47,6 +50,12 @@ export interface BooksProps {
   bookDescript: string;
   bookPrice: string;
   bookImg: any;
+  newBookTitle: string;
+  newBookAuthor: string;
+  newBookDescript: string;
+  newBookPrice: string;
+  newBookImg: any;
+  isOpenmodal:boolean;
 }
 
 
@@ -59,7 +68,13 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       bookAuthor: '',
       bookDescript: '',
       bookPrice: '',
-      bookImg: ''
+      bookImg: '',
+      newBookTitle: '',
+      newBookAuthor: '',
+      newBookDescript: '',
+      newBookPrice: '',
+      newBookImg: '',
+      isOpenmodal: false
   }
 
   componentDidMount () {
@@ -81,6 +96,16 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
           this.setState({bookImg: e.target.result})
           // console.log(e.target.result)
       }
+}
+
+onGetNewImg = (e:any) => {
+  let files = e.target.files;
+    let reader = new FileReader();
+    reader.readAsDataURL(files[0]);
+    reader.onload = (e:any) => {
+        this.setState({newBookImg: e.target.result})
+        // console.log(e.target.result)
+    }
 }
 
   onSend = () => {
@@ -105,9 +130,30 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
     
   }
 
+  onEditBook = (e:any) => {
+    this.setState({
+      isOpenmodal: !this.state.isOpenmodal
+  })
+    // console.log(e.currentTarget.id)
+    localStorage.setItem('bookId', e.currentTarget.id)
+  }
+
+  onCangeBook = (e:any) => {
+    const {changeDataBook} = this.props
+    changeDataBook({newBookTitle: this.state.newBookTitle,
+    newBookAuthor: this.state.newBookAuthor,
+    newBookDescript: this.state.newBookDescript,
+    newBookPrice: this.state.newBookPrice,
+    newBookImg: this.state.newBookImg, bookId: localStorage.getItem('bookId')})
+    
+    
+  }
+  
+
   btnOpen:string = '';
   
       render () {
+
 
         if (this.state.isOpenForm) {
           this.btnOpen = "Close"
@@ -117,8 +163,11 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
 
         const openForm = this.state.isOpenForm &&  <div className="form-to-add"><TextField className="inp" name="bookTitle" placeholder="Book's title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onSend}>Send</Button></div>
          
+        const openModalBook = this.state.isOpenmodal && <div className="modal-book">
+          <TextField className="inp" name="newBookTitle" placeholder="Title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="newBookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetNewImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
+        </div>
         // console.log(this.props.allBooks)
-        let books = this.props.allBooks.books
+        // let books = this.props.allBooks.books
               const itemsBooks = this.props.allBooks.map((book:any) => <TableRow > 
                 <TableCell >
                   {book.bookTitle} 
@@ -127,22 +176,37 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
                   {book.bookAuthor}
                 </TableCell>
                 <TableCell >
-                  {book.bookPrice}
+                  {book.bookPrice} $
                 </TableCell>
-                <TableCell className="delete">
-                  <div id={book.id} key={book.id} 
-                  onClick={(e:any)=>this.onDeleteBook(e)}
-                  >x</div> 
+                <TableCell align="right" className="delete">
+                
+                  <EditIcon id={book.id} 
+                    onClick={(e:any)=>this.onEditBook(e)}
+                  ></EditIcon>
+                 
+                <DeleteIcon id={book.id} key={book.id} 
+                  onClick={(e:any)=>this.onDeleteBook(e)}></DeleteIcon>
                 </TableCell>
             </TableRow>);
       
 
         return (
-          <div >
+          <div className="books-wrap">
+             {openModalBook}
             <Paper >
                 <Table>
+                <TableHead>
+                    <TableRow id="tbl-head">
+                      <TableCell>Title</TableCell>
+                      <TableCell>Author</TableCell>
+                      <TableCell>Price</TableCell>
+                      <TableCell></TableCell>
+                      
+                    </TableRow>
+                  </TableHead>
                   <TableBody>  
                       {itemsBooks}
+                     
                   </TableBody>
                 </Table>
             </Paper> 
@@ -167,10 +231,3 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
 
 
 export default TableBooksComponent;
-
-
-// const mapStateToProps = (state: RootState) => ({
-//   users: state.admin.users
-// });
-
-// export default connect(mapStateToProps, deleteUser)(TableUsers)
