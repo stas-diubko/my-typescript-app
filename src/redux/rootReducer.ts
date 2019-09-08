@@ -17,6 +17,8 @@ import { UsersTableState } from "./usersTable/types";
 import { usersTableReducer } from "./usersTable/reducer";
 import { BooksTableState } from "./booksTable/types";
 import { booksTableReducer } from "./booksTable/reducer";
+import { BasketState } from "./basket/types";
+import { basketReducer } from "./basket/reducer";
 
 
 export interface RootState {
@@ -30,7 +32,8 @@ export interface RootState {
     users: LoginState;
     admin: AdminState;
     usersTable: UsersTableState;
-    booksTable: BooksTableState
+    booksTable: BooksTableState;
+    basket: BasketState;
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({
@@ -44,7 +47,8 @@ export interface RootState {
     books: loginReducer,
     admin: adminReducer,
     usersTable: usersTableReducer,
-    booksTable: booksTableReducer
+    booksTable: booksTableReducer,
+    basket: basketReducer
   });
 
   

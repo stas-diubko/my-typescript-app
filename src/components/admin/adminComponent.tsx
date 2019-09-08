@@ -57,7 +57,7 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
       return <Redirect to="/home"/>
       // document.location.href = 'http://localhost:3001/home';    
     } 
-    console.log(this.props.isAdmin)
+    // console.log(this.props.isAdmin)
     return (
       <div>
         <SimpleTabs/>

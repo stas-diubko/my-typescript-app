@@ -8,6 +8,7 @@ import './bookListComponent.css'
 
 export interface  BooksListProps {
     getBooks: () => Object;
+    addToBasket: (data:any) => any;
     books: []
 }
 
@@ -29,7 +30,20 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
         // console.log(this.props);
         
       }
-    
+
+      onAddToBasket = (e:any) => {
+        //   console.log('add', e.currentTarget.id)
+        //   console.log(this.props.books) 
+  
+          const books:any = this.props.books
+          const currentBook = books.filter((x:any) => x.id == e.currentTarget.id);
+          console.log(currentBook) 
+
+      const { addToBasket } = this.props;
+      addToBasket(currentBook[0])
+        
+      }
+     
     render () {
 
         const booksList = this.props.books.map((book:any) => <Grid item xs={12} sm={6}>
@@ -38,8 +52,8 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
                     <div><b>{book.bookTitle}</b></div>
                     <div><b>Author: </b>{book.bookAuthor}</div>
                     <div><b>Description: </b>{book.bookDescript}</div>
-                    <div><b>Price: </b>{book.bookPrice}</div>
-                    <Button id={book.id} className="btn" variant="contained" color="primary">Add to basket</Button>
+                    <div><b>Price: </b>{book.bookPrice} $</div>
+                    <Button id={book.id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
                 </div></Paper>
         </Grid>)
 

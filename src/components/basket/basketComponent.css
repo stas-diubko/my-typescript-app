@@ -1,0 +1,10 @@
+.amount {
+    display: inline-block;
+    border: 1px solid grey;
+    border-radius: 3px;
+    width: 100px;
+    height: 30px;
+    margin: 0 10px;
+    text-align: center;
+    line-height: 30px;
+}

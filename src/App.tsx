@@ -13,6 +13,7 @@ import homeContainer from './containers/homeContainer';
 import Loader from './containers/loaderContainer';
 import ErrorComponent from './containers/errorContainer';
 import AdminComponent from './containers/adminContainer';
+import BasketComponent from './containers/basketContainer';
 
 const store: Store<RootState> = configureStore();
 
@@ -37,7 +38,8 @@ export class App extends React.Component {
               <Route path="/registration" component={Register} />
               <Route path="/home" component={homeContainer} />
               <Route path="/about" component={About} />  
-              <Route path="/admin" component={AdminComponent} />  
+              <Route path="/admin" component={AdminComponent} /> 
+              <Route path="/basket" component={BasketComponent} />  
             </Router>
         </header>
       </div>

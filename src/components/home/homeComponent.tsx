@@ -11,7 +11,7 @@ import ModalUserComponent from '../../containers/modalUserContainer';
 import AdminComponent from '../../containers/adminContainer';
 import BooksListComponent from '../../containers/bookListContainer'
 import avaDefault from '../../img/avaDefault.jpg' 
-
+import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 
 
 export interface HomeProps {
@@ -122,7 +122,7 @@ adminComponent:any
            
         <div className="home-header">
           <ul>
-            {/* <li><Link to="/about">About</Link></li> */}
+            <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon></Link></li>
             {this.adminComponent}
           </ul>
           <div className="user-data-wrap" onClick={this.onModal}>          
