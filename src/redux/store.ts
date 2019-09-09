@@ -10,11 +10,11 @@ import { doLogin } from "./login/loginSagas";
 import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout, getDataHome } from "./home/homeSagas";
-import { doUserModalChange } from "./modalUser/modalUsersSagas"
-import { getUsers, getId } from "./admin/adminSagas"
-import { deleteUser } from "./usersTable/usersTableSagas"
-import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas"
-
+import { doUserModalChange } from "./modalUser/modalUsersSagas";
+import { getUsers, getId } from "./admin/adminSagas";
+import { deleteUser } from "./usersTable/usersTableSagas";
+import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
+import { getDataBasket } from "./basket/basketSagas";
 
 export default function configureStore(
     initialState?: RootState
@@ -50,7 +50,8 @@ export default function configureStore(
           deleteBook(),
           getDataHome(),
           getId(),
-          changeDataBook()
+          changeDataBook(),
+          getDataBasket()
         ]);
       });
     return store;

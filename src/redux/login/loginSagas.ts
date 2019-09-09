@@ -52,7 +52,7 @@ export function* doLogin(): IterableIterator<any> {
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)
                   localStorage.setItem('id', targetUserLog[0].id)
-
+                  localStorage.setItem('basket', '[]')
                   // yield console.log(targetUserLog[0].id);
                   
                                     

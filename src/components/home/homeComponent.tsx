@@ -41,9 +41,20 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
   // isAdmin:boolean = JSON.parse(this.isAdminStr);
   isLoadStr:any = localStorage.getItem('load');
   isLoad:boolean = JSON.parse(this.isLoadStr);
+  
+  amounBasketLength:any
+  
   async componentDidMount() {
     const { getDataHome } = this.props;
     getDataHome() 
+
+    // let amounBasketStr:any = localStorage.getItem('basket')
+    // let amounBasket = JSON.parse(amounBasketStr)
+    // this.amounBasketLength = amounBasket.length
+
+
+
+
   //   setTimeout(() => {
   //     // console.log(this.props.isAdmin);
       
@@ -77,6 +88,8 @@ onLogout = (e:any) => {
   doLogout()
   localStorage.removeItem('load');
   localStorage.removeItem('id');
+  localStorage.removeItem('basket');
+
 
   // localStorage.removeItem('dataUser');
   // localStorage.removeItem('isAdmin');
@@ -122,7 +135,9 @@ adminComponent:any
            
         <div className="home-header">
           <ul>
-            <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon></Link></li>
+            <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon>
+            {/* {this.amounBasketLength} */}
+            </Link></li>
             {this.adminComponent}
           </ul>
           <div className="user-data-wrap" onClick={this.onModal}>          

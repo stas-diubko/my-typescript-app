@@ -9,11 +9,11 @@ export const initialStateLog: AdminState = {
 
 export function adminReducer(state: AdminState = initialStateLog, action: any) {
     switch (action.type) {
-        // case 'GET_USERS': {
-        //     return {
-        //         ...state, 
-        //       };
-        // }
+        case 'GET_USERS': {
+            return {
+                ...state, 
+              };
+        }
 
         case 'GOT_USERS': {
             const users = action.payload
@@ -28,6 +28,14 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
             return {
                 ...state, 
                  
+              };
+        }
+
+        case 'GET_ID': {
+           
+            return {
+                ...state, 
+               
               };
         }
 

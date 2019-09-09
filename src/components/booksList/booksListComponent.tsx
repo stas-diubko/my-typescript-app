@@ -37,17 +37,25 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
   
           const books:any = this.props.books
           const currentBook = books.filter((x:any) => x.id == e.currentTarget.id);
-          console.log(currentBook) 
+        //   console.log(currentBook[0]) 
 
       const { addToBasket } = this.props;
-      addToBasket(currentBook[0])
+      addToBasket({bookTitle: currentBook[0].bookTitle,
+        bookAuthor: currentBook[0].bookAuthor,
+        bookDescript: currentBook[0].bookDescript,
+        bookImg: currentBook[0].bookImg,
+        bookPrice: currentBook[0].bookPrice,
+        bookCount: 1,
+        totalPrice: '',
+        id: currentBook[0].id
+    })
         
       }
      
     render () {
 
-        const booksList = this.props.books.map((book:any) => <Grid item xs={12} sm={6}>
-            <Paper><div className="book-item-wrap"> 
+        const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  >
+            <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
                     <img src={book.bookImg} alt={book.bookAuthor}/>
                     <div><b>{book.bookTitle}</b></div>
                     <div><b>Author: </b>{book.bookAuthor}</div>
@@ -60,7 +68,12 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
         return(
             <div className="book-list-wrap">
                 <Grid container spacing={3}>
+                {/* <div 
+                // style={{display: 'flex', flexDirection: 'row'}}
+                > */}
                     {booksList}
+                {/* </div> */}
+                    
                 </Grid>
             </div>
         )
