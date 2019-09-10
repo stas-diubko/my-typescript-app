@@ -9,8 +9,7 @@ import { ErrortState } from "./error/types";
 import { errorReducer } from "./error/reducer";
 import { LoaderState } from "./loader/types";
 import { loaderReducer } from "./loader/reducer";
-import { UserModalState } from "./modalUser/types";
-import { userModalReducer } from "./modalUser/reducer";
+
 import { AdminState } from "./admin/types";
 import { adminReducer } from "./admin/reducer";
 import { UsersTableState } from "./usersTable/types";
@@ -27,7 +26,6 @@ export interface RootState {
     home: HomeState;
     error: ErrortState;
     loader: LoaderState;
-    userModal: UserModalState;
     books: LoginState;
     users: LoginState;
     admin: AdminState;
@@ -42,7 +40,6 @@ export interface RootState {
     home: homeReducer,
     error: errorReducer,
     loader: loaderReducer,
-    userModal: userModalReducer,
     users: loginReducer,
     books: loginReducer,
     admin: adminReducer,

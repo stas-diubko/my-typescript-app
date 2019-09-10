@@ -43,6 +43,10 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
             const id = action.payload
             // console.log(id.users.isAdmin);
             
+            if (id.users.isAdmin) {
+                localStorage.setItem('isAdmin', 'true' )
+            }
+
             return {
                 ...state, 
                 isAdmin: id.users.isAdmin

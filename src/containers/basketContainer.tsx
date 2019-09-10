@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { RootState } from "../redux/rootReducer";
 import BasketComponent from "../components/basket/basketComponent";
-import {increaseCount, getDataBasket, decreaseCount} from "../redux/basket/actions"
+import {increaseCount, getDataBasket, decreaseCount, removeFromCart} from "../redux/basket/actions"
 
 
 const mapStateToProps = (state: RootState) => ({
@@ -11,6 +11,6 @@ const mapStateToProps = (state: RootState) => ({
  
   export default connect(
     mapStateToProps,
-    {increaseCount, getDataBasket, decreaseCount},
+    {increaseCount, getDataBasket, decreaseCount, removeFromCart},
   )(BasketComponent);
   

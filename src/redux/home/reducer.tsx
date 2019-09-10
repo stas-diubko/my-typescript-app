@@ -11,10 +11,14 @@ import { Redirect } from "react-router";
 export const initialState: HomeState = {
     email: "",
     name: "",
+    pass: "",
     logOut: false,
     isModal: false, 
     img: '',
-    isAdmin: false
+    isAdmin: false,
+    countBasket: '',
+    isChangeData: false,
+    imgChange: ''
 };
 
 export function homeReducer(state: HomeState = initialState, action: any) {
@@ -24,13 +28,16 @@ export function homeReducer(state: HomeState = initialState, action: any) {
         //    const dataUser:any = JSON.parse(dataUserStr);
            let dataUser = action.payload
         //    console.log(dataUser.dataHome);
+        //    console.log(dataUser.countBasket);
            
             return {
                 ...state,
                 email: dataUser.dataHome.email,
                 name: dataUser.dataHome.name,
                 isAdmin: dataUser.dataHome.isAdmin,
-                img: dataUser.dataHome.imgChange
+                img: dataUser.dataHome.imgChange,
+                countBasket: dataUser.countBasket,
+                pass: dataUser.dataHome.pass
             }
         }
         // case 'GET_ADMIN': {

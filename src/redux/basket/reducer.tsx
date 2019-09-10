@@ -16,46 +16,7 @@ export function basketReducer(state: BasketState = initialState, action: any) {
                 basket: action.payload.dataBasket
             }
         }
-        case 'ADD_TO_BASKET': {
-            // console.log(action.data.id)
-           
-           let dataBasketStr:any = localStorage.getItem('basket')
-        //    localStorage.removeItem('basket');
-           let dataStore = JSON.parse(dataBasketStr)
-           
-
-           let index = dataStore.findIndex((i:any) => i.id == action.data.id);
-           let currentBook = action.data;
-           currentBook.totalPrice = currentBook.bookCount * currentBook.bookPrice
-           
-        //    console.log(dataStore)
-
-            if (index == -1) {
-               
-                dataStore.push(currentBook)
-                let newDataStore = JSON.stringify(dataStore)
-                localStorage.setItem('basket', newDataStore)
-                
-
-            } 
-            else {
-                for (let i = 0; i < dataStore.length; i++) {
-                    if (dataStore[i].id === action.data.id) {
-                        dataStore[i].bookCount = dataStore[i].bookCount + 1
-                        dataStore[i].totalPrice = dataStore[i].bookCount * dataStore[i].bookPrice
-                    }
-               }
-    
-               let newDataStore = JSON.stringify(dataStore)
-                localStorage.setItem('basket', newDataStore)
-            }
-
-           return {
-                ...state,
-                // basket:[dataStore]
-            }
-         
-        }
+        
 
         case "INCREASE_COUNT": {
             let dataIncrease = action.data

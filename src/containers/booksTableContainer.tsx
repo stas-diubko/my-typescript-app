@@ -1,7 +1,7 @@
 import { connect } from "react-redux";
 import { RootState } from "../redux/rootReducer";
 import { TableBooksComponent } from "../components/booksTable/booksTableComponent";
-import { addBook, getBooks, deleteBook, changeDataBook } from "../redux/booksTable/actions"
+import { addBook, getBooks, deleteBook, changeDataBook, getCurrentBookBook } from "../redux/booksTable/actions"
 
 const mapStateToProps = (state: RootState) => ({
     bookToAdd: state.booksTable.bookToAdd,
@@ -22,6 +22,6 @@ const mapStateToProps = (state: RootState) => ({
  
   export default connect(
     mapStateToProps,
-    {addBook, getBooks, deleteBook, changeDataBook},
+    {addBook, getBooks, deleteBook, changeDataBook, getCurrentBookBook},
   )(TableBooksComponent);
   

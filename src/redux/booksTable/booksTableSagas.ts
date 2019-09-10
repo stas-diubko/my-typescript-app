@@ -74,13 +74,15 @@ export function* getBooks(): IterableIterator<any> {
 
       }
   })
+
+  
 }
 
 export function* changeDataBook(): IterableIterator<any> {
   yield takeEvery('CHANGE_DATA_BOOK', function*(action: any) {
     try {
         let {newBookTitle, newBookAuthor, newBookDescript, newBookPrice, newBookImg, bookId} = action.data;
-        // yield console.log(bookId)
+        
         
         const API_URL = 'http://localhost:3000/books/'                                            
         const API_PATH = bookId

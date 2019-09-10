@@ -10,7 +10,7 @@ import { doLogin } from "./login/loginSagas";
 import { onError } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout, getDataHome } from "./home/homeSagas";
-import { doUserModalChange } from "./modalUser/modalUsersSagas";
+
 import { getUsers, getId } from "./admin/adminSagas";
 import { deleteUser } from "./usersTable/usersTableSagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
@@ -42,7 +42,6 @@ export default function configureStore(
           onError(),
           onLoaderOccured(),
           doLogout(),
-          doUserModalChange(),
           getUsers(),
           deleteUser(),
           addBook(),

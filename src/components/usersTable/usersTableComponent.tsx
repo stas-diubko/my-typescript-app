@@ -90,6 +90,13 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
           <div >
             <Paper >
                 <Table>
+                <TableHead>
+                    <TableRow id="tbl-head">
+                      <TableCell>User Name</TableCell>
+                      <TableCell>User Email</TableCell>
+                      <TableCell></TableCell>
+                    </TableRow>
+                  </TableHead>
                   <TableBody>  
                     {/* <UserList 
                       users={this.props.users}

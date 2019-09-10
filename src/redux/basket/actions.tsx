@@ -15,3 +15,7 @@ export function decreaseCount (data:any) {
 export function getDataBasket () {
     return { type: BasketActions.GET_DATA_BASKET }
 }
+
+export function removeFromCart (data:any) {
+    return { type:BasketActions.REMOVE_FROM_CART, data }
+}

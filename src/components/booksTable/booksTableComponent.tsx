@@ -42,6 +42,7 @@ export interface BooksProps {
   getBooks: () => Object;
   deleteBook: (data:any) => any;
   changeDataBook: (data:any) => Object;
+  getCurrentBookBook:(data:any) => any;
   bookToAdd: Object;
   allBooks: any; 
   isOpenForm: boolean;
@@ -60,7 +61,9 @@ export interface BooksProps {
 
 
 export class TableBooksComponent extends React.Component<BooksProps, BooksTableState> {
-    state: BooksTableState = {
+
+  
+  state: BooksTableState = {
       bookToAdd: {},
       allBooks: [],
       isOpenForm: false,
@@ -76,6 +79,8 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       newBookImg: '',
       isOpenmodal: false
   }
+
+          
 
   componentDidMount () {
     const { getBooks } = this.props;
@@ -96,6 +101,34 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
           this.setState({bookImg: e.target.result})
           // console.log(e.target.result)
       }
+}
+
+onEditBook = (e:any) => {
+ 
+  for(let i = 0; i < this.props.allBooks.length; i++) {
+    if (this.props.allBooks[i].id == e.currentTarget.id){
+      this.setState({
+        bookTitle: this.props.allBooks[i].bookTitle
+    })
+      
+    }
+  }
+    
+let qqq = () => {
+    this.setState({
+      isOpenmodal: !this.state.isOpenmodal
+  })
+  }
+  setTimeout(function(){
+    qqq()
+    
+  }, 200)
+
+  // console.log(this.props);
+
+
+
+  localStorage.setItem('bookId', e.currentTarget.id)
 }
 
 onGetNewImg = (e:any) => {
@@ -130,13 +163,7 @@ onGetNewImg = (e:any) => {
     
   }
 
-  onEditBook = (e:any) => {
-    this.setState({
-      isOpenmodal: !this.state.isOpenmodal
-  })
-    // console.log(e.currentTarget.id)
-    localStorage.setItem('bookId', e.currentTarget.id)
-  }
+ 
 
   onCangeBook = (e:any) => {
     const {changeDataBook} = this.props
@@ -144,8 +171,10 @@ onGetNewImg = (e:any) => {
     newBookAuthor: this.state.newBookAuthor,
     newBookDescript: this.state.newBookDescript,
     newBookPrice: this.state.newBookPrice,
-    newBookImg: this.state.newBookImg, bookId: localStorage.getItem('bookId')})
+    newBookImg: this.state.newBookImg, 
+    bookId: localStorage.getItem('bookId')})
     
+  document.location.href = 'http://localhost:3001/admin';
     
   }
   
@@ -163,9 +192,9 @@ onGetNewImg = (e:any) => {
 
         const openForm = this.state.isOpenForm &&  <div className="form-to-add"><TextField className="inp" name="bookTitle" placeholder="Book's title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onSend}>Send</Button></div>
          
-        const openModalBook = this.state.isOpenmodal && <div className="modal-book">
-          <TextField className="inp" name="newBookTitle" placeholder="Title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="newBookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetNewImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
-        </div>
+        // const openModalBook = this.state.isOpenmodal && <div className="modal-book">
+        //   <TextField className="inp" name="newBookTitle" placeholder="Title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="newBookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetNewImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
+        // </div>
         // console.log(this.props.allBooks)
         // let books = this.props.allBooks.books
               const itemsBooks = this.props.allBooks.map((book:any) => <TableRow > 
@@ -192,7 +221,33 @@ onGetNewImg = (e:any) => {
 
         return (
           <div className="books-wrap">
-             {openModalBook}
+              <Modal  open={this.state.isOpenmodal} 
+              onClose={this.onEditBook}
+              style={{display: 'flex',
+              alignItems: 'center',
+              justifyContent: 'center',}}>
+                  <Fade in={this.state.isOpenmodal}>
+                    <div style={{height: "450px", 
+                        width: "500px",
+                        backgroundColor:"rgb(125, 195, 207)", 
+                        display: 'flex',
+                        alignItems: 'center',
+                        flexDirection: "column",
+                        padding: "10px",
+                        borderRadius: "20px",
+                        }}>
+                          <div ><span style={{color: "brown", fontSize: "30px", fontWeight: "bold"}}>Book for change:</span><h2>{this.state.bookTitle}</h2></div>
+                      <TextField  style={{marginTop: "20px"}} className="inp" name="newBookTitle" placeholder="New Title" onChange={(e:any)=>this.handle(e)} />
+                      <TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/>
+                      <TextField className="inp" name="newBookDescript"  placeholder="New Description" onChange={(e:any)=>this.handle(e)}/>
+                      <TextField className="inp" name="newBookPrice"  placeholder="New Price" onChange={(e:any)=>this.handle(e)}/>
+                      <TextField type="file" className="inp" name="newBookImg"  placeholder="New Img" onChange={(e:any)=>this.onGetNewImg(e)}/>
+                      
+                      <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
+                    </div>
+                  </Fade>
+              </Modal>
+             {/* {openModalBook} */}
             <Paper >
                 <Table>
                 <TableHead>

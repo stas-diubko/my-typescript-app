@@ -9,3 +9,7 @@ export function doLogout() {
 export function getDataHome() {
   return { type: LogoutActions.GET_DATA_HOME};
 }
+
+export function doUserModalChange(data: any) {
+  return { type: LogoutActions.DO_USER_CHANGE, data};
+}

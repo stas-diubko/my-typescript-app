@@ -30,7 +30,9 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
     const { getId } = this.props;
     getId()
     
+           
 
+    
     // if (this.props.isAdmin){
     //     this.setState({isAdmin: this.props.isAdmin}) 
     //   // console.log(this.state.isAdmin)
@@ -52,8 +54,9 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
   //   console.log(this.state.isAdmin)
   // } 
   // console.log(this.props.isAdmin)
-
-    if(this.props.isAdmin === false) {
+  const isAdminStr:any = localStorage.getItem('isAdmin')
+  const isAdminPars = JSON.parse(isAdminStr)
+    if(!isAdminPars) {
       return <Redirect to="/home"/>
       // document.location.href = 'http://localhost:3001/home';    
     } 

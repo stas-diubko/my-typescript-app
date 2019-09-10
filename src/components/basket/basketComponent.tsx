@@ -10,6 +10,7 @@ export interface  BasketProps {
     getDataBasket: () => any;
     increaseCount: (data:any) => any;
     decreaseCount: (data:any) => any;
+    removeFromCart: (data:any) => any;
     basket: any;
     countItem: string;
     dataStore: any;
@@ -40,7 +41,12 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
     }
     
    
-
+    onRemove = (e:any) => {
+        const {removeFromCart} = this.props;
+        removeFromCart(e.currentTarget.id)
+        // console.log(e.currentTarget.id);
+        
+    }
 
     render () {
         
@@ -59,8 +65,13 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         
 
         // console.log(this.props.basket);
+
+        let arrBasket = this.props.basket
+        if(arrBasket == null) {
+            arrBasket = []
+        }
         
-        const basketList = this.props.basket.map((book:any) => <Grid item  xs={6} sm={6} 
+        const basketList = arrBasket.map((book:any) => <Grid item  xs={6} sm={6} 
         style={{width: '600px'}}
         >
         <Paper><div className="basket-item"> 
@@ -70,7 +81,8 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
                 <div><b>Description: </b>{book.bookDescript}</div>
                 <div><b>Price: </b>{book.bookPrice} $</div>
                 <div className="btns-change"><Button id={book.id} variant="contained" color="primary" onClick={(e:any)=>toDecrease(e)}>-</Button><div className="amount">{book.bookCount}</div><Button id={book.id} variant="contained" color="primary" onClick={(e:any)=>toIncrease(e)}>+</Button></div>
-                <div className="total-item">Total price: {book.totalPrice} $</div>
+                <div className="total-item">Total price: {book.totalPrice} $ </div>
+                <Button id={book.id} variant="contained" style={{backgroundColor: 'pink'}} onClick={(e:any) => this.onRemove(e)}>Remove</Button>
             </div></Paper>
     </Grid>)
         return (

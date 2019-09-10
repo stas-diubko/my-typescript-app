@@ -42,16 +42,59 @@ export function* doLogout(): IterableIterator<any> {
 
       } )
 
-
+      
+    let amounBasketStr:any = localStorage.getItem('basket')
+    let amounBasket = JSON.parse(amounBasketStr)
+    let amounBasketLength = amounBasket.length
         yield put ({
             type: 'GOT_DATA_HOME',
             payload: {
-                dataHome: dataHome
+                dataHome: dataHome,
+                countBasket: amounBasketLength
+              
+            }
+          })
+
+          yield put ({
+            type: 'GET_ID',
+            payload: {
+               
               
             }
           })
 
          
+      } 
+      catch (error) {
+       
+      }
+    });
+
+    yield takeEvery('DO_USER_CHANGE', function*(action: any) {
+      try {
+          let {name, imgChange, pass, email, id, isAdmin} = action.data;
+          const API_URL = 'http://localhost:3000/users/'                                            
+          const API_PATH = id
+        console.log({name, imgChange, pass, email,  id});
+        
+        yield call (() => {
+            // const load:any = localStorage.getItem('dataUser')
+            // const isLoad = JSON.parse(load)
+            
+
+            return fetch (API_URL + API_PATH, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',                                                              
+            body: JSON.stringify( { name: name, 
+              email: email, pass: pass, isAdmin: isAdmin,
+              imgChange: imgChange } )                                        
+            })
+           
+        })
+        
       } 
       catch (error) {
        

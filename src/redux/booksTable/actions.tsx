@@ -17,3 +17,7 @@ export function changeDataBook(data:any) {
     return { type: BooksTableActions.CHANGE_DATA_BOOK, data};
 }
 
+export function getCurrentBookBook(data:any) {
+    return { type: BooksTableActions.GET_CURRENT_BOOK, data};
+}
+
