@@ -7,7 +7,6 @@ import ErrorComponent from "../components/error/errorComponent";
 
 const mapStateToProps = (state: RootState) => ({
    error: state.error.error,
-   
   });
 
 

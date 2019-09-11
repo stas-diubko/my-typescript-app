@@ -2,12 +2,12 @@ import React from 'react';
 import SimpleTabs from './adminTabs';
 import { AdminState } from '../../redux/admin/types';
 import { Redirect } from 'react-router';
+import { Link } from 'react-router-dom';
 
 
 export interface AdminProps {
   getUsers: () => object;
   getId: () => object;
-  // getBooks: () => Object;
   books: any;
   users: any;
   isAdmin: boolean;
@@ -30,39 +30,25 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
     const { getId } = this.props;
     getId()
     
-           
-
-    
-    // if (this.props.isAdmin){
-    //     this.setState({isAdmin: this.props.isAdmin}) 
-    //   // console.log(this.state.isAdmin)
-    // } 
-    // else {
-    //     this.setState({isAdmin: false}) 
-
-    // }
-    // console.log(this.props.isAdmin)
-    
-
-
   }
 
 
   render () {
-  //   if (this.props.isAdmin){
-  //     this.setState({isAdmin: this.props.isAdmin}) 
-  //   console.log(this.state.isAdmin)
-  // } 
-  // console.log(this.props.isAdmin)
-  const isAdminStr:any = localStorage.getItem('isAdmin')
-  const isAdminPars = JSON.parse(isAdminStr)
+    const isAdminStr:any = localStorage.getItem('isAdmin')
+    const isAdminPars = JSON.parse(isAdminStr)
+    
     if(!isAdminPars) {
-      return <Redirect to="/home"/>
-      // document.location.href = 'http://localhost:3001/home';    
+        return <Redirect to="/home"/>
     } 
-    // console.log(this.props.isAdmin)
+    
     return (
       <div>
+        <div className="home-header">
+          <div style={{display: "flex"}}>
+            <h2>Admin Page</h2>
+            <Link style={{margin: "22px 0 0 20px "}} to="/home">To Home Page</Link>
+          </div>
+        </div>
         <SimpleTabs/>
       </div>
     )

@@ -35,8 +35,6 @@ import Modal from '@material-ui/core/Modal';
 import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
-
-
 export interface BooksProps {
   addBook: (data:any) => Object;
   getBooks: () => Object;
@@ -59,10 +57,8 @@ export interface BooksProps {
   isOpenmodal:boolean;
 }
 
-
 export class TableBooksComponent extends React.Component<BooksProps, BooksTableState> {
 
-  
   state: BooksTableState = {
       bookToAdd: {},
       allBooks: [],
@@ -79,8 +75,6 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       newBookImg: '',
       isOpenmodal: false
   }
-
-          
 
   componentDidMount () {
     const { getBooks } = this.props;
@@ -99,7 +93,6 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       reader.readAsDataURL(files[0]);
       reader.onload = (e:any) => {
           this.setState({bookImg: e.target.result})
-          // console.log(e.target.result)
       }
 }
 
@@ -124,10 +117,6 @@ let qqq = () => {
     
   }, 200)
 
-  // console.log(this.props);
-
-
-
   localStorage.setItem('bookId', e.currentTarget.id)
 }
 
@@ -137,15 +126,20 @@ onGetNewImg = (e:any) => {
     reader.readAsDataURL(files[0]);
     reader.onload = (e:any) => {
         this.setState({newBookImg: e.target.result})
-        // console.log(e.target.result)
     }
 }
 
-  onSend = () => {
-    // console.log(this.state);
+  onSend = (e:any) => {
     const {addBook} = this.props;
     addBook({ bookTitle: this.state.bookTitle, bookAuthor: this.state.bookAuthor, bookDescript: this.state.bookDescript, bookPrice: this.state.bookPrice, bookImg: this.state.bookImg})
     this.setState(this.state)
+    this.setState({
+      bookTitle: '',
+      bookAuthor: '',
+      bookDescript: '',
+      bookPrice: '',
+      bookImg: '',
+    })
   }
 
   onOpenForm = () => {
@@ -155,15 +149,9 @@ onGetNewImg = (e:any) => {
   }
 
   onDeleteBook = (e:any) => {
-    const {deleteBook} = this.props;  
-    
+    const {deleteBook} = this.props; 
     deleteBook(e.currentTarget.id)
-    alert('book was deleted')
-    // console.log(e.currentTarget.id);
-    
   }
-
- 
 
   onCangeBook = (e:any) => {
     const {changeDataBook} = this.props
@@ -173,16 +161,12 @@ onGetNewImg = (e:any) => {
     newBookPrice: this.state.newBookPrice,
     newBookImg: this.state.newBookImg, 
     bookId: localStorage.getItem('bookId')})
-    
-  document.location.href = 'http://localhost:3001/admin';
-    
+    document.location.href = 'http://localhost:3001/admin';
   }
   
-
   btnOpen:string = '';
   
       render () {
-
 
         if (this.state.isOpenForm) {
           this.btnOpen = "Close"
@@ -190,14 +174,15 @@ onGetNewImg = (e:any) => {
           this.btnOpen = 'Add new book'
         }
 
-        const openForm = this.state.isOpenForm &&  <div className="form-to-add"><TextField className="inp" name="bookTitle" placeholder="Book's title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="bookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onSend}>Send</Button></div>
+        const openForm = this.state.isOpenForm &&  <div className="form-to-add">
+          <TextField  id="mainInput" className="inp" name="bookTitle" placeholder="Book's title" onChange={(e:any)=>this.handle(e)} value={this.state.bookTitle}/>
+          <TextField className="inp" name="bookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)} value={this.state.bookAuthor}/>
+          <TextField className="inp" name="bookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)} value={this.state.bookDescript}/>
+          <TextField className="inp" name="bookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)} value={this.state.bookPrice}/>
+          <TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)} /> 
+          <Button id="btn-send" variant="contained" color="secondary" onClick={(e:any)=>this.onSend(e)}>Send</Button></div>
          
-        // const openModalBook = this.state.isOpenmodal && <div className="modal-book">
-        //   <TextField className="inp" name="newBookTitle" placeholder="Title" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookDescript"  placeholder="Description" onChange={(e:any)=>this.handle(e)}/><TextField className="inp" name="newBookPrice"  placeholder="Price" onChange={(e:any)=>this.handle(e)}/><TextField type="file" name="newBookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetNewImg(e)}/> <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
-        // </div>
-        // console.log(this.props.allBooks)
-        // let books = this.props.allBooks.books
-              const itemsBooks = this.props.allBooks.map((book:any) => <TableRow > 
+        const itemsBooks = this.props.allBooks.map((book:any) => <TableRow key={book.id}> 
                 <TableCell >
                   {book.bookTitle} 
                 </TableCell>
@@ -211,12 +196,13 @@ onGetNewImg = (e:any) => {
                 
                   <EditIcon id={book.id} 
                     onClick={(e:any)=>this.onEditBook(e)}
+                    style={{marginRight: "15px"}}
                   ></EditIcon>
                  
                 <DeleteIcon id={book.id} key={book.id} 
                   onClick={(e:any)=>this.onDeleteBook(e)}></DeleteIcon>
                 </TableCell>
-            </TableRow>);
+          </TableRow>);
       
 
         return (
@@ -247,7 +233,7 @@ onGetNewImg = (e:any) => {
                     </div>
                   </Fade>
               </Modal>
-             {/* {openModalBook} */}
+           
             <Paper >
                 <Table>
                 <TableHead>
@@ -255,34 +241,20 @@ onGetNewImg = (e:any) => {
                       <TableCell>Title</TableCell>
                       <TableCell>Author</TableCell>
                       <TableCell>Price</TableCell>
-                      <TableCell></TableCell>
-                      
+                      <TableCell></TableCell> 
                     </TableRow>
                   </TableHead>
                   <TableBody>  
                       {itemsBooks}
-                     
                   </TableBody>
                 </Table>
             </Paper> 
-            
-                {openForm}        
-            
-            
+                {openForm}      
             <Button variant="contained" color="primary" id="btn" onClick={this.onOpenForm}>{this.btnOpen}</Button>
             
           </div>
         );
-        
-      
-
-
-      
       }
-
-   
-  
 }
-
 
 export default TableBooksComponent;

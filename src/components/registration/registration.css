@@ -1,5 +1,5 @@
 form {
-    border: 1px solid grey;
+    border: 2px solid  rgb(216, 155, 63);
     border-radius: 10px;
     display: flex;
     flex-direction: column;
@@ -11,7 +11,8 @@ input {
     margin: 5px;
     padding: 5px;
     height: 25px;
-
+    border: 1px solid  rgb(216, 155, 63);
+    border-radius: 4px;
 }
 
 .form-error {
@@ -21,4 +22,16 @@ input {
 
 .loader {
     display: block;
+}
+
+.Registr {
+    display: flex;
+    justify-content: center
+}
+
+.btn-form {
+    width: 100px;
+    margin: 15px 0 0 5px;
+    border-radius: 4px;
+    background-color: blanchedalmond;
 }

@@ -18,16 +18,7 @@ export function* onLoaderOccured(): IterableIterator<any> {
         });
       } 
       catch (error) {
-        // yield put({
-        //   type: `@@ERROR_SHOW`,
-        //   payload: {
-        //     error: error.message
-        //   }
-        // });
-        // yield call(delay, 500);
-        // yield put({
-        //   type: `@@ERROR_HIDE`
-        // });
+        
       }
     });
   }

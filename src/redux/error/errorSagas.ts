@@ -1,7 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
 
-
 export function* onError(): IterableIterator<any> {
     yield takeEvery('ERROR_OCCURED', function*(action: any) {
       try {
@@ -17,16 +16,7 @@ export function* onError(): IterableIterator<any> {
         });
       } 
       catch (error) {
-        // yield put({
-        //   type: `@@ERROR_SHOW`,
-        //   payload: {
-        //     error: error.message
-        //   }
-        // });
-        // yield call(delay, 500);
-        // yield put({
-        //   type: `@@ERROR_HIDE`
-        // });
+       
       }
     });
   }

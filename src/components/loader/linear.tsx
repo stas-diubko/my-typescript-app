@@ -32,8 +32,6 @@ export default function LinearDeterminate() {
    
     return (
       <div className={classes.root}>
-        <LinearProgress variant="determinate" value={completed} />
-        <br />
         <LinearProgress color="secondary" variant="determinate" value={completed} />
       </div>
     );

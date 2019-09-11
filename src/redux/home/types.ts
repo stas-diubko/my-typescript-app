@@ -19,6 +19,6 @@ export interface HomeState {
   pass: any;
   isChangeData: boolean,
   imgChange: any;
-
+  isModalMore: boolean; 
 }
 

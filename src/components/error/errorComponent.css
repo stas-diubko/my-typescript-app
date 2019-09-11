@@ -1,11 +1,9 @@
 .error-wrap {
     background-color: rgb(241, 147, 171);
-    /* height: 40px; */
     display: flex;
     justify-content: center;
     align-items: center;
     color: white;
     font-size: 20px;
     font-weight: 600;
-    /* line-height: 40px; */
 }

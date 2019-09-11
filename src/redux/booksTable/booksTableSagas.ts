@@ -1,7 +1,5 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 
-
-
 export function* addBook(): IterableIterator<any> {
     yield takeEvery('ADD_BOOK', function*(action: any) {
      let {bookTitle, bookAuthor, bookDescript, bookPrice, bookImg} =  action.data;
@@ -16,6 +14,13 @@ export function* addBook(): IterableIterator<any> {
                 },
               body: JSON.stringify({bookTitle, bookAuthor, bookDescript, bookPrice, bookImg}),
             })      
+            })
+
+            yield put ({
+              type: "GET_ALL_BOOKS",
+              payload: {
+                              
+              }
             })
                       
         } 
@@ -40,6 +45,13 @@ export function* deleteBook(): IterableIterator<any> {
               })
 
           } )
+
+          yield put ({
+            type: "GET_ALL_BOOKS",
+            payload: {
+                            
+            }
+          })
                     
       } 
       
@@ -66,8 +78,7 @@ export function* getBooks(): IterableIterator<any> {
            
         }
       })
-         
-                    
+                      
       } 
       
       catch (error) {
@@ -75,14 +86,12 @@ export function* getBooks(): IterableIterator<any> {
       }
   })
 
-  
 }
 
 export function* changeDataBook(): IterableIterator<any> {
   yield takeEvery('CHANGE_DATA_BOOK', function*(action: any) {
     try {
         let {newBookTitle, newBookAuthor, newBookDescript, newBookPrice, newBookImg, bookId} = action.data;
-        
         
         const API_URL = 'http://localhost:3000/books/'                                            
         const API_PATH = bookId
@@ -100,8 +109,6 @@ export function* changeDataBook(): IterableIterator<any> {
          
       })
 
-      
-      
     } 
     catch (error) {
      

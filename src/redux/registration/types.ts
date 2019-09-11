@@ -26,17 +26,13 @@ export interface RegisterState {
     name: string;
     email: string;
     pass: string;
-    isAdmin: boolean
+    isAdmin: boolean;
+    imgChange:any;
   }
-
-// export interface RegisterState extends BaseState {
-//     users: User[];
-// }
 
 export interface DoRegister {
     name: string;
     email: string;
     pass: string;
-    isAdmin: boolean
-    // payloadFunc: Function;
+    isAdmin: boolean;
   }

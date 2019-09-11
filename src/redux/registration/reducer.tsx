@@ -22,13 +22,12 @@ export function registerReducer (state: RegisterState = initialState, action: an
         }
         case '@@register/SUCCESSFULL': {
             const data = action.payload;
-            // console.log(data)
+            
             return {
                 ...state,
                 email: data.email,
                 pass: data.pass,
                 isRegister: data.isRegister,
-                // isLoader: data.isLoader
             };
         }
         case '@@register/ERROR_OCCURED': {

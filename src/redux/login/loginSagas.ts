@@ -16,8 +16,7 @@ export function* doLogin(): IterableIterator<any> {
             } )
             
             let targetUserLog = dataLogin.filter((i:any) => i.email === email);
-            // yield console.log(targetUserLog)
-
+            
              if (targetUserLog.length === 0) {
                 yield put ({
                     type: 'ERROR_OCCURED',
@@ -28,17 +27,7 @@ export function* doLogin(): IterableIterator<any> {
                   })
             }  
             else if (pass === targetUserLog[0].pass) {
-              // let adminEmail = 'admin@admin.com'
-              // if (targetUserLog[0].email === adminEmail) {
-              //   let isAdmin = JSON.stringify(true)
-              //   localStorage.setItem('isAdmin', isAdmin)
-              //   yield put({
-              //     type: 'GET_ADMIN',
-              //     payload: {
-              //       isAdmin: true
-              //     }
-              //   });
-              // }
+              
                 yield put({
                     type: 'DO_LOADER',
                     payload: {
@@ -46,24 +35,18 @@ export function* doLogin(): IterableIterator<any> {
                     }
                   });
 
-                  // let dataUser = JSON.stringify(targetUserLog[0])
-                  // let dataUser = JSON.stringify({email, name, isLoading})
-                  // localStorage.setItem('dataUser', dataUser)
                   let isLoadi = JSON.stringify(true)
                   localStorage.setItem('load', isLoadi)
                   localStorage.setItem('id', targetUserLog[0].id)
                   localStorage.setItem('basket', '[]')
-                  // yield console.log(targetUserLog[0].id);
-                  
-                                    
+                                 
                 yield call(delay, 2000);
 
                 yield put({
                     type: 'LOGIN_SUCCESS',
                     payload: {
                       users: dataLogin
-                        // isLoading: true,
-                        // email: targetUserLog[0].email
+                        
                     }
                 })
 
@@ -77,18 +60,16 @@ export function* doLogin(): IterableIterator<any> {
                 yield put({
                   type: 'GET_USER_DATA',
                   payload: {
-                    // name: targetUserLog[0].name
+                   
                   }
                 });
             } 
 
             else {
-                // alert('password is not correct, try again')
                 yield put ({
                     type: 'ERROR_OCCURED',
                     payload: {
                       error: 'password is not correct, try again'
-                      
                     }
                   })
             }   
@@ -98,6 +79,5 @@ export function* doLogin(): IterableIterator<any> {
 
         }
     })
-
 
 }

@@ -1,5 +1,4 @@
 
-
 import { RootState } from "../rootReducer";
 import { ErrortState } from "./types";
 
@@ -27,7 +26,6 @@ export function errorReducer(state: any = initialState, action: any) {
           error: ""
         };
       }
-
 
         default:
         return state;

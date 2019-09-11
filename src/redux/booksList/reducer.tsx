@@ -2,7 +2,9 @@ import { BookListState } from "./types";
 import { RootState } from "../rootReducer";
 
 export const initialState: BookListState = {
-    books: ''
+    books: '',
+    isModalMore: false 
+
 };
 
 

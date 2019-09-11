@@ -6,7 +6,7 @@ import { addToBasket } from "../redux/basket/actions"
 
 const mapStateToProps = (state: RootState) => ({
     books: state.booksTable.allBooks,
-    
+   
 });
  
   export default connect(

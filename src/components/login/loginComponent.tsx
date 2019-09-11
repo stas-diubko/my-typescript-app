@@ -1,11 +1,8 @@
 import React from 'react';
 import { LoginState, LoginRequest } from '../../redux/login/types';
-
 import { login } from '../../redux/login/reducer';
 import {Redirect, Link} from 'react-router-dom'
 import configureStore from '../../redux/store';
-// import HomeComponent from '../home/homeComponent';
-// import ErrorComponent from '../../containers/errorContainer';
 
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
@@ -60,12 +57,6 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
         if (isValidLogin) {
           const { doLogin } = this.props;
           doLogin({ email: this.state.email, pass: this.state.pass });
-          // this.setState({
-          //   email: '',
-          //   pass: '',
-          //   passError: '',
-          //   emailError: '',
-          // })
           this.setState(this.state)
         }   
     }
@@ -73,24 +64,29 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
     render () {
       const load:any = localStorage.getItem('load')
       const isLoad = JSON.parse(load)
+      
       if (this.props.isLoading || isLoad){
             return <Redirect to="/home"/>        
       }   
 
       return (       
         <div >
-          {/* <ErrorComponent/> */}
-          <ul>
-            <li><Link to="/registration">Registration</Link></li>
-          </ul>
-          <h3>Login</h3>
-          <form >
+          <div className="home-header">
+            <h3>Welcome to Book Shop!</h3>
+          </div>  
+          <div style={{display: "flex", justifyContent: "center"}}>
+          <div>
+            <h3>Login</h3>
+            <form  style={{ marginBottom: "10px"}}>
               <input type="email" name="email" placeholder="User Email" onChange={this.handle} value={this.state.email}/>
               <div className="form-error">{this.state.emailError}</div>              
               <input type="password" name="pass" placeholder="User Pass" onChange={this.handle} value={this.state.pass}/>
               <div className="form-error">{this.state.passError}</div>  
-              <button onClick={(e:any)=>this.handleSubmit(e)}>Log In</button>
+              <button style={{width: "100px", margin: "15px 0 0 5px", borderRadius: "4px", backgroundColor: "blanchedalmond"}} onClick={(e:any)=>this.handleSubmit(e)}>Log In</button>
           </form> 
+          <div><span style={{color: "brown"}}>Don't have an account? </span><Link style={{fontSize: "16px", marginTop: "30px"}} to="/registration">Go to registration</Link></div>
+          </div>
+          </div>
         </div>
       );
     }

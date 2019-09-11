@@ -21,14 +21,6 @@ export enum LoginActions {
     users: any;
   }
   
-//   export interface DoLoginProps {
-//     email: string;
-//     password: string;
-//     payloadFunc: Function;
-//   }
-
-  
-  
   export interface LoginResult {
     token: string;
   }

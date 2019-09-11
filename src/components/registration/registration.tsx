@@ -3,9 +3,7 @@ import './registration.css';
 import { Redirect } from 'react-router';
 import { RegisterState, RegisterRequest } from '../../redux/registration/types';
 import { tsThisType } from '@babel/types';
-// import LinearDeterminate, { Loader } from '../loader/loader';
-// import ErrorComponent from '../../containers/errorContainer';
-// import Loader from '../../containers/loaderContainer';
+import avaDefault from '../../img/avaDefault.jpg';
 
 export interface RegisterProps {
   doInit: (data: RegisterRequest) => object;
@@ -35,6 +33,7 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
     isLoader: false,
     isAdmin: false,
   };
+
   handle = (event: any) =>
     this.setState({ [event.target.name]: event.target.value 
     } as any)
@@ -65,28 +64,30 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
     const isValid = this.validate();
     if (isValid) {
       const { doInit } = this.props;
-      doInit({ name: this.state.name, email: this.state.email, pass: this.state.pass, isAdmin: this.state.isAdmin });
+      doInit({ 
+        name: this.state.name, 
+        email: this.state.email, 
+        pass: this.state.pass, 
+        isAdmin: this.state.isAdmin,
+        imgChange: avaDefault
+      });
       this.setState(this.state)
     }
   }
 
-  // loader:any
-  
   render () {
     if (this.props.isRegister){
       return <Redirect to="/"/>
     }
-    // if (this.state.isLoader){
-    //   this.loader = <div className="loader"><LinearDeterminate/></div>
-    // } 
+    
     return (
-      
-      <div className="Registr">
-        {/* <ErrorComponent/> */}
-        {/* <div className="loader"><LinearDeterminate/></div>   */}
-        {/* {this.loader} */}
-        {/* <Loader/> */}
-          <h3>Registration</h3>          
+      <div >
+        <div className="home-header">
+            <h3>Registration</h3>
+        </div>
+        <div className="Registr ">
+          <div>
+           <h3>Registration</h3>          
           <form >
               <input type="text" name="name" placeholder="Your Name" onChange={this.handle} value={this.state.name}/>   
               <div className="form-error">{this.state.nameError}</div>           
@@ -94,8 +95,10 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
               <div className="form-error">{this.state.emailError}</div>
               <input type="password" name="pass" placeholder="Your Pass" onChange={this.handle} value={this.state.pass}/>
               <div className="form-error">{this.state.passError}</div> 
-              <button onClick={(e:any)=>this.handleSubmit(e)}>Send</button>
+              <button className="btn-form" onClick={(e:any)=>this.handleSubmit(e)}>Send</button>
           </form>
+        </div>
+        </div>
       </div>
     );
   }

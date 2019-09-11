@@ -4,12 +4,10 @@ import { Loader } from "../components/loader/loader";
 
 
 const mapStateToProps = (state: RootState) => ({
-    isLoader: state.loader.isLoader,
-    
-   });
+    isLoader: state.loader.isLoader,   
+  });
  
- 
- export default connect(
+  export default connect(
      mapStateToProps,
    )(Loader);
  

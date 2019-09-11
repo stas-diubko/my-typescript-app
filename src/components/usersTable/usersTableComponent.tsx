@@ -27,65 +27,41 @@ import { RootState } from "../../redux/rootReducer";
 import { connect } from "react-redux"
 import '../admin/adminComponent.css';
 import { UsersTableState } from "../../redux/usersTable/types";
-// import  { deleteUser }  from "../../redux/admin/actions"
-
-
-
-
 
 export interface TableUsersProps {
   deleteUser: (data:any) => any;
   users: any;
 }
 
-
 export class TableUsersComponent extends React.Component<TableUsersProps, UsersTableState> {
     state: UsersTableState = {
       users: ''   
   }
-
 
   isResizeble = false;
 
   onDeleteUser = (e:any) => {
     const {deleteUser} = this.props;    
     deleteUser(e.currentTarget.id)
-    alert('user was deleted')
-    
   }
 
   
   
       render () {
-      // const  onDeleteUser = (e:any) => {
-      //     const {deleteUser} = this.props;
-      //     let userid = e.currentTarget.id
-      //     // deleteUser()
-      //     console.log(e.currentTarget.id);
-          
-      //   }
-        // console.log(this.props.users)
-        
-        // function UserList(props:any){
-        //       const users = props.users;
-        //       // console.log(users);
-              
-              const items = this.props.users.map((user:any) => <TableRow className="user-row">
+              const items = this.props.users.map((user:any) => <TableRow className="user-row" key={user.id}>
                 <TableCell >
                   {user.name} 
                 </TableCell>
                 <TableCell >
                   {user.email}
                 </TableCell>
-                <TableCell className="delete">
-                  <div id={user.id} key={user.email} 
-                  onClick={(e:any)=>this.onDeleteUser(e)}
-                  >x</div> 
+                <TableCell  className="delete">
+                  <DeleteIcon  id={user.id} key={user.email}  style={{marginLeft: "80%"}}
+                    onClick={(e:any)=>this.onDeleteUser(e)}>
+                  </DeleteIcon>
                 </TableCell>
             </TableRow>);
-      //   return (<ul>{items}</ul>)
-      // }
-
+     
         return (
           <div >
             <Paper >
@@ -98,32 +74,13 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
                     </TableRow>
                   </TableHead>
                   <TableBody>  
-                    {/* <UserList 
-                      users={this.props.users}
-                    /> */}
                     {items}
                   </TableBody>
                 </Table>
             </Paper> 
           </div>
         );
-        
-      
-
-
-      
       }
-
-   
-  
 }
 
-
 export default TableUsersComponent;
-
-
-// const mapStateToProps = (state: RootState) => ({
-//   users: state.admin.users
-// });
-
-// export default connect(mapStateToProps, deleteUser)(TableUsers)

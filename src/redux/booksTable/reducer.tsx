@@ -23,7 +23,6 @@ export function booksTableReducer(state: BooksTableState = initialState, action:
     switch (action.type) {
         case 'GOT_BOOKS': {
             const books = action.payload
-            // console.log(books.books); 
             
             return {
                 ...state,
@@ -31,11 +30,7 @@ export function booksTableReducer(state: BooksTableState = initialState, action:
 
             }
         }
-
-        
-
-
-        
+ 
         default:
             return state;
         

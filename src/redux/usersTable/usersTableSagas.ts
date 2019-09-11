@@ -1,7 +1,5 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 
-
-
 export function* deleteUser(): IterableIterator<any> {
     yield takeEvery('DELETE_USER', function*(action: any) {
         
@@ -16,6 +14,13 @@ export function* deleteUser(): IterableIterator<any> {
                 })
 
             } )
+
+            yield put ({
+              type: "GET_USERS",
+              payload: {
+                                
+              }
+            })
                       
         } 
         

@@ -8,7 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableUsersComponent from '../../containers/usersTableContainer';
 import TableBooksComponent from '../../containers/booksTableContainer'
-// import EnhancedTableBooks from './booksTable'
 import { Link, Redirect } from 'react-router-dom';
 
 
@@ -64,7 +63,7 @@ export default function SimpleTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Users" {...a11yProps(0)} />
           <Tab label="Books" {...a11yProps(1)} />
-          <Link className="link" to="/home">To Home Page</Link>
+          
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>
@@ -73,7 +72,6 @@ export default function SimpleTabs() {
       <TabPanel value={value} index={1}>
         <TableBooksComponent />
       </TabPanel>
-      
     </div>
   );
 }

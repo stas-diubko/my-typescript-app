@@ -1,7 +1,5 @@
 import React from 'react';
 import './App.css';
-import About from './components/about/about';
-// import HomeComponent from './components/home/homeComponent';
 import Register from './containers/registerContainer';
 import {Route, Link, BrowserRouter as Router} from "react-router-dom";
 import { Provider } from 'react-redux';
@@ -23,24 +21,17 @@ export class App extends React.Component {
       <Provider store={store}>
       <div className="App">
       <div className="loader-wrap">
-        <div className="loader"> <Loader/></div>
+        <Loader/>
         <ErrorComponent/>      
       </div>
         <header className="App-header">
               <Router>
-              {/* <ul id='shed'>
-                <li><Link to="/registration">Registration</Link></li>
-                <li><Link to="/">Log In</Link></li>
-                <li><Link to="/home">Home</Link></li>
-                <li><Link to="/about">About</Link></li>
-              </ul> */}
-              <Route exact path="/" component={Login} />
-              <Route path="/registration" component={Register} />
-              <Route path="/home" component={homeContainer} />
-              <Route path="/about" component={About} />  
-              <Route path="/admin" component={AdminComponent} /> 
-              <Route path="/basket" component={BasketComponent} />  
-            </Router>
+                <Route exact path="/" component={Login} />
+                <Route path="/registration" component={Register} />
+                <Route path="/home" component={homeContainer} />
+                <Route path="/admin" component={AdminComponent} /> 
+                <Route path="/basket" component={BasketComponent} />  
+              </Router>
         </header>
       </div>
       </Provider>

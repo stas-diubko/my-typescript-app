@@ -6,5 +6,6 @@ export enum BookListleActions {
   
   export interface BookListState {
     books: any;
+    isModalMore: boolean;
   }
   

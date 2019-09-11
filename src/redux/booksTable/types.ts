@@ -6,7 +6,6 @@ export enum BooksTableActions {
     CHANGE_DATA_BOOK = "CHANGE_DATA_BOOK",
     GET_CURRENT_BOOK = "GET_CURRENT_BOOK",
     GOT_CURRENT_BOOK = "GOT_CURRENT_BOOK"
-    
 }
   
 export interface BooksTableState {

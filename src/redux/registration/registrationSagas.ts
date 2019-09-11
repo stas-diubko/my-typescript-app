@@ -1,17 +1,15 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
-// import { push } from 'react-router-redux';
 
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
-     let {name, email, pass, isAdmin} =  action.data;
+     let {name, email, pass, isAdmin, imgChange} =  action.data;
      try {
       let dataRegister = yield call (() => { 
         return fetch('http://localhost:3000/users')
               .then(res => res.json())
        })
         let targetUser = dataRegister.filter((i:any) => i.email === email);
-        // console.log(targetUser.length)
         
         if (targetUser.length === 0) {
               const data = yield call(() => {
@@ -20,10 +18,10 @@ export function* doInit({}): IterableIterator<any> {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify({name, email, pass, isAdmin}),
+                body: JSON.stringify({name, email, pass, isAdmin, imgChange}),
               })      
               })
-              // alert('User created');
+              
               yield put({
                 type: 'DO_LOADER',
                 payload: {
@@ -38,7 +36,7 @@ export function* doInit({}): IterableIterator<any> {
                   email: email,
                   pass: pass,
                   isRegister: true,
-                  // isLoader: true
+                  
                 }
               });
               
@@ -52,7 +50,6 @@ export function* doInit({}): IterableIterator<any> {
             }
           })
 
-          // alert('User with this email already exists, enter another email')
         } 
      
      }

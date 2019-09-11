@@ -1,6 +1,5 @@
 import { BooksTableActions } from "./types";
 
-
 export function addBook(data:any) {
     return { type: BooksTableActions.ADD_BOOK, data};
 }

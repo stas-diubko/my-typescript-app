@@ -23,56 +23,51 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         basket: [],
         dataStore: []
     }
-    // dataBasketStr:any
-    
-    componentDidMount () {
 
+    componentDidMount () {
         const { getDataBasket } = this.props;
         getDataBasket() 
-        // let dataBasketStr:any = localStorage.getItem('basket')
-        // let aaa = JSON.parse(dataBasketStr)
-        // this.setState({
-        //     dataStore: aaa
-        //   })
-
-        // this.dataStore = JSON.parse(this.dataBasketStr)
-
-        
     }
     
    
     onRemove = (e:any) => {
         const {removeFromCart} = this.props;
         removeFromCart(e.currentTarget.id)
-        // console.log(e.currentTarget.id);
-        
     }
 
     render () {
-        
 
         let toIncrease = (e:any) => {
             let {increaseCount} = this.props;
             increaseCount(e.currentTarget.id)
-             
         }
 
         let toDecrease = (e:any) => {
             let {decreaseCount} = this.props;
             decreaseCount(e.currentTarget.id)
-            
         }
-        
-
-        // console.log(this.props.basket);
 
         let arrBasket = this.props.basket
         if(arrBasket == null) {
             arrBasket = []
         }
+
+        let cartSumm:number = 0;
+
+        for (let i = 0; i < this.props.basket.length; i++){
+            cartSumm = +cartSumm + +this.props.basket[i].totalPrice
+        }
         
-        const basketList = arrBasket.map((book:any) => <Grid item  xs={6} sm={6} 
-        style={{width: '600px'}}
+        let buyBlock = <div style={{display: "flex"}}><div style={{margin: "20px auto 20px"}}><Button style={{ backgroundColor: "lime", width: "200px"}}>Buy</Button></div></div> 
+        let message = '';
+
+        if (this.props.basket.length == 0){
+            buyBlock = <div></div>
+            message = 'Cart is empty :(';
+        }
+
+        const basketList = arrBasket.map((book:any) => <Grid key={book.id}  item  xs={6} sm={6} 
+            style={{width: '600px'}}
         >
         <Paper><div className="basket-item"> 
                 <img src={book.bookImg} alt={book.bookAuthor}/>
@@ -88,13 +83,14 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         return (
             <div>
                 <div className="home-header">
-                    <h3>Basket</h3>
-                    <Link to="/home">Home</Link>
+                    <h2>Basket</h2>
+                    <div style={{ margin: "20px 150px 0 0"}}><span style={{fontWeight: "bold", fontSize: "20px"}}>Total cart: {cartSumm} $</span></div>
+                    <Link style={{margin: "22px 0 0 20px "}} to="/home">Home</Link>
                 </div>
                 <div className="basket-list-wrap" style={{display: 'flex', flexDirection: 'column', alignItems: 'center'}}>
-                    {/* <Grid id="basket-list-wrap" container spacing={6}> */}
+                    <span style={{fontWeight: "bold", fontSize: "20px", color: "brown"}}>{message}</span>
                         {basketList}
-                    {/* </Grid> */}
+                        {buyBlock}
                 </div>
                 
             </div>

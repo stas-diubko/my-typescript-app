@@ -1,6 +1,6 @@
 .book-item-wrap {
     width: 300px;
-    height: 450px;
+    height: 490px;
     overflow: hidden;
     padding: 15px;
 }
@@ -17,4 +17,12 @@
 
 .btn {
     margin-top: 15px !important;
+}
+
+.see-more {
+    color: blue;
+}
+
+.see-more:hover {
+    cursor: pointer;
 }

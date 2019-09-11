@@ -9,8 +9,6 @@ export interface LoaderProps {
 }
 export class Loader extends React.Component<LoaderProps, any> {
 
-  // leaner = LinearDeterminate;
-
   state = {
     isLoader: true
   }

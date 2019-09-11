@@ -24,7 +24,7 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
         }
 
         case 'DELETE_USER': {
-            // const users = action.payload
+            
             return {
                 ...state, 
                  
@@ -32,7 +32,6 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
         }
 
         case 'GET_ID': {
-           
             return {
                 ...state, 
                
@@ -41,7 +40,6 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
 
         case 'GOT_ID': {
             const id = action.payload
-            // console.log(id.users.isAdmin);
             
             if (id.users.isAdmin) {
                 localStorage.setItem('isAdmin', 'true' )
@@ -52,9 +50,7 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
                 isAdmin: id.users.isAdmin
               };
         }
-
         
-
         default:
             return state;
         

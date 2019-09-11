@@ -1,7 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
 
-
 export function* doLogout(): IterableIterator<any> {
     yield takeEvery('DO_LOGOUT', function*(action: any) {
       try {
@@ -9,20 +8,17 @@ export function* doLogout(): IterableIterator<any> {
         yield put ({
             type: 'REMOOVE_ISLOADING',
             payload: {
-                // logOut: true
               
             }
           })
-        // yield call(delay, 2000); 
+         
         yield put ({
             type: 'LOGOUT',
             payload: {
                 logOut: true
-              
             }
           })
 
-         
       } 
       catch (error) {
        
@@ -39,10 +35,8 @@ export function* doLogout(): IterableIterator<any> {
         let dataHome = yield call (() => {
           return fetch(API_URL + API_PATH)
                   .then(res => res.json())
-
       } )
 
-      
     let amounBasketStr:any = localStorage.getItem('basket')
     let amounBasket = JSON.parse(amounBasketStr)
     let amounBasketLength = amounBasket.length
@@ -59,11 +53,9 @@ export function* doLogout(): IterableIterator<any> {
             type: 'GET_ID',
             payload: {
                
-              
             }
           })
-
-         
+ 
       } 
       catch (error) {
        
@@ -75,13 +67,9 @@ export function* doLogout(): IterableIterator<any> {
           let {name, imgChange, pass, email, id, isAdmin} = action.data;
           const API_URL = 'http://localhost:3000/users/'                                            
           const API_PATH = id
-        console.log({name, imgChange, pass, email,  id});
-        
+                
         yield call (() => {
-            // const load:any = localStorage.getItem('dataUser')
-            // const isLoad = JSON.parse(load)
             
-
             return fetch (API_URL + API_PATH, {
             headers: {
                 'Accept': 'application/json',

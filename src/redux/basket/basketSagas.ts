@@ -1,7 +1,5 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 
-
-
 export function* getDataBasket(): IterableIterator<any> {
     yield takeEvery('GET_DATA_BASKET', function*(action: any) {
         
@@ -18,9 +16,7 @@ export function* getDataBasket(): IterableIterator<any> {
               })
               
         } 
-
-       
-          
+ 
         catch (error) {
   
         }
@@ -29,23 +25,17 @@ export function* getDataBasket(): IterableIterator<any> {
         
         try {
             let dataBasketStr:any = localStorage.getItem('basket')
-        //    localStorage.removeItem('basket');
-           let dataStore = JSON.parse(dataBasketStr)
-           
+        
+            let dataStore = JSON.parse(dataBasketStr)
 
-           let index = dataStore.findIndex((i:any) => i.id == action.data.id);
-           let currentBook = action.data;
-           currentBook.totalPrice = currentBook.bookCount * currentBook.bookPrice
-           
-        //    console.log(dataStore)
+            let index = dataStore.findIndex((i:any) => i.id == action.data.id);
+            let currentBook = action.data;
+            currentBook.totalPrice = currentBook.bookCount * currentBook.bookPrice
 
             if (index == -1) {
-               
                 dataStore.push(currentBook)
                 let newDataStore = JSON.stringify(dataStore)
                 localStorage.setItem('basket', newDataStore)
-                
-
             } 
             else {
                 for (let i = 0; i < dataStore.length; i++) {
@@ -74,11 +64,8 @@ export function* getDataBasket(): IterableIterator<any> {
                    
                 }
               })
-              
         } 
 
-       
-          
         catch (error) {
   
         }
@@ -97,11 +84,8 @@ export function* getDataBasket(): IterableIterator<any> {
                 }
               })
 
-           
         } 
-
-       
-          
+ 
         catch (error) {
   
         }
@@ -121,9 +105,7 @@ export function* getDataBasket(): IterableIterator<any> {
                 }
               })
         } 
-
-       
-          
+ 
         catch (error) {
   
         }
@@ -136,12 +118,10 @@ export function* getDataBasket(): IterableIterator<any> {
 
                 let dataBasketStr:any = localStorage.getItem('basket')
                 let dataBasket = JSON.parse(dataBasketStr)
-                // console.log(dataBasket);
-                //    let dataStore = JSON.parse(dataBasketStr)
+                
                 let index = dataBasket.findIndex((i:any) => i.id == removeId);
                 dataBasket.splice(index, 1)
-                // console.log(dataBasket);
-
+                
                 let newDataStore = JSON.stringify(dataBasket)
                 localStorage.setItem('basket', newDataStore)
                 
@@ -157,8 +137,6 @@ export function* getDataBasket(): IterableIterator<any> {
                 })
             } 
 
-        
-            
             catch (error) {
     
             }
