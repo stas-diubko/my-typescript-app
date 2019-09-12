@@ -18,6 +18,7 @@ import Fade from '@material-ui/core/Fade';
 export interface HomeProps {
   getDataHome: () => Object;
   doUserModalChange: (data: any) => object;
+  onErrorOccured: (data:any) => any;
   doLogout: any,
   email: any;
   name: any;
@@ -49,6 +50,8 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
   
   async componentDidMount() {
     
+   console.log(this.isLoad);
+   
     const { getDataHome } = this.props;
     getDataHome() 
   
@@ -61,6 +64,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     localStorage.removeItem('load');
     localStorage.removeItem('id');
     localStorage.removeItem('isAdmin');
+    
     document.location.href = 'http://localhost:3001/home';
   } 
 
@@ -83,10 +87,16 @@ handle = (event: any) => {
 onChangeImg = (e:any) => {
   let files = e.target.files;
   let reader = new FileReader();
+  if (files.length === 1) {
   reader.readAsDataURL(files[0]);
-  reader.onload = (e:any) => {
-      this.setState({imgChange: e.target.result})
+        reader.onload = (e:any) => {
+            this.setState({imgChange: e.target.result})
+        }
+  } else {
+    const { onErrorOccured } = this.props;
+    onErrorOccured('Field of file must be filled')
   }
+
 }
 
 handleChange = (e:any) => {
@@ -94,8 +104,8 @@ handleChange = (e:any) => {
   e.preventDefault();
   const {doUserModalChange} = this.props;
   doUserModalChange({name: this.state.name, imgChange:this.state.imgChange, id:getDataUserId, pass: this.props.pass, email: this.props.email, isAdmin:this.props.isAdmin})
-  document.location.href = 'http://localhost:3001/home';
-
+  
+  
 }
 
 onChangeData = () => {
@@ -106,19 +116,15 @@ onChangeData = () => {
   })
 }
 
-// onModalMore = () => {
-//   this.setState({
-//     isModalMore: !this.state.isModalMore
-//   })
-// }
 
 el:any = null
 
 adminComponent:any
   render () {
-    if (!this.isLoad) {
-      
+    
+    if (this.isLoad === null) {
       this.el = <div className="logout" onClick={this.toLogin}>Log in</div>
+      
     }
     else {
       this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
@@ -144,35 +150,6 @@ adminComponent:any
       userwindow = <div></div>
     }
 
-// --------------------------------
-
-  //   let moreAbout = <Modal open={this.state.isModalMore} 
-  //   onClose={this.onModalMore}
-  //   style={{display: 'flex',
-  //   alignItems: 'center',
-  //   justifyContent: 'center',}}
-  // >
-  //         <Fade in={this.state.isModalMore}>
-  //             <div 
-  //             style={{height: "480px", width: "500px", backgroundColor:"#fff", display: 'flex',
-  //             alignItems: 'center',
-  //             flexDirection: "column",
-  //             padding: "10px",
-  //             borderRadius: "20px"
-  //           }}
-  //             >
-  //             <div className="user-img">
-  //                 <img src={this.props.img} style={{height: "250px", width: "200px", }}/>
-  //             </div>
-  //             <div><b>book's title: </b>{this.props.name}</div>
-             
-                 
-  //             </div>
-  //         </Fade>
-  //     </Modal> 
-
-
-// ------------------------------------
 
     return (
       <div className="Home">  
@@ -193,7 +170,7 @@ adminComponent:any
           
         </div>    
         <div className="home-wrap">
-          {/* {moreAbout} */}
+       
             <Modal open={this.state.isModal} 
               onClose={this.onModal}
               style={{display: 'flex',

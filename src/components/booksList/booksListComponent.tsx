@@ -7,12 +7,21 @@ import Button from '@material-ui/core/Button';
 import './bookListComponent.css'
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
-import { Link } from "@material-ui/core";
-import { LinkProps } from "@material-ui/core/Link";
+// import { Link } from "@material-ui/core";
+import {Route, Link, LinkProps, BrowserRouter as Router} from "react-router-dom";
+// import { LinkProps } from "@material-ui/core/Link";
+import AdminComponent from '../../containers/adminContainer';
+
+
+
+// const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
+//     <Link innerRef={ref as any} {...props} />
+//   ));
 
 export interface  BooksListProps {
     getBooks: () => Object;
     addToBasket: (data:any) => any;
+    // getIdBook: (data:any) => any;
     books: []
 }
 
@@ -20,12 +29,13 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
 
     state: BookListState = {
         books: [],
-        isModalMore: false
     }
 
     componentDidMount () {
         const { getBooks } = this.props;
         getBooks() 
+
+        
     }
 
       onAddToBasket = (e:any) => {
@@ -45,10 +55,12 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
       }
 
       onSeeMore = (e:any) => {
-        console.log(e.currentTarget.id);
-        this.setState({
-            isModalMore: !this.state.isModalMore
-          })
+        // console.log(e.currentTarget.id);
+        // const { getIdBook } = this.props;
+        // getIdBook(e.currentTarget.id) 
+        // this.setState({
+        //     isModalMore: !this.state.isModalMore
+        //   })
       }
 
 
@@ -66,62 +78,34 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
 
 
     render () {
-        const AdapterLink = React.forwardRef<HTMLAnchorElement, LinkProps>((props, ref) => (
-            <Link innerRef={ref as any} {...props} />
-          ));
+        
 
-        const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book.id}>
+        const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book.id}
+        //  component={AdapterLink} to={{
+        //     pathname: `/home/00`,
+            
+        //   }}
+          >
             <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
                     <img src={book.bookImg} alt={book.bookAuthor}/>
                     <div><b>{book.bookTitle}</b></div>
                     <div><b>Author: </b>{book.bookAuthor}</div>
                     <div><b>Description: </b>{book.bookDescript}</div>
                     <div><b>Price: </b>{book.bookPrice} $</div>
-                    <div><span id={book.id} className="see-more" onClick={(e:any)=>this.onSeeMore(e)}>See More</span></div>
+
+                    {/* <div><span id={book.id} className="see-more" onClick={(e:any)=>this.onSeeMore(e)}>See More</span></div> */}
+                    <Link id={book.id} style={{display: "block", fontSize: "16px"}} to={`books/${book.id}`} onClick={(e:any)=>this.onSeeMore(e)}>See More</Link>
                     <Button id={book.id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
+                
                 </div></Paper>
         </Grid>)
 
-
-// --------------------------------
-
-let moreAbout =  <Modal 
-
-open={this.state.isModalMore} 
-onClose={this.onSeeMore}
-style={{display: 'flex',
-alignItems: 'center',
-justifyContent: 'center',}}
->
-      <Fade in={this.state.isModalMore}>
-          <div 
-          style={{height: "480px", width: "500px", backgroundColor:"#fff", display: 'flex',
-          alignItems: 'center',
-          flexDirection: "column",
-          padding: "10px",
-          borderRadius: "20px"
-        }}
-          >
-          <div className="user-img">
-              {/* <img src={this.props.img} style={{height: "250px", width: "200px", }}/> */}
-          </div>
-          <div><b>book's title: </b>
-          {/* {this.props.name} */}
-          </div>
-         
-             
-          </div>
-      </Fade>
-  </Modal> 
-
-
-// ------------------------------------
 
 
 
         return(
             <div className="book-list-wrap">
-                {moreAbout}
+            
                 <Grid container spacing={3}>
                     {booksList} 
                 </Grid>

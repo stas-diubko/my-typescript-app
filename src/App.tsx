@@ -12,7 +12,7 @@ import Loader from './containers/loaderContainer';
 import ErrorComponent from './containers/errorContainer';
 import AdminComponent from './containers/adminContainer';
 import BasketComponent from './containers/basketContainer';
-
+import AboutBookComponent from './containers/aboutBookContainer'
 const store: Store<RootState> = configureStore();
 
 export class App extends React.Component {
@@ -31,6 +31,7 @@ export class App extends React.Component {
                 <Route path="/home" component={homeContainer} />
                 <Route path="/admin" component={AdminComponent} /> 
                 <Route path="/basket" component={BasketComponent} />  
+                <Route path="/books/:id" component={AboutBookComponent} />
               </Router>
         </header>
       </div>

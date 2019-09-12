@@ -3,6 +3,7 @@ import { connect } from "react-redux";
 import { RootState } from "../redux/rootReducer";
 import { HomeComponent } from "../components/home/homeComponent";
 import { doLogout, getDataHome, doUserModalChange } from "../redux/home/actions";
+import { onErrorOccured } from "../redux/error/actions";
 
 
 const mapStateToProps = (state: RootState) => ({
@@ -17,6 +18,6 @@ const mapStateToProps = (state: RootState) => ({
 
   export default connect(
     mapStateToProps,
-    { doLogout, getDataHome, doUserModalChange },
+    { doLogout, getDataHome, doUserModalChange, onErrorOccured },
   )(HomeComponent);
   

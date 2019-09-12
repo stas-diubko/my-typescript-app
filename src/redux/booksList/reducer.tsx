@@ -3,8 +3,6 @@ import { RootState } from "../rootReducer";
 
 export const initialState: BookListState = {
     books: '',
-    isModalMore: false 
-
 };
 
 

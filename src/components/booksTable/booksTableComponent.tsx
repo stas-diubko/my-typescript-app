@@ -40,7 +40,8 @@ export interface BooksProps {
   getBooks: () => Object;
   deleteBook: (data:any) => any;
   changeDataBook: (data:any) => Object;
-  getCurrentBookBook:(data:any) => any;
+  getCurrentBookBook: (data:any) => any;
+  onErrorOccured: (data:any) => any;
   bookToAdd: Object;
   allBooks: any; 
   isOpenForm: boolean;
@@ -90,10 +91,16 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
   onGetImg = (e:any) => {
     let files = e.target.files;
       let reader = new FileReader();
+      if (files.length === 1) {
       reader.readAsDataURL(files[0]);
-      reader.onload = (e:any) => {
-          this.setState({bookImg: e.target.result})
+            reader.onload = (e:any) => {
+                this.setState({bookImg: e.target.result})
+            }
+      } else {
+        const { onErrorOccured } = this.props;
+        onErrorOccured('Field of file must be filled')
       }
+ 
 }
 
 onEditBook = (e:any) => {
@@ -101,7 +108,10 @@ onEditBook = (e:any) => {
   for(let i = 0; i < this.props.allBooks.length; i++) {
     if (this.props.allBooks[i].id == e.currentTarget.id){
       this.setState({
-        bookTitle: this.props.allBooks[i].bookTitle
+        newBookTitle: this.props.allBooks[i].bookTitle,
+        newBookAuthor: this.props.allBooks[i].bookAuthor,
+        newBookDescript: this.props.allBooks[i].bookDescript,
+        newBookPrice: this.props.allBooks[i].bookPrice,
     })
       
     }
@@ -123,13 +133,22 @@ let qqq = () => {
 onGetNewImg = (e:any) => {
   let files = e.target.files;
     let reader = new FileReader();
-    reader.readAsDataURL(files[0]);
-    reader.onload = (e:any) => {
-        this.setState({newBookImg: e.target.result})
-    }
+
+    if (files.length === 1) {
+      reader.readAsDataURL(files[0]);
+            reader.onload = (e:any) => {
+                this.setState({newBookImg: e.target.result})
+            }
+      } else {
+        const { onErrorOccured } = this.props;
+        onErrorOccured('Field of file must be filled')
+      }
 }
 
+
+
   onSend = (e:any) => {
+    
     const {addBook} = this.props;
     addBook({ bookTitle: this.state.bookTitle, bookAuthor: this.state.bookAuthor, bookDescript: this.state.bookDescript, bookPrice: this.state.bookPrice, bookImg: this.state.bookImg})
     this.setState(this.state)
@@ -161,7 +180,12 @@ onGetNewImg = (e:any) => {
     newBookPrice: this.state.newBookPrice,
     newBookImg: this.state.newBookImg, 
     bookId: localStorage.getItem('bookId')})
-    document.location.href = 'http://localhost:3001/admin';
+    this.setState({
+      newBookTitle: '',
+      newBookAuthor: '',
+      newBookDescript: '',
+      newBookPrice: ''
+    })
   }
   
   btnOpen:string = '';
@@ -223,10 +247,10 @@ onGetNewImg = (e:any) => {
                         borderRadius: "20px",
                         }}>
                           <div ><span style={{color: "brown", fontSize: "30px", fontWeight: "bold"}}>Book for change:</span><h2>{this.state.bookTitle}</h2></div>
-                      <TextField  style={{marginTop: "20px"}} className="inp" name="newBookTitle" placeholder="New Title" onChange={(e:any)=>this.handle(e)} />
-                      <TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)}/>
-                      <TextField className="inp" name="newBookDescript"  placeholder="New Description" onChange={(e:any)=>this.handle(e)}/>
-                      <TextField className="inp" name="newBookPrice"  placeholder="New Price" onChange={(e:any)=>this.handle(e)}/>
+                      <TextField  style={{marginTop: "20px"}} className="inp" name="newBookTitle" placeholder="New Title" onChange={(e:any)=>this.handle(e)} value={this.state.newBookTitle} />
+                      <TextField className="inp" name="newBookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e) } value={this.state.newBookAuthor}/>
+                      <TextField className="inp" name="newBookDescript"  placeholder="New Description" onChange={(e:any)=>this.handle(e)} value={this.state.newBookDescript}/>
+                      <TextField className="inp" name="newBookPrice"  placeholder="New Price" onChange={(e:any)=>this.handle(e)} value={this.state.newBookPrice}/>
                       <TextField type="file" className="inp" name="newBookImg"  placeholder="New Img" onChange={(e:any)=>this.onGetNewImg(e)}/>
                       
                       <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>

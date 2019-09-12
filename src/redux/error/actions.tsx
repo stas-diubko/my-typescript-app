@@ -1,5 +1,5 @@
 import { ErrorActions } from "./types";
 
-export function onErrorOccured(error: string) {
-  return { type: ErrorActions.ERROR_OCCURED, error };
+export function onErrorOccured(data: string) {
+  return { type: ErrorActions.ERROR_OCCURED, data };
 }

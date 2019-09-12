@@ -4,7 +4,7 @@ import { delay } from "q";
 export function* doLogout(): IterableIterator<any> {
     yield takeEvery('DO_LOGOUT', function*(action: any) {
       try {
-        
+       
         yield put ({
             type: 'REMOOVE_ISLOADING',
             payload: {
@@ -19,7 +19,18 @@ export function* doLogout(): IterableIterator<any> {
             }
           })
 
+        yield put ({
+                  type: 'GET_DATA_HOME',
+                  payload: {
+                    
+                  }
+                })
+                
+          
+          
       } 
+
+      
       catch (error) {
        
       }
@@ -81,6 +92,12 @@ export function* doLogout(): IterableIterator<any> {
               imgChange: imgChange } )                                        
             })
            
+        })
+        yield put ({
+          type: 'GET_DATA_HOME',
+          payload: {
+             
+          }
         })
         
       } 

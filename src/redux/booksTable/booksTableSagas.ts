@@ -5,8 +5,18 @@ export function* addBook(): IterableIterator<any> {
      let {bookTitle, bookAuthor, bookDescript, bookPrice, bookImg} =  action.data;
         
         try {
-         
-          yield call(() => {
+          // yield console.log(bookImg.length);
+          
+          if (bookTitle.length === 0 || bookAuthor.length === 0 || bookDescript.length === 0 || bookPrice.length === 0 || bookImg.length === 0){
+            yield put ({
+              type: 'ERROR_OCCURED',
+              payload: {
+                error: 'All fields must be filled'
+                
+              }
+            })
+          } else {
+             yield call(() => {
             return fetch('http://localhost:3000/books', {
               method: 'POST', 
               headers: {
@@ -22,6 +32,9 @@ export function* addBook(): IterableIterator<any> {
                               
               }
             })
+          }
+         
+         
                       
         } 
         
@@ -96,18 +109,40 @@ export function* changeDataBook(): IterableIterator<any> {
         const API_URL = 'http://localhost:3000/books/'                                            
         const API_PATH = bookId
 
-      yield call (() => {
-        
-          return fetch (API_URL + API_PATH, {
-          headers: {
-              'Accept': 'application/json',
-              'Content-Type': 'application/json'
-          },
-          method: 'put',                                                              
-          body: JSON.stringify( { bookTitle: newBookTitle, bookAuthor: newBookAuthor, bookDescript: newBookDescript, bookPrice: newBookPrice,  bookImg: newBookImg, } )                                        
+      
+
+
+        if (newBookTitle.length === 0 || newBookAuthor.length === 0 || newBookDescript.length === 0 || newBookPrice.length === 0 || newBookImg.length === 0){
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: 'All fields must be filled'
+              
+            }
           })
-         
-      })
+        } else {
+          yield call (() => {
+          
+            return fetch (API_URL + API_PATH, {
+            headers: {
+                'Accept': 'application/json',
+                'Content-Type': 'application/json'
+            },
+            method: 'put',                                                              
+            body: JSON.stringify( { bookTitle: newBookTitle, bookAuthor: newBookAuthor, bookDescript: newBookDescript, bookPrice: newBookPrice,  bookImg: newBookImg, } )                                        
+            })
+          
+        })
+
+        yield put ({
+          type: "GET_ALL_BOOKS",
+          payload: {
+          
+          }
+        })
+      }
+
+
 
     } 
     catch (error) {

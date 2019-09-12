@@ -9,11 +9,7 @@ export const initialState:ErrortState = {
 
 export function errorReducer(state: any = initialState, action: any) {
   switch (action.type) {
-    case `ERROR_OCCURED`: {
-      return {
-        ...state,
-    }
-    }
+    
     case `ERROR_SHOW`: {
         const { error } = action.payload;
         return {

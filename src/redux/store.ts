@@ -7,7 +7,7 @@ import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
 import { any } from "prop-types";
 import { doLogin } from "./login/loginSagas";
-import { onError } from "./error/errorSagas";
+import { onErrorOccured } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout, getDataHome } from "./home/homeSagas";
 
@@ -15,7 +15,7 @@ import { getUsers, getId } from "./admin/adminSagas";
 import { deleteUser } from "./usersTable/usersTableSagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
 import { getDataBasket } from "./basket/basketSagas";
-
+import { getBookId } from "./aboutBook/aboutBookSagas"
 export default function configureStore(
     initialState?: RootState
   ): Store<RootState> {
@@ -39,7 +39,7 @@ export default function configureStore(
         yield all([
           doInit({}),
           doLogin(),
-          onError(),
+          onErrorOccured(),
           onLoaderOccured(),
           doLogout(),
           getUsers(),
@@ -50,7 +50,8 @@ export default function configureStore(
           getDataHome(),
           getId(),
           changeDataBook(),
-          getDataBasket()
+          getDataBasket(),
+          getBookId()
         ]);
       });
     return store;
