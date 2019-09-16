@@ -41,33 +41,39 @@ export function* doLogout(): IterableIterator<any> {
     yield takeEvery('GET_DATA_HOME', function*(action: any) {
       try {
         const userId:any = localStorage.getItem('id');
-        const API_URL = 'http://localhost:3000/users/'                                            
-        const API_PATH = userId
-        let dataHome = yield call (() => {
-          return fetch(API_URL + API_PATH)
+        const API_URL = 'http://localhost:3000/v1/users'                                            
+        // const API_PATH = userId
+        let dataUsers = yield call (() => {
+          return fetch(API_URL)
                   .then(res => res.json())
       } )
+      // yield console.log(dataUsers.data);
 
+      let targetUserLog = dataUsers.data.filter((i:any) => i._id === userId);
+      // yield console.log(targetUserLog[0]);
+
+      
     let amounBasketStr:any = localStorage.getItem('basket')
     let amounBasket = JSON.parse(amounBasketStr)
     let amounBasketLength = amounBasket.length
-        yield put ({
-            type: 'GOT_DATA_HOME',
-            payload: {
-                dataHome: dataHome,
-                countBasket: amounBasketLength
-              
-            }
-          })
+        
+            yield put ({
+                type: 'GOT_DATA_HOME',
+                payload: {
+                    dataHome: targetUserLog[0],
+                    countBasket: amounBasketLength
+                  
+                }
+              })
 
-          yield put ({
-            type: 'GET_ID',
-            payload: {
-               
-            }
-          })
- 
-      } 
+              yield put ({
+                type: 'GET_ID',
+                payload: {
+                  
+                }
+              })
+    
+          } 
       catch (error) {
        
       }

@@ -50,11 +50,11 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
   
   async componentDidMount() {
     
-   console.log(this.isLoad);
+   
    
     const { getDataHome } = this.props;
     getDataHome() 
-  
+    // console.log(this.props);
   }
 
   onLogout = (e:any) => {

@@ -26,7 +26,7 @@ export interface RegisterState {
     name: string;
     email: string;
     pass: string;
-    isAdmin: boolean;
+    // isAdmin: boolean;
     imgChange:any;
   }
 
@@ -34,5 +34,5 @@ export interface DoRegister {
     name: string;
     email: string;
     pass: string;
-    isAdmin: boolean;
+    // isAdmin: boolean;
   }

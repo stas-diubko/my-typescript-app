@@ -68,7 +68,7 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
         name: this.state.name, 
         email: this.state.email, 
         pass: this.state.pass, 
-        isAdmin: this.state.isAdmin,
+        // isAdmin: this.state.isAdmin,
         imgChange: avaDefault
       });
       this.setState(this.state)

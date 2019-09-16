@@ -18,7 +18,7 @@ export function* doInit({}): IterableIterator<any> {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify({name, email, pass, isAdmin, imgChange}),
+                body: JSON.stringify({name, email, pass, imgChange}),
               }).then((response : any) => response.json())       
               })
               console.log(req);

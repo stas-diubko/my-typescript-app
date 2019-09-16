@@ -20,24 +20,36 @@ export function* doLogin(): IterableIterator<any> {
             })
             .then((response : any) => response.json())     
             })
+            console.log(req);
  
             if(req.success){
-              console.log(req.message, req.data)
+              // console.log(req.message, req.data)
               var token = req.data;
               
               var decoded:any = jwt_decode(token);
-              console.log(decoded.email);
+              // console.log(decoded);
            
-              // let isLoadi = JSON.stringify(true)
-              // localStorage.setItem('load', isLoadi)
+              let isLoadi = JSON.stringify(true)
+              localStorage.setItem('load', isLoadi)
 
-              //   yield put({
-              //     type: 'LOGIN_SUCCESS',
-              //     payload: {
-              //       // users: dataLogin
+              localStorage.setItem('id', decoded.userData.id)
+              localStorage.setItem('basket', '[]')
+
+              yield put({
+                type: 'GET_IS_ADMIN',
+                payload: {
+                  isAdmin: req.isAdmin
+                    
+                }
+            })
+
+                yield put({
+                  type: 'LOGIN_SUCCESS',
+                  payload: {
+                    // users: dataLogin
                       
-              //     }
-              // })
+                  }
+              })
             }
            
 

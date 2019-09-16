@@ -27,10 +27,17 @@ export function homeReducer(state: HomeState = initialState, action: any) {
                 ...state,
                 email: dataUser.dataHome.email,
                 name: dataUser.dataHome.name,
-                isAdmin: dataUser.dataHome.isAdmin,
+                // isAdmin: dataUser.dataHome.isAdmin,
                 img: dataUser.dataHome.imgChange,
                 countBasket: dataUser.countBasket,
                 pass: dataUser.dataHome.pass
+            }
+        }
+
+        case 'GET_IS_ADMIN': {
+            return {
+                ...state,
+                isAdmin: action.payload.isAdmin,
             }
         }
         
