@@ -1,5 +1,6 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
+import  jwt_decode from 'jwt-decode';
 
 export function* doLogout(): IterableIterator<any> {
     yield takeEvery('DO_LOGOUT', function*(action: any) {
@@ -19,14 +20,6 @@ export function* doLogout(): IterableIterator<any> {
             }
           })
 
-        yield put ({
-                  type: 'GET_DATA_HOME',
-                  payload: {
-                    
-                  }
-                })
-                
-          
           
       } 
 
@@ -40,16 +33,20 @@ export function* doLogout(): IterableIterator<any> {
   export function* getDataHome(): IterableIterator<any> {
     yield takeEvery('GET_DATA_HOME', function*(action: any) {
       try {
-        const userId:any = localStorage.getItem('id');
-        const API_URL = 'http://localhost:3000/v1/users'                                            
-        // const API_PATH = userId
-        let dataUsers = yield call (() => {
-          return fetch(API_URL)
-                  .then(res => res.json())
-      } )
+      //   const userId:any = localStorage.getItem('id');
+      //   const API_URL = 'http://localhost:3000/v1/users'                                            
+      //   // const API_PATH = userId
+      //   let dataUsers = yield call (() => {
+      //     return fetch(API_URL)
+      //             .then(res => res.json())
+      // } )
       // yield console.log(dataUsers.data);
+    let dataUserToken:any = localStorage.getItem('token')
+    let decoded:any = jwt_decode(dataUserToken);
+              // console.log(decoded.userData.id); 
 
-      let targetUserLog = dataUsers.data.filter((i:any) => i._id === userId);
+
+      // let targetUserLog = dataUsers.data.filter((i:any) => i._id === userId);
       // yield console.log(targetUserLog[0]);
 
       
@@ -60,7 +57,7 @@ export function* doLogout(): IterableIterator<any> {
             yield put ({
                 type: 'GOT_DATA_HOME',
                 payload: {
-                    dataHome: targetUserLog[0],
+                    dataUser: decoded.userData,
                     countBasket: amounBasketLength
                   
                 }
@@ -82,10 +79,13 @@ export function* doLogout(): IterableIterator<any> {
     yield takeEvery('DO_USER_CHANGE', function*(action: any) {
       try {
           let {name, imgChange, pass, email, id, isAdmin} = action.data;
-          const API_URL = 'http://localhost:3000/users/'                                            
-          const API_PATH = id
+          let dataUserToken:any = localStorage.getItem('token')
+          let decoded:any = jwt_decode(dataUserToken);
+              // console.log(decoded.userData.id);
+          const API_URL = 'http://localhost:3000/v1/users/'                                            
+          const API_PATH = `${decoded.userData.id}`
                 
-        yield call (() => {
+          let req = yield call (() => {
             
             return fetch (API_URL + API_PATH, {
             headers: {
@@ -93,12 +93,14 @@ export function* doLogout(): IterableIterator<any> {
                 'Content-Type': 'application/json'
             },
             method: 'put',                                                              
-            body: JSON.stringify( { name: name, 
-              email: email, pass: pass, isAdmin: isAdmin,
-              imgChange: imgChange } )                                        
+            body: JSON.stringify( { name: name, imgChange: imgChange } )                                        
             })
+            .then((response : any) => response.json())  
            
         })
+        localStorage.removeItem('token')
+        localStorage.setItem('token', req.data)
+        // console.log(req.data);
         yield put ({
           type: 'GET_DATA_HOME',
           payload: {

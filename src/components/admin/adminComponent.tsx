@@ -3,11 +3,12 @@ import SimpleTabs from './adminTabs';
 import { AdminState } from '../../redux/admin/types';
 import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
+import  jwt_decode from 'jwt-decode';
 
 
 export interface AdminProps {
   getUsers: () => object;
-  getId: () => object;
+  // getIsAdmin: () => object;
   books: any;
   users: any;
   isAdmin: boolean;
@@ -27,17 +28,20 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
   componentDidMount () {
     const { getUsers } = this.props;
     getUsers() 
-    const { getId } = this.props;
-    getId()
     
   }
 
 
   render () {
-    const isAdminStr:any = localStorage.getItem('isAdmin')
-    const isAdminPars = JSON.parse(isAdminStr)
-    
-    if(!isAdminPars) {
+    let dataUserToken:any = localStorage.getItem('token')
+    let decoded:any;
+    if (dataUserToken === null) {
+      decoded = null;
+    } else {
+      decoded = jwt_decode(dataUserToken);
+    }
+
+    if( decoded === null || !decoded.userData.isAdmin) {
         return <Redirect to="/home"/>
     } 
     

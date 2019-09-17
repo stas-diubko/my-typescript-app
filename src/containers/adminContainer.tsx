@@ -1,6 +1,6 @@
 import { connect } from "react-redux";
 import { RootState } from "../redux/rootReducer";
-import { getUsers, getId } from "../redux/admin/actions";
+import { getUsers} from "../redux/admin/actions";
 import { deleteUser } from "../redux/usersTable/actions";
 
 import { AdminComponent } from "../components/admin/adminComponent";
@@ -13,7 +13,7 @@ const mapStateToProps = (state: RootState) => ({
   
   export default connect(
     mapStateToProps,
-    { getUsers, getId }, 
+    { getUsers}, 
   )(AdminComponent);
   
 

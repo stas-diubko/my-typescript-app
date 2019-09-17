@@ -16,17 +16,17 @@ export const initialState: BooksTableState = {
     newBookDescript: '',
     newBookPrice: '',
     newBookImg: '',
+    bookId: ''
 };
 
 
 export function booksTableReducer(state: BooksTableState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_BOOKS': {
-            const books = action.payload
-            
+           
             return {
                 ...state,
-                allBooks: books.books
+                allBooks: action.payload.books
 
             }
         }

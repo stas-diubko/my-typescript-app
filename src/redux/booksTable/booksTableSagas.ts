@@ -16,16 +16,17 @@ export function* addBook(): IterableIterator<any> {
               }
             })
           } else {
-             yield call(() => {
-            return fetch('http://localhost:3000/books', {
+            let req = yield call(() => {
+            return fetch('http://localhost:3000/v1/books', {
               method: 'POST', 
               headers: {
                   'Content-Type': 'application/json',
                 },
               body: JSON.stringify({bookTitle, bookAuthor, bookDescript, bookPrice, bookImg}),
-            })      
+            }) 
+            .then((response : any) => response.json())     
             })
-
+                         
             yield put ({
               type: "GET_ALL_BOOKS",
               payload: {
@@ -49,7 +50,7 @@ export function* deleteBook(): IterableIterator<any> {
       
       try {
         let id = action.data;
-        const API_URL = 'http://localhost:3000/books/'                                            
+        const API_URL = 'http://localhost:3000/v1/books/'                                            
         const API_PATH = id
         
           yield call (() => {
@@ -79,15 +80,16 @@ export function* getBooks(): IterableIterator<any> {
       
       try {
         let dataBooks = yield call (() => {
-          return fetch('http://localhost:3000/books')
+          return fetch('http://localhost:3000/v1/books')
                   .then(res => res.json())
 
       } )
+        // yield console.log(dataBooks.data);
         
       yield put ({
         type: "GOT_BOOKS",
         payload: {
-          books: dataBooks
+          books: dataBooks.data
            
         }
       })
@@ -106,7 +108,7 @@ export function* changeDataBook(): IterableIterator<any> {
     try {
         let {newBookTitle, newBookAuthor, newBookDescript, newBookPrice, newBookImg, bookId} = action.data;
         
-        const API_URL = 'http://localhost:3000/books/'                                            
+        const API_URL = 'http://localhost:3000/v1/books/'                                            
         const API_PATH = bookId
 
       
@@ -121,7 +123,7 @@ export function* changeDataBook(): IterableIterator<any> {
             }
           })
         } else {
-          yield call (() => {
+          let req = yield call (() => {
           
             return fetch (API_URL + API_PATH, {
             headers: {
@@ -131,9 +133,9 @@ export function* changeDataBook(): IterableIterator<any> {
             method: 'put',                                                              
             body: JSON.stringify( { bookTitle: newBookTitle, bookAuthor: newBookAuthor, bookDescript: newBookDescript, bookPrice: newBookPrice,  bookImg: newBookImg, } )                                        
             })
-          
+            .then((response : any) => response.json())
         })
-
+     
         yield put ({
           type: "GET_ALL_BOOKS",
           payload: {

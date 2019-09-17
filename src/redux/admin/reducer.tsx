@@ -16,10 +16,10 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
         }
 
         case 'GOT_USERS': {
-            const users = action.payload
+            
             return {
                 ...state, 
-                users: users.users   
+                users: action.payload.users
               };
         }
 
@@ -38,16 +38,17 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
               };
         }
 
-        case 'GOT_ID': {
-            const id = action.payload
+        case 'GET_IS_ADMIN': {
+            // const id = action.payload
+            // console.log(action.payload);
             
-            if (id.users.isAdmin) {
-                localStorage.setItem('isAdmin', 'true' )
-            }
+            // if (id.users.isAdmin) {
+            //     localStorage.setItem('isAdmin', 'true' )
+            // }
 
             return {
                 ...state, 
-                isAdmin: id.users.isAdmin
+                isAdmin: action.payload.isAdmin
               };
         }
         

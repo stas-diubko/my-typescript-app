@@ -5,7 +5,7 @@ export function* deleteUser(): IterableIterator<any> {
         
         try {
           let id = action.data;
-          const API_URL = 'http://localhost:3000/users/'                                            
+          const API_URL = 'http://localhost:3000/v1/users/'                                            
           const API_PATH = id
           
             yield call (() => {

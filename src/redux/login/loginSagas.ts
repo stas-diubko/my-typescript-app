@@ -20,19 +20,19 @@ export function* doLogin(): IterableIterator<any> {
             })
             .then((response : any) => response.json())     
             })
-            console.log(req);
+            // console.log(req);
  
             if(req.success){
               // console.log(req.message, req.data)
-              var token = req.data;
+              // var token = req.data;
               
-              var decoded:any = jwt_decode(token);
+              // var decoded:any = jwt_decode(token);
               // console.log(decoded);
            
               let isLoadi = JSON.stringify(true)
               localStorage.setItem('load', isLoadi)
 
-              localStorage.setItem('id', decoded.userData.id)
+              localStorage.setItem('token', req.data)
               localStorage.setItem('basket', '[]')
 
               yield put({

@@ -23,5 +23,6 @@ export interface BooksTableState {
   newBookDescript: string;
   newBookPrice: string;
   newBookImg: any;
+  bookId: any;
 }
   

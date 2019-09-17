@@ -61,9 +61,11 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     e.stopPropagation();
     const { doLogout } = this.props;
     doLogout()
+    // const { getDataHome } = this.props;
+    // getDataHome() 
     localStorage.removeItem('load');
-    localStorage.removeItem('id');
-    localStorage.removeItem('isAdmin');
+    localStorage.removeItem('token');
+    localStorage.removeItem('basket');
     
     document.location.href = 'http://localhost:3001/home';
   } 
@@ -146,7 +148,7 @@ adminComponent:any
     
     <div className="user-data">Hello: {this.props.email} <div className="user-ava"><img src={ava} alt="userAva"/></div> </div>
   </div>
-    if (this.props.img === undefined){
+    if (this.isLoad === null){
       userwindow = <div></div>
     }
 

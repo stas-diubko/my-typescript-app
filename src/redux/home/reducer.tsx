@@ -21,16 +21,19 @@ export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_DATA_HOME': {
        
-           let dataUser = action.payload
+        //    let dataUser = action.payload 
+
+        //   let dataUserPars = JSON.parse(dataUser)
+                //   console.log(action.payload);
                   
             return {
                 ...state,
-                email: dataUser.dataHome.email,
-                name: dataUser.dataHome.name,
-                // isAdmin: dataUser.dataHome.isAdmin,
-                img: dataUser.dataHome.imgChange,
-                countBasket: dataUser.countBasket,
-                pass: dataUser.dataHome.pass
+                email: action.payload.dataUser.email,
+                name: action.payload.dataUser.name,
+                isAdmin: action.payload.dataUser.isAdmin,
+                img: action.payload.dataUser.img,
+                countBasket: action.payload.countBasket,
+                // pass: dataUser.dataHome.pass
             }
         }
 

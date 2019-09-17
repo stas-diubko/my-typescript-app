@@ -74,7 +74,8 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       newBookDescript: '',
       newBookPrice: '',
       newBookImg: '',
-      isOpenmodal: false
+      isOpenmodal: false,
+      bookId: ''
   }
 
   componentDidMount () {
@@ -104,14 +105,15 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
 }
 
 onEditBook = (e:any) => {
- 
+ console.log(e.currentTarget.id)  
   for(let i = 0; i < this.props.allBooks.length; i++) {
-    if (this.props.allBooks[i].id == e.currentTarget.id){
+    if (this.props.allBooks[i]._id == e.currentTarget.id){
       this.setState({
         newBookTitle: this.props.allBooks[i].bookTitle,
         newBookAuthor: this.props.allBooks[i].bookAuthor,
         newBookDescript: this.props.allBooks[i].bookDescript,
         newBookPrice: this.props.allBooks[i].bookPrice,
+        bookId: e.currentTarget.id
     })
       
     }
@@ -172,14 +174,14 @@ onGetNewImg = (e:any) => {
     deleteBook(e.currentTarget.id)
   }
 
-  onCangeBook = (e:any) => {
+  onChangeBook = (e:any) => {
     const {changeDataBook} = this.props
     changeDataBook({newBookTitle: this.state.newBookTitle,
     newBookAuthor: this.state.newBookAuthor,
     newBookDescript: this.state.newBookDescript,
     newBookPrice: this.state.newBookPrice,
     newBookImg: this.state.newBookImg, 
-    bookId: localStorage.getItem('bookId')})
+    bookId: this.state.bookId})
     this.setState({
       newBookTitle: '',
       newBookAuthor: '',
@@ -206,7 +208,7 @@ onGetNewImg = (e:any) => {
           <TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)} /> 
           <Button id="btn-send" variant="contained" color="secondary" onClick={(e:any)=>this.onSend(e)}>Send</Button></div>
          
-        const itemsBooks = this.props.allBooks.map((book:any) => <TableRow key={book.id}> 
+        const itemsBooks = this.props.allBooks.map((book:any) => <TableRow key={book._id}> 
                 <TableCell >
                   {book.bookTitle} 
                 </TableCell>
@@ -218,12 +220,12 @@ onGetNewImg = (e:any) => {
                 </TableCell>
                 <TableCell align="right" className="delete">
                 
-                  <EditIcon id={book.id} 
+                  <EditIcon id={book._id} 
                     onClick={(e:any)=>this.onEditBook(e)}
                     style={{marginRight: "15px"}}
                   ></EditIcon>
                  
-                <DeleteIcon id={book.id} key={book.id} 
+                <DeleteIcon id={book._id} key={book._id} 
                   onClick={(e:any)=>this.onDeleteBook(e)}></DeleteIcon>
                 </TableCell>
           </TableRow>);
@@ -253,7 +255,7 @@ onGetNewImg = (e:any) => {
                       <TextField className="inp" name="newBookPrice"  placeholder="New Price" onChange={(e:any)=>this.handle(e)} value={this.state.newBookPrice}/>
                       <TextField type="file" className="inp" name="newBookImg"  placeholder="New Img" onChange={(e:any)=>this.onGetNewImg(e)}/>
                       
-                      <Button id="btn-send" variant="contained" color="secondary" onClick={this.onCangeBook}>Change</Button>
+                      <Button id="btn-send" variant="contained" color="secondary" onClick={this.onChangeBook}>Change</Button>
                     </div>
                   </Fade>
               </Modal>

@@ -48,7 +48,7 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
   
   
       render () {
-              const items = this.props.users.map((user:any) => <TableRow className="user-row" key={user.id}>
+              const items = this.props.users.map((user:any) => <TableRow className="user-row" key={user._id}>
                 <TableCell >
                   {user.name} 
                 </TableCell>
@@ -56,7 +56,7 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
                   {user.email}
                 </TableCell>
                 <TableCell  className="delete">
-                  <DeleteIcon  id={user.id} key={user.email}  style={{marginLeft: "80%"}}
+                  <DeleteIcon  id={user._id} key={user._id}  style={{marginLeft: "80%"}}
                     onClick={(e:any)=>this.onDeleteUser(e)}>
                   </DeleteIcon>
                 </TableCell>

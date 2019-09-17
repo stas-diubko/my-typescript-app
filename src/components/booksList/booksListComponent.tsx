@@ -37,10 +37,11 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
 
         
     }
+        // here must be fixed !!!!!!
 
       onAddToBasket = (e:any) => {
         const books:any = this.props.books
-        const currentBook = books.filter((x:any) => x.id == e.currentTarget.id);
+        const currentBook = books.filter((x:any) => x._id == e.currentTarget.id);
         
         const { addToBasket } = this.props;
         addToBasket({bookTitle: currentBook[0].bookTitle,
@@ -80,25 +81,25 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
     render () {
         
 
-        // const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book.id}
-        // //  component={AdapterLink} to={{
-        // //     pathname: `/home/00`,
+        const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book._id}
+        //  component={AdapterLink} to={{
+        //     pathname: `/home/00`,
             
-        // //   }}
-        //   >
-        //     <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
-        //             <img src={book.bookImg} alt={book.bookAuthor}/>
-        //             <div><b>{book.bookTitle}</b></div>
-        //             <div><b>Author: </b>{book.bookAuthor}</div>
-        //             <div><b>Description: </b>{book.bookDescript}</div>
-        //             <div><b>Price: </b>{book.bookPrice} $</div>
+        //   }}
+          >
+            <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
+                    <img src={book.bookImg} alt={book.bookAuthor}/>
+                    <div><b>{book.bookTitle}</b></div>
+                    <div><b>Author: </b>{book.bookAuthor}</div>
+                    <div><b>Description: </b>{book.bookDescript}</div>
+                    <div><b>Price: </b>{book.bookPrice} $</div>
 
-        //             {/* <div><span id={book.id} className="see-more" onClick={(e:any)=>this.onSeeMore(e)}>See More</span></div> */}
-        //             <Link id={book.id} style={{display: "block", fontSize: "16px"}} to={`books/${book.id}`} onClick={(e:any)=>this.onSeeMore(e)}>See More</Link>
-        //             <Button id={book.id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
+                    {/* <div><span id={book.id} className="see-more" onClick={(e:any)=>this.onSeeMore(e)}>See More</span></div> */}
+                    <Link id={book.id} style={{display: "block", fontSize: "16px"}} to={`books/${book.id}`} onClick={(e:any)=>this.onSeeMore(e)}>See More</Link>
+                    <Button id={book._id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
                 
-        //         </div></Paper>
-        // </Grid>)
+                </div></Paper>
+        </Grid>)
 
 
 
@@ -107,7 +108,7 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
             <div className="book-list-wrap">
             
                 <Grid container spacing={3}>
-                    {/* {booksList}  */}
+                    {booksList} 
                 </Grid>
             </div>
         )

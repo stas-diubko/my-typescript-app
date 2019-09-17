@@ -11,7 +11,7 @@ import { onErrorOccured } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout, getDataHome } from "./home/homeSagas";
 
-import { getUsers, getId } from "./admin/adminSagas";
+import { getUsers} from "./admin/adminSagas";
 import { deleteUser } from "./usersTable/usersTableSagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
 import { getDataBasket } from "./basket/basketSagas";
@@ -48,7 +48,6 @@ export default function configureStore(
           getBooks(),
           deleteBook(),
           getDataHome(),
-          getId(),
           changeDataBook(),
           getDataBasket(),
           getBookId()
