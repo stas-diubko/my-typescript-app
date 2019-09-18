@@ -2,7 +2,8 @@ import { AboutBookState } from "./types"
 
 export const initialState: AboutBookState = {
     book: '',
-    id: ''
+    id: '',
+    isShow: false
 };
 
 export function aboutBookReducer(state: AboutBookState = initialState, action: any) {
@@ -11,8 +12,17 @@ export function aboutBookReducer(state: AboutBookState = initialState, action: a
 
             return {
                 ...state,
-                book: action.payload.book
+                book: action.payload.book,
+                isShow: true
+            }
 
+            
+        }
+
+        case "RETURN_IS_SHOW": {
+            return {
+                ...state,
+                isShow: false
             }
         }
       

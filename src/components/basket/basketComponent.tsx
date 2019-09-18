@@ -4,7 +4,9 @@ import Paper from '@material-ui/core/Paper';
 import Grid from '@material-ui/core/Grid';
 import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
-import './basketComponent.css'
+import './basketComponent.css';
+import { Redirect } from 'react-router';
+
 
 export interface  BasketProps {
     getDataBasket: () => any;
@@ -33,21 +35,38 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
     onRemove = (e:any) => {
         const {removeFromCart} = this.props;
         removeFromCart(e.currentTarget.id)
+
+        const { getDataBasket } = this.props;
+        getDataBasket()
     }
 
     render () {
-
+        let dataBasketStr:any = localStorage.getItem('basket')
+        // console.log(dataBasketStr);
+        if (dataBasketStr == null) {
+            return <Redirect to="/home"/>
+        }
         let toIncrease = (e:any) => {
+            console.log(e.currentTarget.id);
+            
             let {increaseCount} = this.props;
             increaseCount(e.currentTarget.id)
+
+            const { getDataBasket } = this.props;
+            getDataBasket()
         }
 
         let toDecrease = (e:any) => {
             let {decreaseCount} = this.props;
             decreaseCount(e.currentTarget.id)
+
+            const { getDataBasket } = this.props;
+            getDataBasket()
         }
 
         let arrBasket = this.props.basket
+        // console.log(arrBasket);
+        
         if(arrBasket == null) {
             arrBasket = []
         }

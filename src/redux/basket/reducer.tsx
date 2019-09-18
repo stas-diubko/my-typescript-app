@@ -9,6 +9,15 @@ export const initialState: BasketState = {
 
 export function basketReducer(state: BasketState = initialState, action: any) {
     switch (action.type) {
+        case 'GET_DATA_BASKET': {
+            let dataBasketStr:any = localStorage.getItem('basket')
+            let dataBasket = JSON.parse(dataBasketStr)
+            return {
+                ...state,
+                basket: dataBasket
+            }
+        }
+
         case 'GOT_DATA_BASKET': {
             
             return {
@@ -19,6 +28,8 @@ export function basketReducer(state: BasketState = initialState, action: any) {
 
         case "INCREASE_COUNT": {
             let dataIncrease = action.data
+            
+            
             let dataBasketStr:any = localStorage.getItem('basket')
             let dataStore = JSON.parse(dataBasketStr)
             
@@ -58,8 +69,25 @@ export function basketReducer(state: BasketState = initialState, action: any) {
           
             return {
                 ...state,
-                
+              
+            }
+        }
 
+        case "REMOVE_FROM_CART": {
+            let removeId = action.data
+
+            let dataBasketStr:any = localStorage.getItem('basket')
+            let dataBasket = JSON.parse(dataBasketStr)
+            
+            let index = dataBasket.findIndex((i:any) => i.id == removeId);
+            dataBasket.splice(index, 1)
+            
+            let newDataStore = JSON.stringify(dataBasket)
+            localStorage.setItem('basket', newDataStore)
+
+            return {
+                ...state,
+                
             }
         }
         

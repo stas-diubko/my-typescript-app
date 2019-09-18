@@ -1,33 +1,25 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 
 export function* getDataBasket(): IterableIterator<any> {
-    yield takeEvery('GET_DATA_BASKET', function*(action: any) {
-        
-        try {
-            let dataBasketStr:any = localStorage.getItem('basket')
-            let dataBasket = JSON.parse(dataBasketStr)
-
-            yield put ({
-                type: "GOT_DATA_BASKET",
-                payload: {
-                    dataBasket: dataBasket
-                   
-                }
-              })
-              
-        } 
- 
-        catch (error) {
-  
-        }
-    })
+    
     yield takeEvery('ADD_TO_BASKET', function*(action: any) {
         
         try {
             let dataBasketStr:any = localStorage.getItem('basket')
-        
+            // console.log(dataBasketStr);
+            if (dataBasketStr == null) {
+                yield put ({
+                    type: 'ERROR_OCCURED',
+                    payload: {
+                      error: 'to buy a book you need to log in'
+                      
+                    }
+                  })
+            }
+            
             let dataStore = JSON.parse(dataBasketStr)
-
+            console.log(action.data.id);
+            
             let index = dataStore.findIndex((i:any) => i.id == action.data.id);
             let currentBook = action.data;
             currentBook.totalPrice = currentBook.bookCount * currentBook.bookPrice
@@ -70,77 +62,7 @@ export function* getDataBasket(): IterableIterator<any> {
   
         }
     })
-    yield takeEvery('INCREASE_COUNT', function*(action: any) {
-        
-        try {
-            let dataBasketStr:any = localStorage.getItem('basket')
-            let dataBasket = JSON.parse(dataBasketStr)
-
-            yield put ({
-                type: "GOT_DATA_BASKET",
-                payload: {
-                    dataBasket: dataBasket
-                   
-                }
-              })
-
-        } 
- 
-        catch (error) {
-  
-        }
-    })
-
-    yield takeEvery('DECREASE_COUNT', function*(action: any) {
-        
-        try {
-            let dataBasketStr:any = localStorage.getItem('basket')
-            let dataBasket = JSON.parse(dataBasketStr)
-
-            yield put ({
-                type: "GOT_DATA_BASKET",
-                payload: {
-                    dataBasket: dataBasket
-                   
-                }
-              })
-        } 
- 
-        catch (error) {
-  
-        }
-    })
-
-    yield takeEvery('REMOVE_FROM_CART', function*(action: any) {
-            
-            try {
-                let removeId = action.data
-
-                let dataBasketStr:any = localStorage.getItem('basket')
-                let dataBasket = JSON.parse(dataBasketStr)
-                
-                let index = dataBasket.findIndex((i:any) => i.id == removeId);
-                dataBasket.splice(index, 1)
-                
-                let newDataStore = JSON.stringify(dataBasket)
-                localStorage.setItem('basket', newDataStore)
-                
-                let newDataBasketStr:any = localStorage.getItem('basket')
-                let newDataBasket = JSON.parse(newDataBasketStr)
-                yield put ({
-                    
-                    type: "GOT_DATA_BASKET",
-                    payload: {
-                        dataBasket: newDataBasket
-                    
-                    }
-                })
-            } 
-
-            catch (error) {
     
-            }
-        })
 
 }
   

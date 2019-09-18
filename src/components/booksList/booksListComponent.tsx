@@ -51,7 +51,7 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
             bookPrice: currentBook[0].bookPrice,
             bookCount: 1,
             totalPrice: '',
-            id: currentBook[0].id
+            id: e.currentTarget.id
         })
       }
 
@@ -95,7 +95,7 @@ export class BooksListComponent extends React.Component<BooksListProps, BookList
                     <div><b>Price: </b>{book.bookPrice} $</div>
 
                     {/* <div><span id={book.id} className="see-more" onClick={(e:any)=>this.onSeeMore(e)}>See More</span></div> */}
-                    <Link id={book.id} style={{display: "block", fontSize: "16px"}} to={`books/${book.id}`} onClick={(e:any)=>this.onSeeMore(e)}>See More</Link>
+                    <Link id={book._id} style={{display: "block", fontSize: "16px"}} to={`books/${book._id}`} onClick={(e:any)=>this.onSeeMore(e)}>See More</Link>
                     <Button id={book._id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
                 
                 </div></Paper>

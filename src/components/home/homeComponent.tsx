@@ -34,7 +34,7 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     email: '',
     name: '',
     pass: '',
-    logOut: false,
+    logOut: true,
     isModal: false,
     img: '' ,
     isAdmin: false,
@@ -66,14 +66,16 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     localStorage.removeItem('load');
     localStorage.removeItem('token');
     localStorage.removeItem('basket');
-    
-    document.location.href = 'http://localhost:3001/home';
+    const { getDataHome } = this.props;
+    getDataHome() 
+    // document.location.href = 'http://localhost:3001/home';
   } 
 
-toLogin = (e:any) => {
-  e.stopPropagation();
-  document.location.href = 'http://localhost:3001';
-}
+// toLogin = (e:any) => {
+//   e.stopPropagation();
+//   // document.location.href = 'http://localhost:3001';
+//   return <Redirect to="/"/> 
+// }
 
 onModal = () => {
   this.setState({
@@ -124,16 +126,22 @@ el:any = null
 adminComponent:any
   render () {
     
-    if (this.isLoad === null) {
-      this.el = <div className="logout" onClick={this.toLogin}>Log in</div>
+    if (!this.props.logOut) {
+     this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
       
     }
     else {
-      this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
+       this.el = <div className="logout" 
+      //  onClick={this.toLogin}
+       >
+         <Link to="/">Log in</Link>
+         </div>
     }
     
     if(this.props.isAdmin) {
       this.adminComponent = <li><Link to="/admin">Admin</Link></li>
+    } else {
+      this.adminComponent = null
     }
 
     const changeUserData = this.state.isChangeData && <form> 
@@ -144,23 +152,29 @@ adminComponent:any
 
     let ava = this.props.img
 
-    let userwindow = <div className="user-data-wrap" onClick={this.onModal}>          
+    let userwindow:any
     
+   if(!this.props.logOut){
+      userwindow = <div className="user-data-wrap" onClick={this.onModal}>     
     <div className="user-data">Hello: {this.props.email} <div className="user-ava"><img src={ava} alt="userAva"/></div> </div>
   </div>
-    if (this.isLoad === null){
-      userwindow = <div></div>
+  }
+  else{
+    userwindow = <div></div>
+  }
+    let dataBasketStr:any = localStorage.getItem('basket')
+    let basketIcon = <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon>
+    {this.props.countBasket}
+    </Link></li>
+    if(dataBasketStr == null){
+      basketIcon = <div></div>
     }
-
-
     return (
       <div className="Home">  
            
         <div className="home-header">
           <ul>
-            <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon>
-            {this.props.countBasket}
-            </Link></li>
+            {basketIcon}
             {this.adminComponent}
           </ul>
           <h2>Book Shop</h2>

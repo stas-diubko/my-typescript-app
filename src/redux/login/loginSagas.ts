@@ -8,7 +8,6 @@ export function* doLogin(): IterableIterator<any> {
         
         try {
             let {email, pass, name, isLoading} =  action.data;
-
            
             let req = yield call(() => {
               return fetch('http://localhost:3000/v1/authenticate', {
@@ -20,15 +19,19 @@ export function* doLogin(): IterableIterator<any> {
             })
             .then((response : any) => response.json())     
             })
-            // console.log(req);
- 
-            if(req.success){
-              // console.log(req.message, req.data)
-              // var token = req.data;
-              
-              // var decoded:any = jwt_decode(token);
-              // console.log(decoded);
            
+              yield put({
+                    type: 'DO_LOADER',
+                    payload: {
+                      isLoader: true
+                    }
+                  });
+            if(req.success){
+              yield call(delay, 1000)
+              yield put({
+                type: `LOADER_HIDE`
+              });
+                         
               let isLoadi = JSON.stringify(true)
               localStorage.setItem('load', isLoadi)
 
@@ -46,64 +49,17 @@ export function* doLogin(): IterableIterator<any> {
                 yield put({
                   type: 'LOGIN_SUCCESS',
                   payload: {
-                    // users: dataLogin
-                      
+                     
                   }
               })
             }
            
-
-
-
-          //   export function request(url:string,  method: string, body?: object) {
-          //     return (fetch(url, {
-          //         method: method,
-          //         headers: { 'Content-Type': 'application/json' },
-          //         body: JSON.stringify(body)
-          //     }).then((response : any) => {return  response.text().then(function(text :any) {
-          //         return text ? JSON.parse(text) : {}
-          //             }) 
-          //         })
-          //     );
-          // } 
-            
-            // let targetUserLog = dataLogin.filter((i:any) => i.email === email);
-            
-            //  if (req.status === 200) {
-            //      console.log(req.data);
-                 
-              
-            //   // yield put({
-            //   //       type: 'DO_LOADER',
-            //   //       payload: {
-            //   //         isLoader: true
-            //   //       }
-            //   //     });
-
-                 
-            //   //     localStorage.setItem('id', targetUserLog[0].id)
-            //   //     localStorage.setItem('basket', '[]')
-                                 
-            //   //   yield call(delay, 2000);
-
-                
-
-            //     // yield put({
-            //     //   type: 'GET_DATA_HOME',
-            //     //   payload: {
-            //     //    isAdmin: targetUserLog[0]
-            //     //   }
-            //     // });
-
-            //     // yield put({
-            //     //   type: 'GET_USER_DATA',
-            //     //   payload: {
-                   
-            //     //   }
-            //     // });
-            // }  
             else {
-              console.log(req);
+             
+              yield call(delay, 1000)
+              yield put({
+                type: `LOADER_HIDE`
+              });
               yield put ({
                 type: 'ERROR_OCCURED',
                 payload: {
@@ -114,14 +70,6 @@ export function* doLogin(): IterableIterator<any> {
                
             } 
 
-            // else {
-            //     yield put ({
-            //         type: 'ERROR_OCCURED',
-            //         payload: {
-            //           error: 'password is not correct, try again'
-            //         }
-            //       })
-            // }   
         } 
         
         catch (error) {

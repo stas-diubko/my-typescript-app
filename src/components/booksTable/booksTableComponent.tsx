@@ -105,7 +105,7 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
 }
 
 onEditBook = (e:any) => {
- console.log(e.currentTarget.id)  
+//  console.log(e.currentTarget.id)  
   for(let i = 0; i < this.props.allBooks.length; i++) {
     if (this.props.allBooks[i]._id == e.currentTarget.id){
       this.setState({

@@ -78,6 +78,7 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
   render () {
     if (this.props.isRegister){
       return <Redirect to="/"/>
+      
     }
     
     return (

@@ -6,7 +6,7 @@ export const initialState: HomeState = {
     email: "",
     name: "",
     pass: "",
-    logOut: false,
+    logOut: true,
     isModal: false, 
     img: '',
     isAdmin: false,
@@ -31,9 +31,9 @@ export function homeReducer(state: HomeState = initialState, action: any) {
                 email: action.payload.dataUser.email,
                 name: action.payload.dataUser.name,
                 isAdmin: action.payload.dataUser.isAdmin,
-                img: action.payload.dataUser.img,
+                
                 countBasket: action.payload.countBasket,
-                // pass: dataUser.dataHome.pass
+                logOut: false,
             }
         }
 
@@ -43,11 +43,19 @@ export function homeReducer(state: HomeState = initialState, action: any) {
                 isAdmin: action.payload.isAdmin,
             }
         }
+
+        case 'GET_AVA': {
+            return {
+                ...state,
+                img: action.payload.userAva
+            }
+        }
         
         case 'LOGOUT': {
             return {
                 ...state,
                 logOut: true,
+                isAdmin: false
             }
         }
 

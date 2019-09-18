@@ -1,17 +1,19 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
+import React from 'react';
+import { Redirect } from 'react-router';
 
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
      let {name, email, pass, isAdmin, imgChange} =  action.data;
      try {
-      // let dataRegister = yield call (() => { 
-      //   return fetch('http://localhost:3000/users')
-      //         .then(res => res.json())
-      //  })
-      //   let targetUser = dataRegister.filter((i:any) => i.email === email);
-        
-        // if (targetUser.length === 0) {
+      
+          yield put({
+            type: 'DO_LOADER',
+            payload: {
+              isLoader: true
+            }
+          });
           let req = yield call(() => {
                 return fetch('http://localhost:3000/v1/register', {
                 method: 'POST', 
@@ -24,6 +26,11 @@ export function* doInit({}): IterableIterator<any> {
               console.log(req);
 
               if (req.success) {
+                yield call(delay, 1000)
+                yield put({
+                  type: `LOADER_HIDE`
+                });
+                
                   yield put({
                   type: `@@register/SUCCESSFULL`,
                   payload: {
@@ -32,21 +39,24 @@ export function* doInit({}): IterableIterator<any> {
                     isRegister: true,
                     
                   }
+                 
                 });
-              
+
+                yield put({
+                  type: `RETURN_IS_REGISTER`,
+                  payload: {
+                    isRegister: false
+                    
+                  }
+              });
+                
               }
-              
-              // yield put({
-              //   type: 'DO_LOADER',
-              //   payload: {
-              //     isLoader: true
-              //   }
-              // });
-              // yield call(delay, 3000);
-              
              
-        // }
         else {
+          yield call(delay, 1000)
+          yield put({
+            type: `LOADER_HIDE`
+          });
           yield put ({
             type: 'ERROR_OCCURED',
             payload: {

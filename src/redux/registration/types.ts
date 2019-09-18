@@ -4,7 +4,8 @@ import { User } from "../../types/user";
 export enum RegisterActions {
     DO_REGISTER = "DO_REGISTER",
     SUCCESSFULL = "SUCCESSFULL",
-    ERROR_OCCURED = 'ERROR_OCCURED'
+    ERROR_OCCURED = 'ERROR_OCCURED',
+    RETURN_IS_REGISTER = "RETURN_IS_REGISTER"
   }
 
   

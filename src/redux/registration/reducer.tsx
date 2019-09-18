@@ -1,5 +1,8 @@
+
+
 import { RegisterState } from "./types";
 import { RootState } from "../rootReducer";
+
 
 export const initialState: RegisterState = {   
     users: {},
@@ -22,12 +25,13 @@ export function registerReducer (state: RegisterState = initialState, action: an
         }
         case '@@register/SUCCESSFULL': {
             const data = action.payload;
-            
+           
             return {
                 ...state,
                 email: data.email,
                 pass: data.pass,
                 isRegister: data.isRegister,
+                
             };
         }
         case '@@register/ERROR_OCCURED': {
@@ -37,10 +41,16 @@ export function registerReducer (state: RegisterState = initialState, action: an
                 error: error 
             };
         }
+        case "RETURN_IS_REGISTER": {
+            return {
+                ...state,
+                isRegister: action.payload.isRegister
+            }
+        }
         default:
         return state;
     }
 }
 
 
-// export const register = (state: RootState) => state.register;
+export const register = (state: RootState) => state.register;

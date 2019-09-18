@@ -5,7 +5,8 @@ import { getIdBook } from "../redux/aboutBook/actions"
 
 const mapStateToProps = (state: RootState) => ({
     book: state.aboutBook.book, 
-    id: state.aboutBook.id
+    id: state.aboutBook.id,
+    isShow: state.aboutBook.isShow
 });
 
 export default connect(

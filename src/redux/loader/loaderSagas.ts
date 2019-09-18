@@ -12,10 +12,10 @@ export function* onLoaderOccured(): IterableIterator<any> {
           }
         });
 
-        yield call(delay, 2000);
-        yield put({
-          type: `LOADER_HIDE`
-        });
+        // yield call(delay, 2000);
+        // yield put({
+        //   type: `LOADER_HIDE`
+        // });
       } 
       catch (error) {
         

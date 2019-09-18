@@ -33,22 +33,10 @@ export function* doLogout(): IterableIterator<any> {
   export function* getDataHome(): IterableIterator<any> {
     yield takeEvery('GET_DATA_HOME', function*(action: any) {
       try {
-      //   const userId:any = localStorage.getItem('id');
-      //   const API_URL = 'http://localhost:3000/v1/users'                                            
-      //   // const API_PATH = userId
-      //   let dataUsers = yield call (() => {
-      //     return fetch(API_URL)
-      //             .then(res => res.json())
-      // } )
-      // yield console.log(dataUsers.data);
+     
     let dataUserToken:any = localStorage.getItem('token')
     let decoded:any = jwt_decode(dataUserToken);
-              // console.log(decoded.userData.id); 
-
-
-      // let targetUserLog = dataUsers.data.filter((i:any) => i._id === userId);
-      // yield console.log(targetUserLog[0]);
-
+              
       
     let amounBasketStr:any = localStorage.getItem('basket')
     let amounBasket = JSON.parse(amounBasketStr)
@@ -62,6 +50,34 @@ export function* doLogout(): IterableIterator<any> {
                   
                 }
               })
+
+              if (dataUserToken !== null) {
+                // yield console.log(dataUserToken);
+                const API_URL = 'http://localhost:3000/v1/users/'                                            
+                 const API_PATH = decoded.userData.id
+                 let dataUsers = yield call (() => {
+                 return fetch(`${API_URL}${API_PATH}`, {
+                    method: 'GET', 
+                    headers: {
+                        'Content-Type': 'application/json',
+                        'Authorization' : `Bearer ${dataUserToken}`
+                    },
+                    
+                    
+                }).then((response : any) => response.json())
+                // ))
+               } )
+              //  console.log(dataUsers.data.imgChange);
+               yield put ({
+                type: 'GET_AVA',
+                payload: {
+                  userAva: dataUsers.data.imgChange
+                }
+              })
+             
+           }
+           
+          
 
               yield put ({
                 type: 'GET_ID',

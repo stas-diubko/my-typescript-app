@@ -1,4 +1,5 @@
 import { put, takeEvery, call } from "redux-saga/effects";
+import { delay } from "q";
 
 export function* addBook(): IterableIterator<any> {
     yield takeEvery('ADD_BOOK', function*(action: any) {
@@ -84,15 +85,34 @@ export function* getBooks(): IterableIterator<any> {
                   .then(res => res.json())
 
       } )
+
+     
+
+      if(dataBooks.success){
+      
+        yield put ({
+          type: "GOT_BOOKS",
+          payload: {
+            books: dataBooks.data
+             
+          }
+        })
+      }
+      else {
+        // console.log(req);
+        yield put ({
+          type: 'ERROR_OCCURED',
+          payload: {
+            error: dataBooks.message
+            
+          }
+        })
+         
+      } 
+
         // yield console.log(dataBooks.data);
         
-      yield put ({
-        type: "GOT_BOOKS",
-        payload: {
-          books: dataBooks.data
-           
-        }
-      })
+      
                       
       } 
       
