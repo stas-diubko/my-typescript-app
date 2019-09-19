@@ -1,7 +1,6 @@
 import { LoginState } from "./types";
 import { RootState } from "../rootReducer";
 
-
 export const initialStateLog: LoginState = {
     email: "",
     pass: "",
@@ -18,8 +17,7 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
         case 'DO_LOGIN': {
             return {
                 ...state,
-                
-              };
+            };
         }
 
         case 'LOGIN_SUCCESS': {
@@ -50,7 +48,6 @@ export function loginReducer(state: LoginState = initialStateLog, action: any) {
             return {
               ...state,
               isLoading: false,
-              
             };
         }
 

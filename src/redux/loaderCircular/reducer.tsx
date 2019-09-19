@@ -1,25 +1,25 @@
 import { RootState } from "../rootReducer";
-import { LoaderState } from "./types";
+import { LoaderCircularState } from "./types";
 
-export const initialState:LoaderState = {
+export const initialState:LoaderCircularState = {
   isLoader: false,
 };
 
-export function loaderReducer(state: any = initialState, action: any) {
+export function loaderCircularReducer(state: any = initialState, action: any) {
   switch (action.type) {
-    case 'DO_LOADER': {
+    case 'DO_LOADER_CIRCULAR': {
       return {
         ...state,
       }
     }
-    case `LOADER_SHOW`: {
-        const load  = action.payload;
+    case `LOADER_CIRCULAR_SHOW`: {
+        
         return {
             ...state,
-            isLoader: load.isLoader.isLoader
+            isLoader: true
         }
     }
-    case `LOADER_HIDE`: {
+    case `LOADER_CIRCULAR_HIDE`: {
         return {
             isLoader: false
         };

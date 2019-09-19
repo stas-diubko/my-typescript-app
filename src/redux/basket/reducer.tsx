@@ -4,7 +4,6 @@ import { RootState } from "../rootReducer";
 export const initialState: BasketState = {
     basket: [],
     dataStore: []
-    
 }
 
 export function basketReducer(state: BasketState = initialState, action: any) {
@@ -19,7 +18,6 @@ export function basketReducer(state: BasketState = initialState, action: any) {
         }
 
         case 'GOT_DATA_BASKET': {
-            
             return {
                 ...state,
                 basket: action.payload.dataBasket
@@ -28,7 +26,6 @@ export function basketReducer(state: BasketState = initialState, action: any) {
 
         case "INCREASE_COUNT": {
             let dataIncrease = action.data
-            
             
             let dataBasketStr:any = localStorage.getItem('basket')
             let dataStore = JSON.parse(dataBasketStr)

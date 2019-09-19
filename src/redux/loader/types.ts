@@ -6,5 +6,4 @@ export enum LoaderActions {
   
 export interface LoaderState {
     isLoader: boolean;
-    
 }

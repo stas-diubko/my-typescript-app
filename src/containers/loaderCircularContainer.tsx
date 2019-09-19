@@ -1,9 +1,10 @@
 import { RootState } from "../redux/rootReducer";
 import { connect } from "react-redux";
-import { Loader } from "../components/loader/loader";
+import { Loader } from "../components/loaderCircular/loaderCircular";
+
 
 const mapStateToProps = (state: RootState) => ({
-    isLoader: state.loader.isLoader,   
+    isLoader: state.loaderCircular.isLoader,   
   });
  
   export default connect(

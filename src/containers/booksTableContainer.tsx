@@ -18,7 +18,8 @@ const mapStateToProps = (state: RootState) => ({
     newBookAuthor: state.booksTable.newBookAuthor,
     newBookDescript: state.booksTable.newBookDescript,
     newBookPrice: state.booksTable.newBookPrice,
-    newBookImg: state.booksTable.newBookImg
+    newBookImg: state.booksTable.newBookImg,
+    message: state.booksTable.message
   });
  
   export default connect(

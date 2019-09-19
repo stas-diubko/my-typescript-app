@@ -16,18 +16,25 @@ export const initialState: BooksTableState = {
     newBookDescript: '',
     newBookPrice: '',
     newBookImg: '',
-    bookId: ''
+    bookId: '',
+    message: ''
 };
 
 
 export function booksTableReducer(state: BooksTableState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_BOOKS': {
-           
+           let msg = ''
+           if(action.payload.books.length == 0) {
+               msg = 'No products added yet'
+           }
+           else {
+            msg = ''
+           }
             return {
                 ...state,
-                allBooks: action.payload.books
-
+                allBooks: action.payload.books,
+                message: msg
             }
         }
  

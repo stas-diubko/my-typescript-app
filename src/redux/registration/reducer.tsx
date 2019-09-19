@@ -1,8 +1,5 @@
-
-
 import { RegisterState } from "./types";
 import { RootState } from "../rootReducer";
-
 
 export const initialState: RegisterState = {   
     users: {},
@@ -51,6 +48,5 @@ export function registerReducer (state: RegisterState = initialState, action: an
         return state;
     }
 }
-
 
 export const register = (state: RootState) => state.register;

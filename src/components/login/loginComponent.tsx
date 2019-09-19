@@ -1,8 +1,6 @@
 import React from 'react';
 import { LoginState, LoginRequest } from '../../redux/login/types';
-import { login } from '../../redux/login/reducer';
-import {Redirect, Link} from 'react-router-dom'
-import configureStore from '../../redux/store';
+import {Redirect, Link} from 'react-router-dom';
 
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
@@ -29,7 +27,6 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
     }
 
     validate = () => {
-      
       let passError = '';
       let emailError = '';
       let regEmail = /^\w+([\.-]?\w+)*@(((([a-z0-9]{2,})|([a-z0-9][-][a-z0-9]+))[\.][a-z0-9])|([a-z0-9]+[-]?))+[a-z0-9]+\.([a-z]{2}|(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum))$/i;

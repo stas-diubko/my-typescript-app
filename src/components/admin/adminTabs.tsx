@@ -8,8 +8,6 @@ import Typography from '@material-ui/core/Typography';
 import Box from '@material-ui/core/Box';
 import TableUsersComponent from '../../containers/usersTableContainer';
 import TableBooksComponent from '../../containers/booksTableContainer'
-import { Link, Redirect } from 'react-router-dom';
-
 
 interface TabPanelProps {
   children?: React.ReactNode;
@@ -52,7 +50,6 @@ const useStyles = makeStyles((theme: Theme) => ({
 export default function SimpleTabs() {
   const classes = useStyles();
   const [value, setValue] = React.useState(0);
-
   function handleChange(event: React.ChangeEvent<{}>, newValue: number) {
     setValue(newValue);
   }
@@ -63,7 +60,6 @@ export default function SimpleTabs() {
         <Tabs value={value} onChange={handleChange} aria-label="simple tabs example">
           <Tab label="Users" {...a11yProps(0)} />
           <Tab label="Books" {...a11yProps(1)} />
-          
         </Tabs>
       </AppBar>
       <TabPanel value={value} index={0}>

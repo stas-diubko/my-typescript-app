@@ -7,7 +7,6 @@ import Button from '@material-ui/core/Button';
 import './basketComponent.css';
 import { Redirect } from 'react-router';
 
-
 export interface  BasketProps {
     getDataBasket: () => any;
     increaseCount: (data:any) => any;
@@ -16,7 +15,6 @@ export interface  BasketProps {
     basket: any;
     countItem: string;
     dataStore: any;
-
 }
 
 export class BasketComponent extends React.Component<BasketProps, BasketState> {
@@ -42,13 +40,10 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
 
     render () {
         let dataBasketStr:any = localStorage.getItem('basket')
-        // console.log(dataBasketStr);
         if (dataBasketStr == null) {
             return <Redirect to="/home"/>
         }
         let toIncrease = (e:any) => {
-            console.log(e.currentTarget.id);
-            
             let {increaseCount} = this.props;
             increaseCount(e.currentTarget.id)
 
@@ -65,7 +60,6 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         }
 
         let arrBasket = this.props.basket
-        // console.log(arrBasket);
         
         if(arrBasket == null) {
             arrBasket = []
@@ -111,7 +105,6 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
                         {basketList}
                         {buyBlock}
                 </div>
-                
             </div>
         )
     }

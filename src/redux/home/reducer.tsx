@@ -1,6 +1,5 @@
 import { HomeState } from "./types";
 import { RootState } from "../rootReducer";
-import { Redirect } from "react-router";
 
 export const initialState: HomeState = {
     email: "",
@@ -20,18 +19,12 @@ export const initialState: HomeState = {
 export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_DATA_HOME': {
-       
-        //    let dataUser = action.payload 
-
-        //   let dataUserPars = JSON.parse(dataUser)
-                //   console.log(action.payload);
-                  
+        
             return {
                 ...state,
                 email: action.payload.dataUser.email,
                 name: action.payload.dataUser.name,
                 isAdmin: action.payload.dataUser.isAdmin,
-                
                 countBasket: action.payload.countBasket,
                 logOut: false,
             }
@@ -58,7 +51,6 @@ export function homeReducer(state: HomeState = initialState, action: any) {
                 isAdmin: false
             }
         }
-
         default:
             return state;
         

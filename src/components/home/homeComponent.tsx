@@ -1,18 +1,10 @@
 import React from 'react';
 import './home.css';
-import { Link, Redirect } from 'react-router-dom';
-import {LoginState} from '../../redux/login/types';
-import {RootState} from '../../redux/rootReducer';
+import { Link } from 'react-router-dom';
 import { HomeState } from '../../redux/home/types';
-import { initialStateLog, login } from '../../redux/login/reducer';
-import configureStore from '../../redux/store';
-import { object } from 'prop-types';
-import AdminComponent from '../../containers/adminContainer';
-import BooksListComponent from '../../containers/bookListContainer'
-import avaDefault from '../../img/avaDefault.jpg' 
+import BooksListComponent from '../../containers/bookListContainer';
 import ShoppingBasketIcon from '@material-ui/icons/ShoppingBasket';
 import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
 export interface HomeProps {
@@ -42,40 +34,26 @@ export class HomeComponent extends React.Component<HomeProps, HomeState> {
     isChangeData: false,
     imgChange: "",
     isModalMore: false
-    
 }
 
   isLoadStr:any = localStorage.getItem('load');
   isLoad:boolean = JSON.parse(this.isLoadStr);
   
   async componentDidMount() {
-    
-   
-   
     const { getDataHome } = this.props;
     getDataHome() 
-    // console.log(this.props);
   }
 
   onLogout = (e:any) => {
     e.stopPropagation();
     const { doLogout } = this.props;
     doLogout()
-    // const { getDataHome } = this.props;
-    // getDataHome() 
     localStorage.removeItem('load');
     localStorage.removeItem('token');
     localStorage.removeItem('basket');
     const { getDataHome } = this.props;
     getDataHome() 
-    // document.location.href = 'http://localhost:3001/home';
   } 
-
-// toLogin = (e:any) => {
-//   e.stopPropagation();
-//   // document.location.href = 'http://localhost:3001';
-//   return <Redirect to="/"/> 
-// }
 
 onModal = () => {
   this.setState({
@@ -108,8 +86,7 @@ handleChange = (e:any) => {
   e.preventDefault();
   const {doUserModalChange} = this.props;
   doUserModalChange({name: this.state.name, imgChange:this.state.imgChange, id:getDataUserId, pass: this.props.pass, email: this.props.email, isAdmin:this.props.isAdmin})
-  
-  
+    
 }
 
 onChangeData = () => {
@@ -119,7 +96,6 @@ onChangeData = () => {
       isAdmin: this.props.isAdmin
   })
 }
-
 
 el:any = null
 
@@ -131,9 +107,7 @@ adminComponent:any
       
     }
     else {
-       this.el = <div className="logout" 
-      //  onClick={this.toLogin}
-       >
+       this.el = <div className="logout" >
          <Link to="/">Log in</Link>
          </div>
     }
@@ -166,12 +140,13 @@ adminComponent:any
     let basketIcon = <li><Link to="/basket"><ShoppingBasketIcon></ShoppingBasketIcon>
     {this.props.countBasket}
     </Link></li>
-    if(dataBasketStr == null){
+
+    if (dataBasketStr == null) {
       basketIcon = <div></div>
     }
+
     return (
       <div className="Home">  
-           
         <div className="home-header">
           <ul>
             {basketIcon}
@@ -182,8 +157,6 @@ adminComponent:any
             {this.el}
             {userwindow}
           </div>
-          
-          
         </div>    
         <div className="home-wrap">
        
@@ -213,7 +186,7 @@ adminComponent:any
                     </Fade>
                 </Modal> 
           <BooksListComponent/>
-        
+          
         </div>              
       </div>
     );

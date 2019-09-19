@@ -1,13 +1,11 @@
 import { put, takeEvery, call } from "redux-saga/effects";
-import { any } from "prop-types";
 import { delay } from "q";
-import  jwt_decode from 'jwt-decode';
  
 export function* doLogin(): IterableIterator<any> {
     yield takeEvery('DO_LOGIN', function*(action: any) {
         
         try {
-            let {email, pass, name, isLoading} =  action.data;
+            let {email, pass } =  action.data;
            
             let req = yield call(() => {
               return fetch('http://localhost:3000/v1/authenticate', {
@@ -20,12 +18,13 @@ export function* doLogin(): IterableIterator<any> {
             .then((response : any) => response.json())     
             })
            
-              yield put({
-                    type: 'DO_LOADER',
-                    payload: {
-                      isLoader: true
-                    }
-                  });
+            yield put({
+                  type: 'DO_LOADER',
+                  payload: {
+                    isLoader: true
+                  }
+            });
+
             if(req.success){
               yield call(delay, 1000)
               yield put({
@@ -44,7 +43,7 @@ export function* doLogin(): IterableIterator<any> {
                   isAdmin: req.isAdmin
                     
                 }
-            })
+              })
 
                 yield put({
                   type: 'LOGIN_SUCCESS',
@@ -64,12 +63,9 @@ export function* doLogin(): IterableIterator<any> {
                 type: 'ERROR_OCCURED',
                 payload: {
                   error: req.message
-                  
                 }
               })
-               
             } 
-
         } 
         
         catch (error) {

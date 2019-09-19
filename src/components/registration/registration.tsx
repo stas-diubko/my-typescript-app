@@ -2,7 +2,6 @@ import React from 'react';
 import './registration.css';
 import { Redirect } from 'react-router';
 import { RegisterState, RegisterRequest } from '../../redux/registration/types';
-import { tsThisType } from '@babel/types';
 import avaDefault from '../../img/avaDefault.jpg';
 
 export interface RegisterProps {
@@ -68,7 +67,6 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
         name: this.state.name, 
         email: this.state.email, 
         pass: this.state.pass, 
-        // isAdmin: this.state.isAdmin,
         imgChange: avaDefault
       });
       this.setState(this.state)
@@ -78,7 +76,6 @@ export class Register extends React.Component<RegisterProps, RegisterState>  {
   render () {
     if (this.props.isRegister){
       return <Redirect to="/"/>
-      
     }
     
     return (

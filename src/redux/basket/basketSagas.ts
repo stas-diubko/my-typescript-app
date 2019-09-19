@@ -1,4 +1,4 @@
-import { put, takeEvery, call } from "redux-saga/effects";
+import { put, takeEvery } from "redux-saga/effects";
 
 export function* getDataBasket(): IterableIterator<any> {
     
@@ -6,7 +6,6 @@ export function* getDataBasket(): IterableIterator<any> {
         
         try {
             let dataBasketStr:any = localStorage.getItem('basket')
-            // console.log(dataBasketStr);
             if (dataBasketStr == null) {
                 yield put ({
                     type: 'ERROR_OCCURED',
@@ -18,7 +17,6 @@ export function* getDataBasket(): IterableIterator<any> {
             }
             
             let dataStore = JSON.parse(dataBasketStr)
-            console.log(action.data.id);
             
             let index = dataStore.findIndex((i:any) => i.id == action.data.id);
             let currentBook = action.data;

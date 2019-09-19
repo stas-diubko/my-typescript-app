@@ -1,21 +1,19 @@
-
 import { Store, createStore, applyMiddleware  } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
 import rootReducer, { RootState } from "./rootReducer";
 import {doInit} from "./registration/registrationSagas";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
-import { any } from "prop-types";
 import { doLogin } from "./login/loginSagas";
 import { onErrorOccured } from "./error/errorSagas";
 import { onLoaderOccured } from "./loader/loaderSagas";
 import { doLogout, getDataHome } from "./home/homeSagas";
-
 import { getUsers} from "./admin/adminSagas";
 import { deleteUser } from "./usersTable/usersTableSagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
 import { getDataBasket } from "./basket/basketSagas";
-import { getBookId } from "./aboutBook/aboutBookSagas"
+import { getBookId } from "./aboutBook/aboutBookSagas";
+
 export default function configureStore(
     initialState?: RootState
   ): Store<RootState> {

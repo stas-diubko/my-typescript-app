@@ -9,7 +9,6 @@ import { ErrortState } from "./error/types";
 import { errorReducer } from "./error/reducer";
 import { LoaderState } from "./loader/types";
 import { loaderReducer } from "./loader/reducer";
-
 import { AdminState } from "./admin/types";
 import { adminReducer } from "./admin/reducer";
 import { UsersTableState } from "./usersTable/types";
@@ -20,7 +19,8 @@ import { BasketState } from "./basket/types";
 import { basketReducer } from "./basket/reducer";
 import { AboutBookState } from "./aboutBook/types";
 import { aboutBookReducer } from "./aboutBook/reducer";
-
+import { LoaderCircularState } from "./loaderCircular/types";
+import { loaderCircularReducer } from "./loaderCircular/reducer";
 
 export interface RootState {
     register: RegisterState;
@@ -28,6 +28,7 @@ export interface RootState {
     home: HomeState;
     error: ErrortState;
     loader: LoaderState;
+    loaderCircular: LoaderCircularState;
     books: LoginState;
     users: LoginState;
     admin: AdminState;
@@ -43,6 +44,7 @@ export interface RootState {
     home: homeReducer,
     error: errorReducer,
     loader: loaderReducer,
+    loaderCircular: loaderCircularReducer,
     users: loginReducer,
     books: loginReducer,
     admin: adminReducer,
@@ -52,8 +54,6 @@ export interface RootState {
     aboutBook: aboutBookReducer,
   });
 
-  
-  
 export default rootReducer;
 
 

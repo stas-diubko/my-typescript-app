@@ -1,30 +1,11 @@
 import React from "react";
-import clsx from "clsx";
-import {
-  createStyles,
-  lighten,
-  makeStyles,
-  Theme
-} from "@material-ui/core/styles";
 import Table from "@material-ui/core/Table";
 import TableBody from "@material-ui/core/TableBody";
 import TableCell from "@material-ui/core/TableCell";
 import TableHead from "@material-ui/core/TableHead";
-import TablePagination from "@material-ui/core/TablePagination";
 import TableRow from "@material-ui/core/TableRow";
-import TableSortLabel from "@material-ui/core/TableSortLabel";
-import Toolbar from "@material-ui/core/Toolbar";
-import Typography from "@material-ui/core/Typography";
 import Paper from "@material-ui/core/Paper";
-import Checkbox from "@material-ui/core/Checkbox";
-import IconButton from "@material-ui/core/IconButton";
-import Tooltip from "@material-ui/core/Tooltip";
-import FormControlLabel from "@material-ui/core/FormControlLabel";
-import Switch from "@material-ui/core/Switch";
 import DeleteIcon from "@material-ui/icons/Delete";
-import FilterListIcon from "@material-ui/icons/FilterList";
-import { RootState } from "../../redux/rootReducer";
-import { connect } from "react-redux"
 import '../admin/adminComponent.css';
 import { BooksTableState } from "../../redux/booksTable/types";
 import Button from '@material-ui/core/Button';
@@ -32,7 +13,6 @@ import './booksTableComponent.css';
 import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 import Modal from '@material-ui/core/Modal';
-import Backdrop from '@material-ui/core/Backdrop';
 import Fade from '@material-ui/core/Fade';
 
 export interface BooksProps {
@@ -56,6 +36,7 @@ export interface BooksProps {
   newBookPrice: string;
   newBookImg: any;
   isOpenmodal:boolean;
+  message: string;
 }
 
 export class TableBooksComponent extends React.Component<BooksProps, BooksTableState> {
@@ -75,7 +56,8 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       newBookPrice: '',
       newBookImg: '',
       isOpenmodal: false,
-      bookId: ''
+      bookId: '',
+      message: ''
   }
 
   componentDidMount () {
@@ -86,7 +68,6 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
   handle = (e: any) => {
       this.setState({ [e.target.name]: e.target.value    
       } as any)
-      
   }
 
   onGetImg = (e:any) => {
@@ -101,11 +82,9 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
         const { onErrorOccured } = this.props;
         onErrorOccured('Field of file must be filled')
       }
- 
 }
 
 onEditBook = (e:any) => {
-//  console.log(e.currentTarget.id)  
   for(let i = 0; i < this.props.allBooks.length; i++) {
     if (this.props.allBooks[i]._id == e.currentTarget.id){
       this.setState({
@@ -115,7 +94,6 @@ onEditBook = (e:any) => {
         newBookPrice: this.props.allBooks[i].bookPrice,
         bookId: e.currentTarget.id
     })
-      
     }
   }
     
@@ -146,8 +124,6 @@ onGetNewImg = (e:any) => {
         onErrorOccured('Field of file must be filled')
       }
 }
-
-
 
   onSend = (e:any) => {
     
@@ -208,7 +184,9 @@ onGetNewImg = (e:any) => {
           <TextField type="file" name="bookImg"  className="inp" placeholder="Add cover" onChange={(e:any)=>this.onGetImg(e)} /> 
           <Button id="btn-send" variant="contained" color="secondary" onClick={(e:any)=>this.onSend(e)}>Send</Button></div>
          
-        const itemsBooks = this.props.allBooks.map((book:any) => <TableRow key={book._id}> 
+        const itemsBooks = this.props.allBooks.map((book:any) => 
+        
+        <TableRow key={book._id}> 
                 <TableCell >
                   {book.bookTitle} 
                 </TableCell>
@@ -230,7 +208,6 @@ onGetNewImg = (e:any) => {
                 </TableCell>
           </TableRow>);
       
-
         return (
           <div className="books-wrap">
               <Modal  open={this.state.isOpenmodal} 
@@ -272,12 +249,13 @@ onGetNewImg = (e:any) => {
                   </TableHead>
                   <TableBody>  
                       {itemsBooks}
+                      
                   </TableBody>
                 </Table>
             </Paper> 
-                {openForm}      
+                {openForm}  
             <Button variant="contained" color="primary" id="btn" onClick={this.onOpenForm}>{this.btnOpen}</Button>
-            
+            <div style={{display:"flex", justifyContent:"center", width:"100%", height:"100px", alignItems:"center"}}><span>{this.props.message}</span></div>
           </div>
         );
       }

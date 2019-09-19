@@ -1,6 +1,5 @@
 import { RootState } from "../redux/rootReducer";
 import { connect } from "react-redux";
-import { Register } from "../components/registration/registration";
 import ErrorComponent from "../components/error/errorComponent";
 import { onErrorOccured } from "../redux/error/actions";
 

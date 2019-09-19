@@ -8,11 +8,9 @@ import  jwt_decode from 'jwt-decode';
 
 export interface AdminProps {
   getUsers: () => object;
-  // getIsAdmin: () => object;
   books: any;
   users: any;
   isAdmin: boolean;
-  
 }
 
 export class AdminComponent extends React.Component<AdminProps, AdminState>  {
@@ -27,10 +25,8 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
 
   componentDidMount () {
     const { getUsers } = this.props;
-    getUsers() 
-    
+    getUsers(); 
   }
-
 
   render () {
     let dataUserToken:any = localStorage.getItem('token')

@@ -1,7 +1,7 @@
 import React from 'react';
 import './App.css';
 import Register from './containers/registerContainer';
-import {Route, Link, BrowserRouter as Router} from "react-router-dom";
+import {Route, BrowserRouter as Router} from "react-router-dom";
 import { Provider } from 'react-redux';
 import {RootState} from './redux/rootReducer'
 import { Store } from "redux";
@@ -38,7 +38,6 @@ export class App extends React.Component {
       </Provider>
     );
   }
-  
 }
 
 export default App;

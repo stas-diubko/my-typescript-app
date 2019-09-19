@@ -1,11 +1,8 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
 
-
-
 export function* getBookId(): IterableIterator<any> {
     yield takeEvery('GET_ID_BOOK', function*(action: any)  {
-      
         try {
           yield put({
             type: 'RETURN_IS_SHOW',
@@ -27,8 +24,6 @@ export function* getBookId(): IterableIterator<any> {
   
         } )
         
-       
-
         if(dataBook.success){
             yield call(delay, 1000)
             yield put({
@@ -52,13 +47,9 @@ export function* getBookId(): IterableIterator<any> {
             type: 'ERROR_OCCURED',
             payload: {
               error: dataBook.message
-              
             }
           })
-           
-        }
-
-                        
+        }  
         } 
         
         catch (error) {

@@ -1,13 +1,9 @@
-import { BaseState } from "../../types/baseState";
-import { User } from "../../types/user";
-
 export enum RegisterActions {
     DO_REGISTER = "DO_REGISTER",
     SUCCESSFULL = "SUCCESSFULL",
     ERROR_OCCURED = 'ERROR_OCCURED',
     RETURN_IS_REGISTER = "RETURN_IS_REGISTER"
   }
-
   
 export interface RegisterState {
     name: string;
@@ -27,7 +23,6 @@ export interface RegisterState {
     name: string;
     email: string;
     pass: string;
-    // isAdmin: boolean;
     imgChange:any;
   }
 
@@ -35,5 +30,4 @@ export interface DoRegister {
     name: string;
     email: string;
     pass: string;
-    // isAdmin: boolean;
   }

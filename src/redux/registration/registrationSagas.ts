@@ -1,13 +1,10 @@
 import { put, takeEvery, call } from "redux-saga/effects";
 import { delay } from "q";
-import React from 'react';
-import { Redirect } from 'react-router';
 
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
      let {name, email, pass, isAdmin, imgChange} =  action.data;
      try {
-      
           yield put({
             type: 'DO_LOADER',
             payload: {
@@ -30,14 +27,12 @@ export function* doInit({}): IterableIterator<any> {
                 yield put({
                   type: `LOADER_HIDE`
                 });
-                
                   yield put({
                   type: `@@register/SUCCESSFULL`,
                   payload: {
                     email: email,
                     pass: pass,
                     isRegister: true,
-                    
                   }
                  
                 });

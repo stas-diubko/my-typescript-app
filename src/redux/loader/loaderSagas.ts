@@ -1,6 +1,4 @@
-import { put, takeEvery, call } from "redux-saga/effects";
-import { delay } from "q";
-
+import { put, takeEvery } from "redux-saga/effects";
 
 export function* onLoaderOccured(): IterableIterator<any> {
     yield takeEvery('DO_LOADER', function*(action: any) {
@@ -12,10 +10,6 @@ export function* onLoaderOccured(): IterableIterator<any> {
           }
         });
 
-        // yield call(delay, 2000);
-        // yield put({
-        //   type: `LOADER_HIDE`
-        // });
       } 
       catch (error) {
         

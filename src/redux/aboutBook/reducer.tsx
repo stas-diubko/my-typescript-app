@@ -16,9 +16,8 @@ export function aboutBookReducer(state: AboutBookState = initialState, action: a
                 isShow: true
             }
 
-            
         }
-
+        
         case "RETURN_IS_SHOW": {
             return {
                 ...state,

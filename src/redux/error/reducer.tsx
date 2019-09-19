@@ -4,7 +4,6 @@ import { ErrortState } from "./types";
 
 export const initialState:ErrortState = {
   error: "",
-  
 };
 
 export function errorReducer(state: any = initialState, action: any) {
