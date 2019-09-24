@@ -12,7 +12,7 @@ export function* doInit({}): IterableIterator<any> {
             }
           });
           let req = yield call(() => {
-                return fetch('http://localhost:3000/v1/register', {
+                return fetch('http://localhost:4200/users/register', {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,7 +20,7 @@ export function* doInit({}): IterableIterator<any> {
                 body: JSON.stringify({name, email, pass, imgChange}),
               }).then((response : any) => response.json())       
               })
-              console.log(req);
+              // console.log(req);
 
               if (req.success) {
                 yield call(delay, 1000)
@@ -64,8 +64,7 @@ export function* doInit({}): IterableIterator<any> {
      
      }
      catch(error){
-      yield console.log(error);
-       
+     
       yield put({
         type: `@@ERROR_OCCURED`,
         payload: {

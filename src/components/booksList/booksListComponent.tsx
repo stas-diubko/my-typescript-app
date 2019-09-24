@@ -30,11 +30,11 @@ export class BooksListComponent extends React.Component<BooksListProps, any> {
         const currentBook = books.filter((x:any) => x._id == e.currentTarget.id);
         
         const { addToBasket } = this.props;
-        addToBasket({bookTitle: currentBook[0].bookTitle,
-            bookAuthor: currentBook[0].bookAuthor,
-            bookDescript: currentBook[0].bookDescript,
-            bookImg: currentBook[0].bookImg,
-            bookPrice: currentBook[0].bookPrice,
+        addToBasket({bookTitle: currentBook[0].title,
+            bookAuthor: currentBook[0].author,
+            bookDescript: currentBook[0].description,
+            bookImg: currentBook[0].bookImage,
+            bookPrice: currentBook[0].price,
             bookCount: 1,
             totalPrice: '',
             id: e.currentTarget.id
@@ -45,11 +45,11 @@ export class BooksListComponent extends React.Component<BooksListProps, any> {
         
         const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book._id} >
                 <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
-                        <img src={book.bookImg} alt={book.bookAuthor}/>
-                        <div><b>{book.bookTitle}</b></div>
-                        <div><b>Author: </b>{book.bookAuthor}</div>
-                        <div><b>Description: </b>{book.bookDescript}</div>
-                        <div><b>Price: </b>{book.bookPrice} $</div>
+                        <img src={book.bookImage} alt={book.bookAuthor}/>
+                        <div><b>{book.title}</b></div>
+                        <div><b>Author: </b>{book.author}</div>
+                        <div><b>Description: </b>{book.description}</div>
+                        <div><b>Price: </b>{book.price} $</div>
                         <Link id={book._id} style={{display: "block", fontSize: "16px"}} to={`books/${book._id}`} >See More</Link>
                         <Button id={book._id} className="btn" variant="contained" color="primary" onClick={(e:any)=>this.onAddToBasket(e)}>Add to basket</Button>
                     </div>

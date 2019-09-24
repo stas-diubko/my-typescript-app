@@ -27,6 +27,8 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
     componentDidMount () {
         const { getDataBasket } = this.props;
         getDataBasket() 
+        // console.log(this.props.basket);
+        
     }
     
    
@@ -84,7 +86,7 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         >
         <Paper><div className="basket-item"> 
                 <img src={book.bookImg} alt={book.bookAuthor}/>
-                <div><b>{book.bookTitle}</b></div>
+                <div><b>{book.title}</b></div>
                 <div><b>Author: </b>{book.bookAuthor}</div>
                 <div><b>Description: </b>{book.bookDescript}</div>
                 <div><b>Price: </b>{book.bookPrice} $</div>

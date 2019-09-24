@@ -26,14 +26,14 @@ export class AboutBookComponent extends React.Component <any, any> {
         const isShow = this.props.isShow && <div>
         
         <div style={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems:"center",  paddingTop:"35px"}}>
-            <div style={{textAlign:"center", fontSize:"24px"}}><b>Book Title: <span style={{color:"brown"}}>{this.props.book.bookTitle}</span></b></div>
-            <h3 style={{textAlign:"center", fontSize:"24px"}}>Author: <span style={{color:"brown"}}>{this.props.book.bookAuthor}</span></h3>
+            <div style={{textAlign:"center", fontSize:"24px"}}><b>Book Title: <span style={{color:"brown"}}>{this.props.book.title}</span></b></div>
+            <h3 style={{textAlign:"center", fontSize:"24px"}}>Author: <span style={{color:"brown"}}>{this.props.book.author}</span></h3>
             
-            <div style={{textAlign:"center", fontSize:"24px"}}><img src={this.props.book.bookImg} alt={this.props.book.bookTitle}/></div>
+            <div style={{textAlign:"center", fontSize:"24px"}}><img src={this.props.book.bookImage} alt={this.props.book.title}/></div>
             <div style={{textAlign:"center", width:"600px"}}>
                 <h4>Description</h4>
-                <p>{this.props.book.bookDescript}</p>
-                <h4>Price: <span style={{color:"brown"}}>{this.props.book.bookPrice}</span></h4>
+                <p>{this.props.book.description}</p>
+                <h4>Price: <span style={{color:"brown"}}>{this.props.book.price}</span></h4>
             </div>
             
         </div>

@@ -88,10 +88,10 @@ onEditBook = (e:any) => {
   for(let i = 0; i < this.props.allBooks.length; i++) {
     if (this.props.allBooks[i]._id == e.currentTarget.id){
       this.setState({
-        newBookTitle: this.props.allBooks[i].bookTitle,
-        newBookAuthor: this.props.allBooks[i].bookAuthor,
-        newBookDescript: this.props.allBooks[i].bookDescript,
-        newBookPrice: this.props.allBooks[i].bookPrice,
+        newBookTitle: this.props.allBooks[i].title,
+        newBookAuthor: this.props.allBooks[i].author,
+        newBookDescript: this.props.allBooks[i].description,
+        newBookPrice: this.props.allBooks[i].price,
         bookId: e.currentTarget.id
     })
     }
@@ -148,6 +148,7 @@ onGetNewImg = (e:any) => {
   onDeleteBook = (e:any) => {
     const {deleteBook} = this.props; 
     deleteBook(e.currentTarget.id)
+    
   }
 
   onChangeBook = (e:any) => {
@@ -188,13 +189,13 @@ onGetNewImg = (e:any) => {
         
         <TableRow key={book._id}> 
                 <TableCell >
-                  {book.bookTitle} 
+                  {book.title} 
                 </TableCell>
                 <TableCell >
-                  {book.bookAuthor}
+                  {book.author}
                 </TableCell>
                 <TableCell >
-                  {book.bookPrice} $
+                  {book.price} $
                 </TableCell>
                 <TableCell align="right" className="delete">
                 

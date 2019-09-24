@@ -9,9 +9,17 @@ export function* getUsers(): IterableIterator<any> {
 
                 }
               });
+            let dataUserToken:any = localStorage.getItem('token')
+
             let dataUsers = yield call (() => {
-                return fetch('http://localhost:3000/v1/users')
-                        .then(res => res.json())
+                return fetch('http://localhost:4200/users', {
+                  method: 'GET', 
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'Authorization' : `Bearer ${dataUserToken}`
+                  },
+                   
+              }).then(res => res.json())
             } )
             
             yield put ({

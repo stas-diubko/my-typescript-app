@@ -5,13 +5,18 @@ export function* deleteUser(): IterableIterator<any> {
         
         try {
           let id = action.data;
-          const API_URL = 'http://localhost:3000/v1/users/'                                            
+          const API_URL = 'http://localhost:4200/users/'                                            
           const API_PATH = id
-          
+          let dataUserToken:any = localStorage.getItem('token')
+           
             yield call (() => {
                 return fetch(API_URL + API_PATH, {
-                  method: 'DELETE'
-                })
+                  method: 'DELETE',
+                  headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${dataUserToken}`
+                },
+                }).then(res => res.json())
 
             } )
 

@@ -3,6 +3,7 @@ import { delay } from "q";
 
 export function* getBookId(): IterableIterator<any> {
     yield takeEvery('GET_ID_BOOK', function*(action: any)  {
+      let dataUserToken:any = localStorage.getItem('token')
         try {
           yield put({
             type: 'RETURN_IS_SHOW',
@@ -16,14 +17,23 @@ export function* getBookId(): IterableIterator<any> {
               isLoader: true
             }
           });
-            const API_URL = 'http://localhost:3000/v1/books/'                                            
+            const API_URL = 'http://localhost:4200/books/'                                            
             const API_PATH = action.data
           let dataBook = yield call (() => {
-            return fetch(API_URL + API_PATH)
+            return fetch(API_URL + API_PATH, 
+              {
+                method: 'GET', 
+                headers: {
+                    'Content-Type': 'application/json',
+                    'Authorization' : `Bearer ${dataUserToken}`
+                },
+                 
+            }
+              )
             .then(res => res.json())
   
         } )
-        
+               
         if(dataBook.success){
             yield call(delay, 1000)
             yield put({

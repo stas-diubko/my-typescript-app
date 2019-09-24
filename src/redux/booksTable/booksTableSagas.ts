@@ -3,7 +3,14 @@ import { put, takeEvery, call } from "redux-saga/effects";
 export function* addBook(): IterableIterator<any> {
     yield takeEvery('ADD_BOOK', function*(action: any) {
      let {bookTitle, bookAuthor, bookDescript, bookPrice, bookImg} =  action.data;
-        
+     let dataUserToken:any = localStorage.getItem('token')
+     let book = {
+      title: action.data.bookTitle,
+      author: action.data.bookAuthor,
+      description: action.data.bookDescript,
+      price: action.data.bookPrice,
+      bookImage: action.data.bookImg
+     }
         try {
           if (bookTitle.length === 0 || bookAuthor.length === 0 || bookDescript.length === 0 || bookPrice.length === 0 || bookImg.length === 0){
             yield put ({
@@ -14,13 +21,15 @@ export function* addBook(): IterableIterator<any> {
               }
             })
           } else {
+
             let req = yield call(() => {
-            return fetch('http://localhost:3000/v1/books', {
+            return fetch('http://localhost:4200/books', {
               method: 'POST', 
               headers: {
                   'Content-Type': 'application/json',
+                  'Authorization' : `Bearer ${dataUserToken}`
                 },
-              body: JSON.stringify({bookTitle, bookAuthor, bookDescript, bookPrice, bookImg}),
+              body: JSON.stringify(book),
             }) 
             .then((response : any) => response.json())     
             })
@@ -46,15 +55,19 @@ export function* deleteBook(): IterableIterator<any> {
       
       try {
         let id = action.data;
-        const API_URL = 'http://localhost:3000/v1/books/'                                            
+        const API_URL = 'http://localhost:4200/books/'                                            
         const API_PATH = id
-        
-          yield call (() => {
+        let dataUserToken:any = localStorage.getItem('token')
+        let req = yield call (() => {
               return fetch(API_URL + API_PATH, {
-                method: 'DELETE'
-              })
+                method: 'DELETE',
+                headers: {
+                  'Content-Type': 'application/json',
+                  'Authorization' : `Bearer ${dataUserToken}`
+              },
+              }).then((response : any) => response.json())
           } )
-
+          
           yield put ({
             type: "GET_ALL_BOOKS",
             payload: {
@@ -71,6 +84,8 @@ export function* deleteBook(): IterableIterator<any> {
 
 export function* getBooks(): IterableIterator<any> {
   yield takeEvery('GET_ALL_BOOKS', function*(action: any) {
+    let dataUserToken:any = localStorage.getItem('token')
+
       yield put({
         type: 'LOADER_CIRCULAR_SHOW',
         payload: {
@@ -79,8 +94,13 @@ export function* getBooks(): IterableIterator<any> {
       });
       try {
         let dataBooks = yield call (() => {
-          return fetch('http://localhost:3000/v1/books')
-                  .then(res => res.json())
+          return fetch('http://localhost:4200/books', {
+            method: 'GET', 
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${dataUserToken}`
+              }
+          }).then(res => res.json())
       } )
 
       if(dataBooks.success){
@@ -126,9 +146,16 @@ export function* changeDataBook(): IterableIterator<any> {
   yield takeEvery('CHANGE_DATA_BOOK', function*(action: any) {
     try {
         let {newBookTitle, newBookAuthor, newBookDescript, newBookPrice, newBookImg, bookId} = action.data;
-        
-        const API_URL = 'http://localhost:3000/v1/books/'                                            
+        const book = {
+          title: action.data.newBookTitle,
+          author: action.data.newBookAuthor,
+          description: action.data.newBookDescript,
+          price: action.data.newBookPrice,
+          bookImage: action.data.newBookImg
+        }
+        const API_URL = 'http://localhost:4200/books/'                                            
         const API_PATH = bookId
+        let dataUserToken:any = localStorage.getItem('token')
 
         if (newBookTitle.length === 0 || newBookAuthor.length === 0 || newBookDescript.length === 0 || newBookPrice.length === 0 || newBookImg.length === 0){
           yield put ({
@@ -144,14 +171,15 @@ export function* changeDataBook(): IterableIterator<any> {
             return fetch (API_URL + API_PATH, {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${dataUserToken}`
             },
             method: 'put',                                                              
-            body: JSON.stringify( { bookTitle: newBookTitle, bookAuthor: newBookAuthor, bookDescript: newBookDescript, bookPrice: newBookPrice,  bookImg: newBookImg, } )                                        
+            body: JSON.stringify( book )                                        
             })
             .then((response : any) => response.json())
         })
-     
+             
         yield put ({
           type: "GET_ALL_BOOKS",
           payload: {

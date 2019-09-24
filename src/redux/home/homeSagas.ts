@@ -31,23 +31,23 @@ export function* doLogout(): IterableIterator<any> {
      
     let dataUserToken:any = localStorage.getItem('token')
     let decoded:any = jwt_decode(dataUserToken);
-     
+    
     let amounBasketStr:any = localStorage.getItem('basket')
     let amounBasket = JSON.parse(amounBasketStr)
     let amounBasketLength = amounBasket.length
-        
             yield put ({
                 type: 'GOT_DATA_HOME',
                 payload: {
-                    dataUser: decoded.userData,
+                    dataUser: decoded,
                     countBasket: amounBasketLength
                   
                 }
               })
-
+             
+                            
               if (dataUserToken !== null) {
-                const API_URL = 'http://localhost:3000/v1/users/'                                            
-                 const API_PATH = decoded.userData.id
+                const API_URL = 'http://localhost:4200/users/avatar/'                                            
+                 const API_PATH = decoded.id
                  let dataUsers = yield call (() => {
                  return fetch(`${API_URL}${API_PATH}`, {
                     method: 'GET', 
@@ -57,11 +57,13 @@ export function* doLogout(): IterableIterator<any> {
                     },
                      
                 }).then((response : any) => response.json())
+                
                } )
+               
                yield put ({
                 type: 'GET_AVA',
                 payload: {
-                  userAva: dataUsers.data.imgChange
+                  userAva: dataUsers.data
                 }
               })
            }
@@ -83,22 +85,24 @@ export function* doLogout(): IterableIterator<any> {
           let {name, imgChange, pass, email, id, isAdmin} = action.data;
           let dataUserToken:any = localStorage.getItem('token')
           let decoded:any = jwt_decode(dataUserToken);
-          const API_URL = 'http://localhost:3000/v1/users/'                                            
-          const API_PATH = `${decoded.userData.id}`
-            
+          const API_URL = 'http://localhost:4200/users/avatar/'                                            
+          const API_PATH = `${decoded.id}`
+                      
           let req = yield call (() => {
             
             return fetch (API_URL + API_PATH, {
             headers: {
                 'Accept': 'application/json',
-                'Content-Type': 'application/json'
+                'Content-Type': 'application/json',
+                'Authorization' : `Bearer ${dataUserToken}`
             },
             method: 'put',                                                              
-            body: JSON.stringify( { name: name, imgChange: imgChange } )                                        
+            body: JSON.stringify( { name: name, image: imgChange } )                                        
             })
             .then((response : any) => response.json())  
            
         })
+                
         localStorage.removeItem('token')
         localStorage.setItem('token', req.data)
         yield put ({
