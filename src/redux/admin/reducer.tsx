@@ -4,7 +4,8 @@ import { RootState } from "../rootReducer";
 export const initialStateLog: AdminState = {
     books: "",
     users: [],
-    isAdmin: false
+    isAdmin: false,
+    usersLength: ''
 };
 
 export function adminReducer(state: AdminState = initialStateLog, action: any) {
@@ -16,9 +17,11 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
         }
 
         case 'GOT_USERS': {
+                    
             return {
                 ...state, 
-                users: action.payload.users
+                users: action.payload.users,
+                usersLength: action.payload.usersLength
               };
         }
 

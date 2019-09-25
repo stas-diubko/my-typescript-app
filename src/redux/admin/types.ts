@@ -7,4 +7,5 @@ export interface AdminState {
     books: any;
     users: any;
     isAdmin: boolean;
+    usersLength: any;
   }

@@ -7,7 +7,7 @@ import  jwt_decode from 'jwt-decode';
 
 
 export interface AdminProps {
-  getUsers: () => object;
+  getUsers: (data:any) => object;
   books: any;
   users: any;
   isAdmin: boolean;
@@ -18,14 +18,16 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
       books: '',
       users: [],
       isAdmin: false,
+      usersLength: ''
   }
 
   isAdminStr:any = localStorage.getItem('isAdmin');
   isAdmin:boolean = JSON.parse(this.isAdminStr);
 
   componentDidMount () {
+    let data = 0
     const { getUsers } = this.props;
-    getUsers(); 
+    getUsers(data); 
   }
 
   render () {

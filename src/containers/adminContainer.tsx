@@ -7,7 +7,8 @@ import { AdminComponent } from "../components/admin/adminComponent";
 const mapStateToProps = (state: RootState) => ({
     books: state.login.books,
     users: state.login.users,
-    isAdmin: state.admin.isAdmin
+    isAdmin: state.admin.isAdmin,
+    usersLength: state.admin.usersLength
 });
   
   export default connect(

@@ -9,29 +9,61 @@ import DeleteIcon from "@material-ui/icons/Delete";
 import '../admin/adminComponent.css';
 import { UsersTableState } from "../../redux/usersTable/types";
 import LoaderCircular from '../../containers/loaderCircularContainer'
+import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
+import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
 
 export interface TableUsersProps {
   deleteUser: (data:any) => any;
+  getUsers: (data:any) => object;
+  usersLength: any;
   users: any;
 }
 
 export class TableUsersComponent extends React.Component<TableUsersProps, UsersTableState> {
     state: UsersTableState = {
-      users: ''   
+      users: '',
+      usersLength: '',
   }
-
-  isResizeble = false;
 
   onDeleteUser = (e:any) => {
     const {deleteUser} = this.props;    
     deleteUser(e.currentTarget.id)
-    // console.log(e.currentTarget.id);
-    
+  }
+
+  // paging
+
+  counter:any = 0;
+  onNextPage = (e:any) => {
+    this.counter++
+    if (this.props.usersLength % 2 == 0) {
+      if(this.counter == Math.floor(this.props.usersLength/2)){
+        this.counter--
+      }
+    }
+    if (this.props.usersLength % 2 == 1) {
+      if(this.counter == Math.floor(this.props.usersLength/2)+1){
+        this.counter--
+      }
+    }
+    const { getUsers } = this.props;
+    getUsers(this.counter); 
+  }
+  
+  onPreviousPage = (e:any) => {
+    this.counter--
+    if (this.counter < 0 ) {
+      this.counter = 0
+    }
+    const { getUsers } = this.props;
+    getUsers(this.counter); 
   }
   
       render () {
-                      
-          const items = this.props.users.map((user:any) => <TableRow className="user-row" key={user.id}>
+          let users = this.props.users;
+          if(this.props.users == undefined) {
+            users = []
+          }
+          const items = users.map((user:any) => <TableRow className="user-row" key={user.id}>
             <TableCell >
               {user.name} 
             </TableCell>
@@ -60,7 +92,8 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
                   <TableBody>  
                     {items}
                   </TableBody>
-                </Table>           
+                </Table>     
+                  <div style={{padding:"5px"}}><ArrowDropDownIcon onClick={(e:any)=>this.onNextPage(e)}/><ArrowDropUpIcon onClick={(e:any)=>this.onPreviousPage(e)}/></div>  
             </Paper> 
           </div>
         );

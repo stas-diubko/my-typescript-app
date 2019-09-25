@@ -1,7 +1,7 @@
 import { AdminActions } from "./types";
 
-export function getUsers() {
-    return { type: AdminActions.GET_USERS, };
+export function getUsers(data:any) {
+    return { type: AdminActions.GET_USERS, data};
 }
 
 

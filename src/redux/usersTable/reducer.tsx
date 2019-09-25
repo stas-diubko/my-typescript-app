@@ -2,13 +2,13 @@ import { UsersTableState } from "./types";
 import { RootState } from "../rootReducer";
 
 export const initialState: UsersTableState = {
-    users: ''
+    users: '',
+    usersLength: ''
 };
 
 export function usersTableReducer(state: UsersTableState = initialState, action: any) {
     switch (action.type) {
         case 'DELETE_USER': {
-           
             return {
                 ...state,
              

@@ -43,8 +43,7 @@ export function* doLogout(): IterableIterator<any> {
                   
                 }
               })
-             
-                            
+                                         
               if (dataUserToken !== null) {
                 const API_URL = 'http://localhost:4200/users/avatar/'                                            
                  const API_PATH = decoded.id

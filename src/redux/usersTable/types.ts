@@ -4,5 +4,6 @@ export enum UsersTableActions {
   
   export interface UsersTableState {
     users: any;
+    usersLength: any;
   }
   

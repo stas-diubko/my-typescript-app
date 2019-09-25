@@ -6,9 +6,7 @@ export function* doLogin(): IterableIterator<any> {
     yield takeEvery('DO_LOGIN', function*(action: any) {
         
         try {
-          //   let {email, pass } =  action.data;
-          //  let password = action.data.pass
-          //  console.log(password, email);
+         
            let user = {
              username: action.data.email,
              password: action.data.pass
@@ -24,9 +22,7 @@ export function* doLogin(): IterableIterator<any> {
             })
             .then((response : any) => response.json())     
             })
-             
-
-           
+            
             yield put({
                   type: 'DO_LOADER',
                   payload: {
@@ -79,7 +75,12 @@ export function* doLogin(): IterableIterator<any> {
         } 
         
         catch (error) {
-
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: error
+            }
+          })
         }
     })
 

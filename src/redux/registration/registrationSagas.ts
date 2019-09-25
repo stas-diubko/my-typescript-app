@@ -64,13 +64,12 @@ export function* doInit({}): IterableIterator<any> {
      
      }
      catch(error){
-     
-      yield put({
-        type: `@@ERROR_OCCURED`,
+      yield put ({
+        type: 'ERROR_OCCURED',
         payload: {
-          error: "Something went wrong while registration"
+          error: error
         }
-      });
+      })
      }
     });
   }
