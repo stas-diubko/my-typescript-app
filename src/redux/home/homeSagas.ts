@@ -20,7 +20,12 @@ export function* doLogout(): IterableIterator<any> {
       } 
 
       catch (error) {
-       
+        yield put ({
+          type: 'ERROR_OCCURED',
+          payload: {
+            error: error
+          }
+        })
       }
     });
   }
@@ -40,7 +45,6 @@ export function* doLogout(): IterableIterator<any> {
                 payload: {
                     dataUser: decoded,
                     countBasket: amounBasketLength
-                  
                 }
               })
                                          
@@ -54,19 +58,16 @@ export function* doLogout(): IterableIterator<any> {
                         'Content-Type': 'application/json',
                         'Authorization' : `Bearer ${dataUserToken}`
                     },
-                     
                 }).then((response : any) => response.json())
-                
                } )
-               
+                              
                yield put ({
                 type: 'GET_AVA',
                 payload: {
                   userAva: dataUsers.data
                 }
               })
-           }
-
+           } 
               yield put ({
                 type: 'GET_ID',
                 payload: {
@@ -74,8 +75,16 @@ export function* doLogout(): IterableIterator<any> {
                 }
               })
           } 
+
       catch (error) {
-       
+        
+        // let err = JSON.stringify(error)
+        // yield put ({
+        //   type: 'ERROR_OCCURED',
+        //   payload: {
+        //     error: err
+        //   }
+        // })
       }
     });
 
@@ -98,8 +107,7 @@ export function* doLogout(): IterableIterator<any> {
             method: 'put',                                                              
             body: JSON.stringify( { name: name, image: imgChange } )                                        
             })
-            .then((response : any) => response.json())  
-           
+            .then((response : any) => response.json())
         })
                 
         localStorage.removeItem('token')
@@ -110,10 +118,15 @@ export function* doLogout(): IterableIterator<any> {
              
           }
         })
-        
-      } 
+      }
+      
       catch (error) {
-       
+        yield put ({
+          type: 'ERROR_OCCURED',
+          payload: {
+            error: error
+          }
+        })
       }
     });
   }

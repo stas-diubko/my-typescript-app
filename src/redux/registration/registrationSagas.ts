@@ -11,8 +11,9 @@ export function* doInit({}): IterableIterator<any> {
               isLoader: true
             }
           });
+
           let req = yield call(() => {
-                return fetch('http://localhost:4200/users/register', {
+              return fetch('http://localhost:4200/users/register', {
                 method: 'POST', 
                 headers: {
                     'Content-Type': 'application/json',
@@ -20,33 +21,29 @@ export function* doInit({}): IterableIterator<any> {
                 body: JSON.stringify({name, email, pass, imgChange}),
               }).then((response : any) => response.json())       
               })
-              // console.log(req);
-
+             
               if (req.success) {
                 yield call(delay, 1000)
                 yield put({
                   type: `LOADER_HIDE`
                 });
-                  yield put({
+
+                yield put({
                   type: `@@register/SUCCESSFULL`,
                   payload: {
                     email: email,
                     pass: pass,
                     isRegister: true,
                   }
-                 
                 });
 
                 yield put({
                   type: `RETURN_IS_REGISTER`,
                   payload: {
                     isRegister: false
-                    
                   }
               });
-                
               }
-             
         else {
           yield call(delay, 1000)
           yield put({
@@ -56,13 +53,11 @@ export function* doInit({}): IterableIterator<any> {
             type: 'ERROR_OCCURED',
             payload: {
               error: req.message
-              
             }
           })
-
         } 
-     
      }
+
      catch(error){
       yield put ({
         type: 'ERROR_OCCURED',

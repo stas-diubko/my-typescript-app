@@ -78,7 +78,6 @@ onChangeImg = (e:any) => {
     const { onErrorOccured } = this.props;
     onErrorOccured('Field of file must be filled')
   }
-
 }
 
 handleChange = (e:any) => {
@@ -86,7 +85,6 @@ handleChange = (e:any) => {
   e.preventDefault();
   const {doUserModalChange} = this.props;
   doUserModalChange({name: this.state.name, imgChange:this.state.imgChange, id:getDataUserId, pass: this.props.pass, email: this.props.email, isAdmin:this.props.isAdmin})
-    
 }
 
 onChangeData = () => {
@@ -104,7 +102,6 @@ adminComponent:any
     
     if (!this.props.logOut) {
      this.el = <div className="logout " onClick={this.onLogout}>Logout</div>
-      
     }
     else {
        this.el = <div className="logout" >
@@ -159,7 +156,6 @@ adminComponent:any
           </div>
         </div>    
         <div className="home-wrap">
-       
             <Modal open={this.state.isModal} 
               onClose={this.onModal}
               style={{display: 'flex',
@@ -181,12 +177,10 @@ adminComponent:any
                         <div><b>User's name: </b>{this.props.name}</div>
                         <button onClick={this.onChangeData} style={{margin: "10px"}}>Change user's data</button>
                         {changeUserData}
-                           
                         </div>
                     </Fade>
                 </Modal> 
           <BooksListComponent/>
-          
         </div>              
       </div>
     );

@@ -1,10 +1,8 @@
-import React, { Dispatch } from "react";
-
+import React from "react";
 import './errorComponent.css';
 
 export interface ErrorProps {
-  error?: string;
-  
+  error?: any;
 }
 
 export class ErrorComponent extends React.Component<ErrorProps> {

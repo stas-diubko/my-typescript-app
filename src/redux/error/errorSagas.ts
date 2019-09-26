@@ -18,7 +18,12 @@ export function* onErrorOccured(): IterableIterator<any> {
         });
       } 
       catch (error) {
-       
+        yield put ({
+          type: 'ERROR_OCCURED',
+          payload: {
+            error: error
+          }
+        })
       }
     });
   }

@@ -5,7 +5,9 @@ export enum BooksTableActions {
     DELETE_BOOK = "DELETE_BOOK",
     CHANGE_DATA_BOOK = "CHANGE_DATA_BOOK",
     GET_CURRENT_BOOK = "GET_CURRENT_BOOK",
-    GOT_CURRENT_BOOK = "GOT_CURRENT_BOOK"
+    GOT_CURRENT_BOOK = "GOT_CURRENT_BOOK",
+    SORT_BOOK = "SORT_BOOK",
+    REMOVE_BOOK = "REMOVE_BOOK"
 }
   
 export interface BooksTableState {
@@ -25,5 +27,6 @@ export interface BooksTableState {
   newBookImg: any;
   bookId: any;
   message: string;
+  booksLength: any;
 }
   

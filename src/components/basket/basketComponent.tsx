@@ -27,11 +27,8 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
     componentDidMount () {
         const { getDataBasket } = this.props;
         getDataBasket() 
-        // console.log(this.props.basket);
-        
     }
-    
-   
+       
     onRemove = (e:any) => {
         const {removeFromCart} = this.props;
         removeFromCart(e.currentTarget.id)

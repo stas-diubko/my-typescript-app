@@ -1,10 +1,10 @@
 import React from 'react';
 import LinearDeterminate from './linear';
 
-
 export interface LoaderProps {
   isLoader: boolean;
 }
+
 export class Loader extends React.Component<LoaderProps, any> {
 
   state = {
@@ -25,7 +25,6 @@ export class Loader extends React.Component<LoaderProps, any> {
       </div>
     )
   }
-
 }
 
 export default Loader; 

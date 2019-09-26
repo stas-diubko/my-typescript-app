@@ -1,4 +1,3 @@
-
 import { RootState } from "../rootReducer";
 import { ErrortState } from "./types";
 

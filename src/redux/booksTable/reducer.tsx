@@ -17,9 +17,9 @@ export const initialState: BooksTableState = {
     newBookPrice: '',
     newBookImg: '',
     bookId: '',
-    message: ''
+    message: '',
+    booksLength: ''
 };
-
 
 export function booksTableReducer(state: BooksTableState = initialState, action: any) {
     switch (action.type) {
@@ -31,10 +31,19 @@ export function booksTableReducer(state: BooksTableState = initialState, action:
            else {
             msg = ''
            }
+           
             return {
                 ...state,
                 allBooks: action.payload.books,
-                message: msg
+                message: msg,
+                booksLength: action.payload.booksLength
+            }
+        }
+
+        case 'REMOVE_BOOK': {
+            return {
+                ...state,
+                allBooks: []
             }
         }
  

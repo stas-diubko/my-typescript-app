@@ -5,6 +5,6 @@ export enum ErrorActions {
 }
   
 export interface ErrortState {
-    error: string;
+    error: any;
     
 }

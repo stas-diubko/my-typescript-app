@@ -7,22 +7,22 @@ import {Link} from "react-router-dom";
 import LoaderCircular from '../../containers/loaderCircularContainer';
 
 export interface  BooksListProps {
-    getBooks: () => Object;
+    getBooksToMain: () => Object;
     addToBasket: (data:any) => any;
-    books: [],
+    books: any,
     message: string;
 }
 
 export class BooksListComponent extends React.Component<BooksListProps, any> {
 
     state = {
-        books: [],
+        books: '',
         message: ''
     }
 
     componentDidMount () {
-        const { getBooks } = this.props;
-        getBooks(); 
+        const { getBooksToMain } = this.props;
+        getBooksToMain(); 
     }
 
       onAddToBasket = (e:any) => {
@@ -42,8 +42,12 @@ export class BooksListComponent extends React.Component<BooksListProps, any> {
       }
      
     render () {
-        
-        const booksList = this.props.books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book._id} >
+        let books = this.props.books;
+
+        if(this.props.books == undefined) {
+            books = []
+        }
+        const booksList = books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book._id} >
                 <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
                         <img src={book.bookImage} alt={book.bookAuthor}/>
                         <div><b>{book.title}</b></div>

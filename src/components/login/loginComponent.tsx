@@ -14,6 +14,7 @@ export interface LoginProps {
   users: any;
   books: any;
 }
+
 export class LoginComponent extends React.Component<LoginProps, LoginState> {
     state: LoginState = {
         error: '',
@@ -30,9 +31,11 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
       let passError = '';
       let emailError = '';
       let regEmail = /^\w+([\.-]?\w+)*@(((([a-z0-9]{2,})|([a-z0-9][-][a-z0-9]+))[\.][a-z0-9])|([a-z0-9]+[-]?))+[a-z0-9]+\.([a-z]{2}|(com|net|org|edu|int|mil|gov|arpa|biz|aero|name|coop|info|pro|museum))$/i;
+      
       if (!regEmail.test(this.state.email)){
         emailError = 'Email is invalid'
       }
+
       if (this.state.pass.length < 5){
         passError = 'Pass must be more than four characters'
       }
@@ -41,6 +44,7 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
         this.setState({passError, emailError})
         return false;
       }
+      
       return true;
     }
   

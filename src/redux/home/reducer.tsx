@@ -13,13 +13,11 @@ export const initialState: HomeState = {
     isChangeData: false,
     imgChange: '',
     isModalMore: false 
-
 };
 
 export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_DATA_HOME': {
-        
             return {
                 ...state,
                 email: action.payload.dataUser.email,
@@ -51,6 +49,7 @@ export function homeReducer(state: HomeState = initialState, action: any) {
                 isAdmin: false
             }
         }
+        
         default:
             return state;
         

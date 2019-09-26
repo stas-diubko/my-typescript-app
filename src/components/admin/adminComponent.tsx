@@ -5,7 +5,6 @@ import { Redirect } from 'react-router';
 import { Link } from 'react-router-dom';
 import  jwt_decode from 'jwt-decode';
 
-
 export interface AdminProps {
   getUsers: (data:any) => object;
   books: any;

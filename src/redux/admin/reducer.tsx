@@ -17,7 +17,6 @@ export function adminReducer(state: AdminState = initialStateLog, action: any) {
         }
 
         case 'GOT_USERS': {
-                    
             return {
                 ...state, 
                 users: action.payload.users,

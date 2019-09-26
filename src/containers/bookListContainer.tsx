@@ -1,16 +1,16 @@
 import { connect } from "react-redux";
 import { RootState } from "../redux/rootReducer";
 import { BooksListComponent } from "../components/booksList/booksListComponent";
-import { getBooks } from "../redux/booksTable/actions";
+import { getBooksToMain } from "../redux/bookList/actions";
 import { addToBasket } from "../redux/basket/actions"
 
 const mapStateToProps = (state: RootState) => ({
-    books: state.booksTable.allBooks,
-    message: state.booksTable.message
+    books: state.bookList.books,
+    message: state.bookList.message
 });
  
   export default connect(
     mapStateToProps,
-    {getBooks, addToBasket},
+    {getBooksToMain, addToBasket},
   )(BooksListComponent);
   

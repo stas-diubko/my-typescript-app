@@ -12,12 +12,13 @@ export function* getUsers(): IterableIterator<any> {
             let dataUserToken:any = localStorage.getItem('token')
               let page:any = 0;
               let pageSize:any = 2 
-              // console.log(action.data);
               page = action.data
               
+              if (action.data == undefined) {
+                page = 0
+              }
             let dataUsers = yield call (() => {
                 return fetch(`http://localhost:4200/users`, {
-                 
                   headers: {
                       'Accept': 'application/json',
                       'Content-Type': 'application/json',
@@ -46,7 +47,12 @@ export function* getUsers(): IterableIterator<any> {
         } 
         
         catch (error) {
-
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: error
+            }
+          })
         }
     })
 }

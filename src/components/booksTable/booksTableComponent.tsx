@@ -14,14 +14,17 @@ import TextField from '@material-ui/core/TextField';
 import EditIcon from '@material-ui/icons/Edit';
 import Modal from '@material-ui/core/Modal';
 import Fade from '@material-ui/core/Fade';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 export interface BooksProps {
   addBook: (data:any) => Object;
-  getBooks: () => Object;
+  getBooks: (data:any) => Object;
   deleteBook: (data:any) => any;
   changeDataBook: (data:any) => Object;
   getCurrentBookBook: (data:any) => any;
   onErrorOccured: (data:any) => any;
+  toSortBooks: () => any;
   bookToAdd: Object;
   allBooks: any; 
   isOpenForm: boolean;
@@ -37,6 +40,7 @@ export interface BooksProps {
   newBookImg: any;
   isOpenmodal:boolean;
   message: string;
+  booksLength:any;
 }
 
 export class TableBooksComponent extends React.Component<BooksProps, BooksTableState> {
@@ -57,14 +61,21 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       newBookImg: '',
       isOpenmodal: false,
       bookId: '',
-      message: ''
+      message: '',
+      booksLength: ''
   }
+
+  counter:any = 0;
+  counterPage:any = 0;
+  amountPage:any = 0;
+  isSort:boolean = false;
 
   componentDidMount () {
     const { getBooks } = this.props;
-    getBooks() 
+    getBooks(this.counter) 
+       
   }
-
+  
   handle = (e: any) => {
       this.setState({ [e.target.name]: e.target.value    
       } as any)
@@ -106,7 +117,6 @@ let qqq = () => {
     qqq()
     
   }, 200)
-
   localStorage.setItem('bookId', e.currentTarget.id)
 }
 
@@ -126,7 +136,6 @@ onGetNewImg = (e:any) => {
 }
 
   onSend = (e:any) => {
-    
     const {addBook} = this.props;
     addBook({ bookTitle: this.state.bookTitle, bookAuthor: this.state.bookAuthor, bookDescript: this.state.bookDescript, bookPrice: this.state.bookPrice, bookImg: this.state.bookImg})
     this.setState(this.state)
@@ -145,10 +154,42 @@ onGetNewImg = (e:any) => {
     })
   }
 
+ 
+  
+  onNextPage = (e:any) => {
+    this.counterPage++
+    this.counter = this.counter + 2
+    if (this.props.booksLength % 2 == 0) {
+      if(this.counterPage == Math.floor(this.props.booksLength/2)){
+        this.counter = this.counter - 2
+        this.counterPage--
+      }
+    }
+    if (this.props.booksLength % 2 == 1) {
+      if(this.counterPage == Math.floor(this.props.booksLength/2)+1){
+        this.counter = this.counter - 2
+        this.counterPage--
+      }
+    }
+    const { getBooks } = this.props;
+    getBooks({counter: this.counter, isSort: this.isSort}) 
+  }
+  
+  onPreviousPage = (e:any) => {
+    this.counterPage--
+    this.counter = this.counter - 2
+    if (this.counterPage < 0 ) {
+      this.counterPage = 0
+      this.counter = 0
+    }
+  const { getBooks } = this.props;
+    getBooks({counter: this.counter, isSort: this.isSort})
+  }
+
   onDeleteBook = (e:any) => {
     const {deleteBook} = this.props; 
-    deleteBook(e.currentTarget.id)
-    
+    deleteBook(e.currentTarget.id);
+    this.counter = 0;
   }
 
   onChangeBook = (e:any) => {
@@ -166,17 +207,28 @@ onGetNewImg = (e:any) => {
       newBookPrice: ''
     })
   }
+
+  onSort = () => {
+    this.isSort = true
+    const { getBooks } = this.props;
+    getBooks({counter: this.counter, isSort: this.isSort})
+  }
   
   btnOpen:string = '';
   
       render () {
-
+        if (this.props.booksLength % 2 == 0){
+          this.amountPage = this.props.booksLength/2
+        } else {
+          this.amountPage =  Math.floor(this.props.booksLength/2)+1
+        }
+        
         if (this.state.isOpenForm) {
           this.btnOpen = "Close"
         } else {
           this.btnOpen = 'Add new book'
         }
-
+      
         const openForm = this.state.isOpenForm &&  <div className="form-to-add">
           <TextField  id="mainInput" className="inp" name="bookTitle" placeholder="Book's title" onChange={(e:any)=>this.handle(e)} value={this.state.bookTitle}/>
           <TextField className="inp" name="bookAuthor"  placeholder="Author" onChange={(e:any)=>this.handle(e)} value={this.state.bookAuthor}/>
@@ -186,7 +238,6 @@ onGetNewImg = (e:any) => {
           <Button id="btn-send" variant="contained" color="secondary" onClick={(e:any)=>this.onSend(e)}>Send</Button></div>
          
         const itemsBooks = this.props.allBooks.map((book:any) => 
-        
         <TableRow key={book._id}> 
                 <TableCell >
                   {book.title} 
@@ -198,12 +249,10 @@ onGetNewImg = (e:any) => {
                   {book.price} $
                 </TableCell>
                 <TableCell align="right" className="delete">
-                
                   <EditIcon id={book._id} 
                     onClick={(e:any)=>this.onEditBook(e)}
                     style={{marginRight: "15px"}}
                   ></EditIcon>
-                 
                 <DeleteIcon id={book._id} key={book._id} 
                   onClick={(e:any)=>this.onDeleteBook(e)}></DeleteIcon>
                 </TableCell>
@@ -245,14 +294,16 @@ onGetNewImg = (e:any) => {
                       <TableCell>Title</TableCell>
                       <TableCell>Author</TableCell>
                       <TableCell>Price</TableCell>
-                      <TableCell></TableCell> 
+                      <TableCell></TableCell>
                     </TableRow>
                   </TableHead>
-                  <TableBody>  
+                  <TableBody>
                       {itemsBooks}
-                      
                   </TableBody>
-                </Table>
+                </Table>   
+                <div style={{padding:"15px", color:"brown", fontSize:"14px", cursor:"pointer"}}><span onClick={this.onSort}>Sort books</span></div>             
+                <div style={{padding:"5px"}}><ArrowLeftIcon onClick={(e:any)=>this.onPreviousPage(e)}/><ArrowRightIcon onClick={(e:any)=>this.onNextPage(e)}/></div>
+                <div style={{padding:"5px"}}><span style={{color:"brown"}}>Page:</span> {this.counterPage + 1} of {this.amountPage}</div>
             </Paper> 
                 {openForm}  
             <Button variant="contained" color="primary" id="btn" onClick={this.onOpenForm}>{this.btnOpen}</Button>

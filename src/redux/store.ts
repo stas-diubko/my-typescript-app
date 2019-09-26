@@ -13,6 +13,8 @@ import { deleteUser } from "./usersTable/usersTableSagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
 import { getDataBasket } from "./basket/basketSagas";
 import { getBookId } from "./aboutBook/aboutBookSagas";
+import { getBooksToMain } from "./bookList/bookListSagas";
+
 
 export default function configureStore(
     initialState?: RootState
@@ -48,8 +50,9 @@ export default function configureStore(
           getDataHome(),
           changeDataBook(),
           getDataBasket(),
-          getBookId()
+          getBookId(),
+          getBooksToMain()
         ]);
       });
     return store;
-  }
+  } 

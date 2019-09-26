@@ -4,6 +4,7 @@ import CircularProgress from '@material-ui/core/CircularProgress';
 export interface LoaderProps {
   isLoader: boolean;
 }
+
 export class Loader extends React.Component<LoaderProps, any> {
 
   state = {
@@ -12,7 +13,6 @@ export class Loader extends React.Component<LoaderProps, any> {
  
   loader:any
   render () {
-        
     if (this.props.isLoader) {
       this.loader = <div 
       style={{

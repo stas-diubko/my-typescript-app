@@ -4,9 +4,7 @@ import  jwt_decode from 'jwt-decode';
  
 export function* doLogin(): IterableIterator<any> {
     yield takeEvery('DO_LOGIN', function*(action: any) {
-        
         try {
-         
            let user = {
              username: action.data.email,
              password: action.data.pass
@@ -60,7 +58,6 @@ export function* doLogin(): IterableIterator<any> {
             }
            
             else {
-             
               yield call(delay, 1000)
               yield put({
                 type: `LOADER_HIDE`

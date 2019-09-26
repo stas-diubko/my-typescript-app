@@ -29,9 +29,7 @@ export function* getBookId(): IterableIterator<any> {
                 },
                  
             }
-              )
-            .then(res => res.json())
-  
+              ).then(res => res.json())
         } )
                
         if(dataBook.success){
@@ -43,12 +41,10 @@ export function* getBookId(): IterableIterator<any> {
             type: "GOT_ID_BOOK",
             payload: {
               book: dataBook.data
-              
             }
           })
 
         }  else {
-             
           yield call(delay, 1000)
           yield put({
             type: `LOADER_HIDE`
@@ -63,7 +59,12 @@ export function* getBookId(): IterableIterator<any> {
         } 
         
         catch (error) {
-  
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: error
+            }
+          })
         }
     })
   } 

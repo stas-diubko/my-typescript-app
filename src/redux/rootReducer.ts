@@ -21,6 +21,8 @@ import { AboutBookState } from "./aboutBook/types";
 import { aboutBookReducer } from "./aboutBook/reducer";
 import { LoaderCircularState } from "./loaderCircular/types";
 import { loaderCircularReducer } from "./loaderCircular/reducer";
+import { BooksTableMainState } from "./bookList/types";
+import { booksListReducer } from "./bookList/reducer";
 
 export interface RootState {
     register: RegisterState;
@@ -36,6 +38,7 @@ export interface RootState {
     booksTable: BooksTableState;
     basket: BasketState;
     aboutBook: AboutBookState;
+    bookList: BooksTableMainState;
   }
 
   const rootReducer: Reducer<RootState> = combineReducers<RootState>({
@@ -52,6 +55,7 @@ export interface RootState {
     booksTable: booksTableReducer,
     basket: basketReducer,
     aboutBook: aboutBookReducer,
+    bookList: booksListReducer
   });
 
 export default rootReducer;

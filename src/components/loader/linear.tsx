@@ -2,12 +2,12 @@ import React from 'react';
 import { makeStyles } from '@material-ui/core/styles';
 import LinearProgress from '@material-ui/core/LinearProgress';
 
-
 const useStyles = makeStyles({
     root: {
       flexGrow: 1,
     },
-  });
+});
+
 export default function LinearDeterminate() {
     const classes = useStyles();
     const [completed, setCompleted] = React.useState(0);
@@ -28,8 +28,7 @@ export default function LinearDeterminate() {
         clearInterval(timer);
       };
     }, []);
-  
-   
+     
     return (
       <div className={classes.root}>
         <LinearProgress color="secondary" variant="determinate" value={completed} />

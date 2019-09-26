@@ -12,7 +12,12 @@ export function* onLoaderOccured(): IterableIterator<any> {
 
       } 
       catch (error) {
-        
+        yield put ({
+          type: 'ERROR_OCCURED',
+          payload: {
+            error: error
+          }
+        })
       }
     });
   }

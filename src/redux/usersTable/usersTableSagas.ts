@@ -2,7 +2,6 @@ import { put, takeEvery, call } from "redux-saga/effects";
 
 export function* deleteUser(): IterableIterator<any> {
     yield takeEvery('DELETE_USER', function*(action: any) {
-        
         try {
           let id = action.data;
           const API_URL = 'http://localhost:4200/users/'                                            
@@ -17,7 +16,6 @@ export function* deleteUser(): IterableIterator<any> {
                     'Authorization' : `Bearer ${dataUserToken}`
                 },
                 }).then(res => res.json())
-
             } )
 
             yield put ({
@@ -25,12 +23,16 @@ export function* deleteUser(): IterableIterator<any> {
               payload: {
                                 
               }
-            })
-                      
+            })        
         } 
         
         catch (error) {
-
+          yield put ({
+            type: 'ERROR_OCCURED',
+            payload: {
+              error: error
+            }
+          })
         }
     })
 }

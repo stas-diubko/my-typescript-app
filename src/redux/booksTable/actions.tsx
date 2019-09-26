@@ -4,8 +4,8 @@ export function addBook(data:any) {
     return { type: BooksTableActions.ADD_BOOK, data};
 }
 
-export function getBooks() {
-    return { type: BooksTableActions.GET_ALL_BOOKS};
+export function getBooks(data:any) {
+    return { type: BooksTableActions.GET_ALL_BOOKS, data};
 }
 
 export function deleteBook(data:any) {
@@ -18,5 +18,9 @@ export function changeDataBook(data:any) {
 
 export function getCurrentBookBook(data:any) {
     return { type: BooksTableActions.GET_CURRENT_BOOK, data};
+}
+
+export function toSortBooks() {
+    return { type: BooksTableActions.SORT_BOOK};
 }
 

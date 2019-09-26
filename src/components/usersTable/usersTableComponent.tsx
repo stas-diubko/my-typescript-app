@@ -8,9 +8,9 @@ import Paper from "@material-ui/core/Paper";
 import DeleteIcon from "@material-ui/icons/Delete";
 import '../admin/adminComponent.css';
 import { UsersTableState } from "../../redux/usersTable/types";
-import LoaderCircular from '../../containers/loaderCircularContainer'
-import ArrowDropUpIcon from '@material-ui/icons/ArrowDropUp';
-import ArrowDropDownIcon from '@material-ui/icons/ArrowDropDown';
+import LoaderCircular from '../../containers/loaderCircularContainer';
+import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
+import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 export interface TableUsersProps {
   deleteUser: (data:any) => any;
@@ -25,14 +25,13 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
       usersLength: '',
   }
 
-  onDeleteUser = (e:any) => {
-    const {deleteUser} = this.props;    
-    deleteUser(e.currentTarget.id)
-  }
+  
 
   // paging
 
   counter:any = 0;
+  amountPage:any = 0;
+  
   onNextPage = (e:any) => {
     this.counter++
     if (this.props.usersLength % 2 == 0) {
@@ -57,12 +56,26 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
     const { getUsers } = this.props;
     getUsers(this.counter); 
   }
-  
+
+  onDeleteUser = (e:any) => {
+    const {deleteUser} = this.props;    
+    deleteUser(e.currentTarget.id);
+    this.counter = 0;
+  }
+
       render () {
           let users = this.props.users;
+
           if(this.props.users == undefined) {
             users = []
           }
+
+          if (this.props.usersLength % 2 == 0){
+            this.amountPage = this.props.usersLength/2
+          } else {
+            this.amountPage =  Math.floor(this.props.usersLength/2)+1
+          }
+
           const items = users.map((user:any) => <TableRow className="user-row" key={user.id}>
             <TableCell >
               {user.name} 
@@ -93,7 +106,8 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
                     {items}
                   </TableBody>
                 </Table>     
-                  <div style={{padding:"5px"}}><ArrowDropDownIcon onClick={(e:any)=>this.onNextPage(e)}/><ArrowDropUpIcon onClick={(e:any)=>this.onPreviousPage(e)}/></div>  
+                  <div style={{padding:"5px"}}><ArrowLeftIcon onClick={(e:any)=>this.onPreviousPage(e)}/><ArrowRightIcon onClick={(e:any)=>this.onNextPage(e)}/></div>
+                  <div style={{padding:"5px"}}><span style={{color:"brown"}}>Page:</span> {this.counter + 1} of {this.amountPage}</div>
             </Paper> 
           </div>
         );

@@ -1,9 +1,7 @@
 import { put, takeEvery } from "redux-saga/effects";
 
 export function* getDataBasket(): IterableIterator<any> {
-    
     yield takeEvery('ADD_TO_BASKET', function*(action: any) {
-        
         try {
             let dataBasketStr:any = localStorage.getItem('basket')
             if (dataBasketStr == null) {
@@ -11,7 +9,6 @@ export function* getDataBasket(): IterableIterator<any> {
                     type: 'ERROR_OCCURED',
                     payload: {
                       error: 'to buy a book you need to log in'
-                      
                     }
                   })
             }
@@ -43,7 +40,6 @@ export function* getDataBasket(): IterableIterator<any> {
                 type: "GOT_DATA_BASKET",
                 payload: {
                     dataBasket: [dataStore]
-                   
                 }
               })
 
@@ -51,13 +47,17 @@ export function* getDataBasket(): IterableIterator<any> {
                 type: "GET_DATA_HOME",
                 payload: {
                     dataBasket: [dataStore]
-                   
                 }
               })
         } 
 
         catch (error) {
-  
+            yield put ({
+                type: 'ERROR_OCCURED',
+                payload: {
+                  error: error
+                }
+              })
         }
     })
     
