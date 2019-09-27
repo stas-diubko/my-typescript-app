@@ -20,7 +20,5 @@ export function getCurrentBookBook(data:any) {
     return { type: BooksTableActions.GET_CURRENT_BOOK, data};
 }
 
-export function toSortBooks() {
-    return { type: BooksTableActions.SORT_BOOK};
-}
+
 

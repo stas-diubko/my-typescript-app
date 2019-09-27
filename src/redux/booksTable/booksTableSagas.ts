@@ -36,7 +36,7 @@ export function* addBook(): IterableIterator<any> {
             yield put ({
               type: "GET_ALL_BOOKS",
               payload: {
-                              
+                   counter: 0           
               }
             })
           }
@@ -74,7 +74,7 @@ export function* deleteBook(): IterableIterator<any> {
           yield put ({
             type: "GET_ALL_BOOKS",
             payload: {
-                            
+              counter: 0        
             }
           })         
       } 
@@ -100,18 +100,18 @@ export function* getBooks(): IterableIterator<any> {
           
         }
       });
-      try {
-             console.log(action.data);
-                
+      try {           
         let page:any = 0;
-        let pageSize:any = 2 
-        page = action.data.counter
-
-        if (action.data.counter === undefined) {
-          page = 0
+        let pageSize:any = 2;
+        let isSort:boolean;
+        if(action.data){
+          page = action.data.counter;
+          isSort = action.data.isSort;
+        } else {
+          page = 0;
+          isSort = false;
         }
-
-
+        
         let dataBooks = yield call (() => {
           return fetch('http://localhost:4200/books', {
             method: 'PUT', 
@@ -119,10 +119,10 @@ export function* getBooks(): IterableIterator<any> {
                 'Content-Type': 'application/json',
                 'Authorization' : `Bearer ${dataUserToken}`
             },
-            body: JSON.stringify( { page: page, pageSize: pageSize, isSort: action.data.isSort} )
+            body: JSON.stringify( { page: page, pageSize: pageSize, isSort: isSort} )
           }).then(res => res.json())
       } )
-          
+                 
       if(dataBooks.success){
         yield put ({
           type: "LOADER_CIRCULAR_HIDE",
@@ -164,71 +164,7 @@ export function* getBooks(): IterableIterator<any> {
         })
       }
   })
-
-  yield takeEvery('SORT_BOOK', function*(action: any) {
-      try {
-        yield put({
-          type: 'LOADER_CIRCULAR_SHOW',
-          payload: {
-            
-          }
-        });
-
-        let dataBooks = yield call (() => {
-          return fetch('http://localhost:4200/books/sort', {
-            method: 'GET', 
-            headers: {
-                'Content-Type': 'application/json',
-                // 'Authorization' : `Bearer ${dataUserToken}`
-            }
-          }).then(res => res.json())
-      } )
-        console.log(dataBooks);
-        if(dataBooks.success){
-          yield put ({
-            type: 'REMOVE_BOOK',
-          })
-
-          yield put ({
-            type: "LOADER_CIRCULAR_HIDE",
-            payload: {
-                           
-            }
-          })
-          yield put ({
-            type: "GOT_BOOKS",
-            payload: {
-              books: dataBooks.data
-            }
-          })
-        }
-        else {
-          yield put ({
-            type: "LOADER_CIRCULAR_HIDE",
-            payload: {
-                           
-            }
-          })
-               
-          yield put ({
-            type: 'ERROR_OCCURED',
-            payload: {
-              error: dataBooks.message 
-            }
-          })
-        } 
-        
-      } catch (error) {
-        yield put ({
-          type: 'ERROR_OCCURED',
-          payload: {
-            error: error
-          }
-        })
-      }
-  })
-
-
+ 
 }
 
 

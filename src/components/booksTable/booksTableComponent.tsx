@@ -24,7 +24,6 @@ export interface BooksProps {
   changeDataBook: (data:any) => Object;
   getCurrentBookBook: (data:any) => any;
   onErrorOccured: (data:any) => any;
-  toSortBooks: () => any;
   bookToAdd: Object;
   allBooks: any; 
   isOpenForm: boolean;
@@ -72,7 +71,7 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
 
   componentDidMount () {
     const { getBooks } = this.props;
-    getBooks(this.counter) 
+    getBooks({counter: this.counter, isSort: this.isSort}) 
        
   }
   
@@ -146,6 +145,7 @@ onGetNewImg = (e:any) => {
       bookPrice: '',
       bookImg: '',
     })
+    this.counterPage = 0;
   }
 
   onOpenForm = () => {
@@ -190,6 +190,7 @@ onGetNewImg = (e:any) => {
     const {deleteBook} = this.props; 
     deleteBook(e.currentTarget.id);
     this.counter = 0;
+    this.counterPage = 0;
   }
 
   onChangeBook = (e:any) => {
@@ -209,7 +210,7 @@ onGetNewImg = (e:any) => {
   }
 
   onSort = () => {
-    this.isSort = true
+    this.isSort = !this.isSort
     const { getBooks } = this.props;
     getBooks({counter: this.counter, isSort: this.isSort})
   }
