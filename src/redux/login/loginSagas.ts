@@ -27,13 +27,14 @@ export function* doLogin(): IterableIterator<any> {
                     isLoader: true
                   }
             });
-
+            
+            
             if(req.success){
               yield call(delay, 1000)
               yield put({
                 type: `LOADER_HIDE`
               });
-              let decoded:any = jwt_decode(req.data);    
+              let decoded:any = jwt_decode(req.data);
                
               let isLoadi = JSON.stringify(true)
               localStorage.setItem('load', isLoadi)
@@ -65,7 +66,7 @@ export function* doLogin(): IterableIterator<any> {
               yield put ({
                 type: 'ERROR_OCCURED',
                 payload: {
-                  error: req.message
+                  error: req.logErrorEmail
                 }
               })
             } 
@@ -75,7 +76,7 @@ export function* doLogin(): IterableIterator<any> {
           yield put ({
             type: 'ERROR_OCCURED',
             payload: {
-              error: error
+              error: 'Incorect login data!'
             }
           })
         }

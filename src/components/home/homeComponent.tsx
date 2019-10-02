@@ -9,18 +9,19 @@ import Fade from '@material-ui/core/Fade';
 
 export interface HomeProps {
   getDataHome: () => Object;
-  doUserModalChange: (data: any) => object;
-  onErrorOccured: (data:any) => any;
-  doLogout: any,
-  email: any;
-  name: any;
+  doUserModalChange: (data: object) => object;
+  onErrorOccured: (data:string) => object;
+  doLogout: () => Object;
+  email: string;
+  name: string;
   logOut: boolean;
   isModal: boolean;   
-  img: any; 
+  img: string; 
   isAdmin: boolean;
   countBasket: string;
-  pass: any;
+  pass: string; 
 }
+
 export class HomeComponent extends React.Component<HomeProps, HomeState> {
   state: HomeState = {
     email: '',

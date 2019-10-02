@@ -1,7 +1,7 @@
 import { AboutBookState } from "./types"
 
 export const initialState: AboutBookState = {
-    book: '',
+    book: [],
     id: '',
     isShow: false
 };

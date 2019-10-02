@@ -5,18 +5,19 @@ import Button from '@material-ui/core/Button';
 import './bookListComponent.css';
 import {Link} from "react-router-dom";
 import LoaderCircular from '../../containers/loaderCircularContainer';
+import { BooksTableMainState } from '../../redux/bookList/types';
 
-export interface  BooksListProps {
+export interface BooksListProps {
     getBooksToMain: () => Object;
-    addToBasket: (data:any) => any;
-    books: any,
+    addToBasket: (data:object) => object;
+    books: object[],
     message: string;
 }
 
-export class BooksListComponent extends React.Component<BooksListProps, any> {
+export class BooksListComponent extends React.Component<BooksListProps, BooksTableMainState> {
 
-    state = {
-        books: '',
+    state: BooksTableMainState = {
+        books: [],
         message: ''
     }
 
@@ -25,28 +26,29 @@ export class BooksListComponent extends React.Component<BooksListProps, any> {
         getBooksToMain(); 
     }
 
-      onAddToBasket = (e:any) => {
-        const books:any = this.props.books
-        const currentBook = books.filter((x:any) => x._id == e.currentTarget.id);
-        
-        const { addToBasket } = this.props;
-        addToBasket({bookTitle: currentBook[0].title,
-            bookAuthor: currentBook[0].author,
-            bookDescript: currentBook[0].description,
-            bookImg: currentBook[0].bookImage,
-            bookPrice: currentBook[0].price,
-            bookCount: 1,
-            totalPrice: '',
-            id: e.currentTarget.id
-        })
-      }
+    onAddToBasket = (e:any) => {
+    const books:any = this.props.books
+    const currentBook = books.filter((x:any) => x._id == e.currentTarget.id);
+    const { addToBasket } = this.props;
+    
+    addToBasket({bookTitle: currentBook[0].title,
+        bookAuthor: currentBook[0].author,
+        bookDescript: currentBook[0].description,
+        bookImg: currentBook[0].bookImage,
+        bookPrice: currentBook[0].price,
+        bookCount: 1,
+        totalPrice: '',
+        id: e.currentTarget.id
+    })
+    }
      
     render () {
         let books = this.props.books;
-
+        
         if(this.props.books == undefined) {
             books = []
         }
+                
         const booksList = books.map((book:any) => <Grid xs={12} sm={6} lg={3} item  key={book._id} >
                 <Paper style={{margin: '5px'}}><div className="book-item-wrap" > 
                         <img src={book.bookImage} alt={book.bookAuthor}/>

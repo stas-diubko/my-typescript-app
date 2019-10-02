@@ -18,28 +18,27 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 export interface BooksProps {
-  addBook: (data:any) => Object;
-  getBooks: (data:any) => Object;
-  deleteBook: (data:any) => any;
-  changeDataBook: (data:any) => Object;
-  getCurrentBookBook: (data:any) => any;
-  onErrorOccured: (data:any) => any;
+  addBook: (data:object) => object;
+  getBooks: (data:object) => object;
+  deleteBook: (data:string) => object;
+  changeDataBook: (data:object) => object; 
+  onErrorOccured: (data:string) => object;
   bookToAdd: Object;
-  allBooks: any; 
+  allBooks: Array<any>;
   isOpenForm: boolean;
   bookTitle: string;
   bookAuthor: string;
   bookDescript: string;
   bookPrice: string;
-  bookImg: any;
+  bookImg: string;
   newBookTitle: string;
   newBookAuthor: string;
   newBookDescript: string;
   newBookPrice: string;
-  newBookImg: any;
+  newBookImg: string;
   isOpenmodal:boolean;
   message: string;
-  booksLength:any;
+  booksLength: number;
 }
 
 export class TableBooksComponent extends React.Component<BooksProps, BooksTableState> {
@@ -61,12 +60,12 @@ export class TableBooksComponent extends React.Component<BooksProps, BooksTableS
       isOpenmodal: false,
       bookId: '',
       message: '',
-      booksLength: ''
+      booksLength: 0
   }
 
-  counter:any = 0;
-  counterPage:any = 0;
-  amountPage:any = 0;
+  counter:number = 0;
+  counterPage:number = 0;
+  amountPage:number = 0;
   isSort:boolean = false;
 
   componentDidMount () {
@@ -107,16 +106,16 @@ onEditBook = (e:any) => {
     }
   }
     
-let qqq = () => {
-    this.setState({
-      isOpenmodal: !this.state.isOpenmodal
-  })
-  }
-  setTimeout(function(){
-    qqq()
-    
-  }, 200)
-  localStorage.setItem('bookId', e.currentTarget.id)
+  let qqq = () => {
+      this.setState({
+        isOpenmodal: !this.state.isOpenmodal
+    })
+    }
+    setTimeout(function(){
+      qqq()
+      
+    }, 200)
+    localStorage.setItem('bookId', e.currentTarget.id)
 }
 
 onGetNewImg = (e:any) => {
@@ -193,7 +192,7 @@ onGetNewImg = (e:any) => {
     this.counterPage = 0;
   }
 
-  onChangeBook = (e:any) => {
+  onChangeBook = () => {
     const {changeDataBook} = this.props
     changeDataBook({newBookTitle: this.state.newBookTitle,
     newBookAuthor: this.state.newBookAuthor,

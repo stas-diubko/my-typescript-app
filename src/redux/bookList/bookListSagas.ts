@@ -10,12 +10,10 @@ export function* getBooksToMain(): IterableIterator<any> {
               method: 'GET', 
               headers: {
                   'Content-Type': 'application/json',
-                //   'Authorization' : `Bearer ${dataUserToken}`
               }
             }).then(res => res.json())
         } )
-            // console.log(dataBooks);
-            
+           
         if(dataBooks.success){
           yield put ({
             type: "LOADER_CIRCULAR_HIDE",

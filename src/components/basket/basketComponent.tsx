@@ -8,13 +8,13 @@ import './basketComponent.css';
 import { Redirect } from 'react-router';
 
 export interface  BasketProps {
-    getDataBasket: () => any;
-    increaseCount: (data:any) => any;
-    decreaseCount: (data:any) => any;
-    removeFromCart: (data:any) => any;
-    basket: any;
+    getDataBasket: () => object;
+    increaseCount: (data:string) => object;
+    decreaseCount: (data:string) => object;
+    removeFromCart: (data:string) => object;
+    basket: Array<any>; 
     countItem: string;
-    dataStore: any;
+    dataStore: object[];
 }
 
 export class BasketComponent extends React.Component<BasketProps, BasketState> {
@@ -39,13 +39,14 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
 
     render () {
         let dataBasketStr:any = localStorage.getItem('basket')
+        
         if (dataBasketStr == null) {
             return <Redirect to="/home"/>
         }
+
         let toIncrease = (e:any) => {
             let {increaseCount} = this.props;
             increaseCount(e.currentTarget.id)
-
             const { getDataBasket } = this.props;
             getDataBasket()
         }
@@ -53,19 +54,18 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         let toDecrease = (e:any) => {
             let {decreaseCount} = this.props;
             decreaseCount(e.currentTarget.id)
-
             const { getDataBasket } = this.props;
             getDataBasket()
         }
 
         let arrBasket = this.props.basket
-        
+                
         if(arrBasket == null) {
             arrBasket = []
-        }
+        } 
 
         let cartSumm:number = 0;
-
+        
         for (let i = 0; i < this.props.basket.length; i++){
             cartSumm = +cartSumm + +this.props.basket[i].totalPrice
         }

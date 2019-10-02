@@ -30,4 +30,4 @@ export function booksListReducer(state: BooksTableMainState = initialState, acti
     }
 }
 
-// export const booksTable = (state: RootState) => state.booksTable;
+export const booksTable = (state: RootState) => state.booksTable;

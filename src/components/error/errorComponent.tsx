@@ -2,7 +2,7 @@ import React from "react";
 import './errorComponent.css';
 
 export interface ErrorProps {
-  error?: any;
+  error?: string;
 }
 
 export class ErrorComponent extends React.Component<ErrorProps> {

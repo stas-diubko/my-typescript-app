@@ -3,7 +3,7 @@ import { RootState } from "../rootReducer";
 
 export const initialState: UsersTableState = {
     users: '',
-    usersLength: ''
+    usersLength: 0
 };
 
 export function usersTableReducer(state: UsersTableState = initialState, action: any) {

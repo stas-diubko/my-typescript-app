@@ -5,7 +5,7 @@ export enum AboutBookActions {
 }
 
 export interface AboutBookState {
-    book: any;
-    id: any;
+    book: object[];
+    id: string;
     isShow: boolean;
 }

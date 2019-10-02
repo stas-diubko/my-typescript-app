@@ -2,10 +2,10 @@ import { AdminState } from "./types";
 import { RootState } from "../rootReducer";
 
 export const initialStateLog: AdminState = {
-    books: "",
+    books: [],
     users: [],
     isAdmin: false,
-    usersLength: ''
+    usersLength: 0
 };
 
 export function adminReducer(state: AdminState = initialStateLog, action: any) {

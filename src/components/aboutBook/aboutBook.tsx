@@ -2,17 +2,17 @@ import React from "react";
 import { AboutBookState } from "../../redux/aboutBook/types";
 import { Link } from 'react-router-dom';
 
-export interface  AboutBookProps {
-    book: any;
-    id: any;
+export interface AboutBookProps {
+    book: object;
+    id: string;
     isShow: boolean;
-    getIdBook: (data:any) => any;
+    getIdBook: (data:string) => string;
 }
 
-export class AboutBookComponent extends React.Component <any, any> {
+export class AboutBookComponent extends React.Component <any, AboutBookState> {
 
     state: AboutBookState = {
-        book: '',
+        book: [],
         id: "",
         isShow: false 
     }
@@ -24,18 +24,15 @@ export class AboutBookComponent extends React.Component <any, any> {
 
     render () {
         const isShow = this.props.isShow && <div>
-        
         <div style={{display:"flex", flexDirection:"column", justifyContent: "center", alignItems:"center",  paddingTop:"35px"}}>
             <div style={{textAlign:"center", fontSize:"24px"}}><b>Book Title: <span style={{color:"brown"}}>{this.props.book.title}</span></b></div>
             <h3 style={{textAlign:"center", fontSize:"24px"}}>Author: <span style={{color:"brown"}}>{this.props.book.author}</span></h3>
-            
             <div style={{textAlign:"center", fontSize:"24px"}}><img src={this.props.book.bookImage} alt={this.props.book.title}/></div>
             <div style={{textAlign:"center", width:"600px"}}>
                 <h4>Description</h4>
                 <p>{this.props.book.description}</p>
                 <h4>Price: <span style={{color:"brown"}}>{this.props.book.price}</span></h4>
-            </div>
-            
+            </div>  
         </div>
     </div>
      
@@ -48,7 +45,6 @@ export class AboutBookComponent extends React.Component <any, any> {
                     <h2>Book Shop</h2>
                     <div></div>
                 </div>
-                
                 {isShow}
             </div>
         )

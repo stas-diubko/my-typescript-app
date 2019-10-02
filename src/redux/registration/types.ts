@@ -12,8 +12,8 @@ export interface RegisterState {
     emailError: string;
     users: {};
     error: string;
-    email: any;
-    pass: any;
+    email: string;
+    pass: string;
     isRegister:boolean;
     isLoader: boolean,
     isAdmin: boolean
@@ -23,7 +23,7 @@ export interface RegisterState {
     name: string;
     email: string;
     pass: string;
-    imgChange:any;
+    imgChange:string;
   }
 
 export interface DoRegister {

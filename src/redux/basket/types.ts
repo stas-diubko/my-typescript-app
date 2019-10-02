@@ -8,7 +8,6 @@ export enum BasketActions {
 }
 
 export interface BasketState {
-    basket: any;
-    dataStore: any
-   
+    basket: Array<any>;
+    dataStore: object[];
 }

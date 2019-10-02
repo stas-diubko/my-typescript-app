@@ -5,14 +5,14 @@ import {Redirect, Link} from 'react-router-dom';
 export interface LoginProps {
   doLogin: (data: LoginRequest) => object;
   email: string;
-  pass: any;
+  pass: string;
   isLoading: boolean;
-  passError: any;
-  emailError: any; 
-  emailFromRegister: any;
-  passFromRegister: any;
-  users: any;
-  books: any;
+  passError: string;
+  emailError: string; 
+  emailFromRegister: string;
+  passFromRegister: string;
+  users: object;
+  books: object;
 }
 
 export class LoginComponent extends React.Component<LoginProps, LoginState> {
@@ -23,7 +23,7 @@ export class LoginComponent extends React.Component<LoginProps, LoginState> {
         isLoading: false,
         passError: '',
         emailError: '',    
-        books: '',
+        books: [],
         users: []  
     }
 

@@ -4,6 +4,6 @@ export enum BooksTableMainActions {
 }
 
 export interface BooksTableMainState {
-    books:any;
+    books: object[];
     message: string; 
 }

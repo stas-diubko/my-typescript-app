@@ -13,24 +13,20 @@ import ArrowLeftIcon from '@material-ui/icons/ArrowLeft';
 import ArrowRightIcon from '@material-ui/icons/ArrowRight';
 
 export interface TableUsersProps {
-  deleteUser: (data:any) => any;
-  getUsers: (data:any) => object;
-  usersLength: any;
-  users: any;
+  deleteUser: (data:string) => object;
+  getUsers: (data:number) => object;
+  usersLength: number;
+  users: object[];
 }
 
 export class TableUsersComponent extends React.Component<TableUsersProps, UsersTableState> {
     state: UsersTableState = {
-      users: '',
-      usersLength: '',
+      users: [],
+      usersLength: 0,
   }
 
-  
-
-  // paging
-
-  counter:any = 0;
-  amountPage:any = 0;
+  counter:number = 0;
+  amountPage:number = 0;
   
   onNextPage = (e:any) => {
     this.counter++
@@ -64,6 +60,7 @@ export class TableUsersComponent extends React.Component<TableUsersProps, UsersT
   }
 
       render () {
+        
           let users = this.props.users;
 
           if(this.props.users == undefined) {

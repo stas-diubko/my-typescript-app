@@ -15,10 +15,10 @@ export enum LoginActions {
     pass: string;
     isLoading: boolean;
     error: string;
-    passError: any;
-    emailError: any;
-    books: any;
-    users: any;
+    passError: string;
+    emailError: string;
+    books: object;
+    users: object[];
   }
   
   export interface LoginResult {

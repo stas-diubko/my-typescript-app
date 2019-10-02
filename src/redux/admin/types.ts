@@ -4,8 +4,8 @@ export enum AdminActions {
 }
 
 export interface AdminState {
-    books: any;
-    users: any;
+    books: object;
+    users: object[];
     isAdmin: boolean;
-    usersLength: any;
-  }
+    usersLength: number;
+}

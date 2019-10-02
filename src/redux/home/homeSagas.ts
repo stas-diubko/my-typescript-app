@@ -79,6 +79,7 @@ export function* doLogout(): IterableIterator<any> {
       catch (error) {
         
         // let err = JSON.stringify(error)
+        // console.error(err)
         // yield put ({
         //   type: 'ERROR_OCCURED',
         //   payload: {

@@ -8,7 +8,7 @@ export const initialStateLog: LoginState = {
     isLoading: false,
     passError: '',
     emailError: '',
-    books: "",
+    books: [],
     users: []
 };
 

@@ -4,6 +4,7 @@ import { delay } from "q";
 export function* doInit({}): IterableIterator<any> {
     yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
      let {name, email, pass, isAdmin, imgChange} =  action.data;
+     let password = pass
      try {
           yield put({
             type: 'DO_LOADER',
@@ -18,7 +19,7 @@ export function* doInit({}): IterableIterator<any> {
                 headers: {
                     'Content-Type': 'application/json',
                   },
-                body: JSON.stringify({name, email, pass, imgChange}),
+                body: JSON.stringify({name, email, password, imgChange}),
               }).then((response : any) => response.json())       
               })
              

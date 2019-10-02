@@ -6,18 +6,18 @@ import { Link } from 'react-router-dom';
 import  jwt_decode from 'jwt-decode';
 
 export interface AdminProps {
-  getUsers: (data:any) => object;
-  books: any;
-  users: any;
+  getUsers: (data:number) => object;
+  books: object;
+  users: object; 
   isAdmin: boolean;
 }
 
 export class AdminComponent extends React.Component<AdminProps, AdminState>  {
     state: AdminState = {
-      books: '',
+      books: [],
       users: [],
       isAdmin: false,
-      usersLength: ''
+      usersLength: 0
   }
 
   isAdminStr:any = localStorage.getItem('isAdmin');
@@ -50,7 +50,11 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
             <Link style={{margin: "22px 0 0 20px "}} to="/home">To Home Page</Link>
           </div>
         </div>
-        <SimpleTabs/>
+        <h3 style={{marginLeft: "20px", color: "brown", fontSize: "24px"}}>Shop Data</h3>
+        <div style={{margin: "0 20px"}}>
+           <SimpleTabs/>
+        </div>
+       
       </div>
     )
   }

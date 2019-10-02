@@ -18,7 +18,7 @@ export const initialState: BooksTableState = {
     newBookImg: '',
     bookId: '',
     message: '',
-    booksLength: ''
+    booksLength: 0
 };
 
 export function booksTableReducer(state: BooksTableState = initialState, action: any) {

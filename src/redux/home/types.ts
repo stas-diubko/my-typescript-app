@@ -10,16 +10,16 @@ export enum LogoutActions {
 }
 
 export interface HomeState {
-  email: any;
-  name: any;
+  email: string;
+  name: string;
   logOut: boolean; 
   isModal: boolean;
-  img: any;
+  img: string;
   isAdmin: boolean; 
   countBasket: string;
-  pass: any;
+  pass: string;
   isChangeData: boolean,
-  imgChange: any;
+  imgChange: string;
   isModalMore: boolean; 
 }
 
