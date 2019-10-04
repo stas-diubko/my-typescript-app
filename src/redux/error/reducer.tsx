@@ -1,4 +1,4 @@
-import { RootState } from "../rootReducer";
+import { RootState } from "../root.reducer";
 import { ErrortState } from "./types";
 
 export const initialState:ErrortState = {

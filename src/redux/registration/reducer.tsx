@@ -1,5 +1,5 @@
 import { RegisterState } from "./types";
-import { RootState } from "../rootReducer";
+import { RootState } from "../root.reducer";
 
 export const initialState: RegisterState = {   
     users: {},

@@ -1,18 +1,18 @@
 import React from 'react';
 import './App.css';
-import Register from './containers/registerContainer';
+import Register from './containers/register.container';
 import {Route, BrowserRouter as Router} from "react-router-dom";
 import { Provider } from 'react-redux';
-import {RootState} from './redux/rootReducer'
+import {RootState} from './redux/root.reducer'
 import { Store } from "redux";
 import configureStore from "./redux/store";
-import Login from './containers/loginContainer';
-import homeContainer from './containers/homeContainer';
-import Loader from './containers/loaderContainer';
-import ErrorComponent from './containers/errorContainer';
-import AdminComponent from './containers/adminContainer';
-import BasketComponent from './containers/basketContainer';
-import AboutBookComponent from './containers/aboutBookContainer'
+import Login from './containers/login.container';
+import homeContainer from './containers/home.container';
+import Loader from './containers/loader.container';
+import ErrorComponent from './containers/error.container';
+import AdminComponent from './containers/admin.container';
+import BasketComponent from './containers/basket.container';
+import AboutBookComponent from './containers/about-book.container'
 const store: Store<RootState> = configureStore();
 
 export class App extends React.Component {

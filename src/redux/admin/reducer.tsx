@@ -1,5 +1,5 @@
 import { AdminState } from "./types";
-import { RootState } from "../rootReducer";
+import { RootState } from "../root.reducer";
 
 export const initialStateLog: AdminState = {
     books: [],

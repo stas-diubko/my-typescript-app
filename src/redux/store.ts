@@ -1,19 +1,19 @@
 import { Store, createStore, applyMiddleware  } from "redux";
 import { composeWithDevTools } from "redux-devtools-extension";
-import rootReducer, { RootState } from "./rootReducer";
-import {doInit} from "./registration/registrationSagas";
+import rootReducer, { RootState } from "./root.reducer";
+import {doInit} from "./registration/registration.sagas";
 import createSagaMiddleware from "redux-saga";
 import { all } from "redux-saga/effects";
-import { doLogin } from "./login/loginSagas";
-import { onErrorOccured } from "./error/errorSagas";
-import { onLoaderOccured } from "./loader/loaderSagas";
-import { doLogout, getDataHome } from "./home/homeSagas";
-import { getUsers} from "./admin/adminSagas";
-import { deleteUser } from "./usersTable/usersTableSagas";
-import { addBook, getBooks, deleteBook, changeDataBook } from "./booksTable/booksTableSagas";
-import { getDataBasket } from "./basket/basketSagas";
-import { getBookId } from "./aboutBook/aboutBookSagas";
-import { getBooksToMain } from "./bookList/bookListSagas";
+import { doLogin } from "./login/login.sagas";
+import { onErrorOccured } from "./error/error.sagas";
+import { onLoaderOccured } from "./loader/loader.sagas";
+import { doLogout, getDataHome } from "./home/home.sagas";
+import { getUsers} from "./admin/admin.sagas";
+import { deleteUser } from "./users_table/users_table.sagas";
+import { addBook, getBooks, deleteBook, changeDataBook } from "./books_table/books-table.sagas";
+import { getDataBasket } from "./basket/basket.sagas";
+import { getBookId } from "./about_book/about-book.sagas";
+import { getBooksToMain } from "./book_list/book-list.sagas";
 
 
 export default function configureStore(
@@ -30,8 +30,8 @@ export default function configureStore(
     const store = createStore(rootReducer, initialState!, enhancer);
     
     if (module.hot) {
-      module.hot.accept("./rootReducer", () => {
-          const nextRootReducer = require("./rootReducer").default;
+      module.hot.accept("./root.reducer", () => {
+          const nextRootReducer = require("./root.reducer").default;
           store.replaceReducer(nextRootReducer);
         });
       }
