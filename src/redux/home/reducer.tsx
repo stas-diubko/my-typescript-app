@@ -18,11 +18,15 @@ export const initialState: HomeState = {
 export function homeReducer(state: HomeState = initialState, action: any) {
     switch (action.type) {
         case 'GOT_DATA_HOME': {
+            let isAdmin = false;
+            if(action.payload.dataUser.role === "admin"){
+                isAdmin = true
+            }
             return {
                 ...state,
                 email: action.payload.dataUser.email,
                 name: action.payload.dataUser.name,
-                isAdmin: action.payload.dataUser.isAdmin,
+                isAdmin: isAdmin,
                 countBasket: action.payload.countBasket,
                 logOut: false,
             }

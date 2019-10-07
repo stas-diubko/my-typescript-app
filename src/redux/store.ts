@@ -9,7 +9,7 @@ import { onErrorOccured } from "./error/error.sagas";
 import { onLoaderOccured } from "./loader/loader.sagas";
 import { doLogout, getDataHome } from "./home/home.sagas";
 import { getUsers} from "./admin/admin.sagas";
-import { deleteUser } from "./users_table/users_table.sagas";
+import { deleteUser } from "./users_table/users-table.sagas";
 import { addBook, getBooks, deleteBook, changeDataBook } from "./books_table/books-table.sagas";
 import { getDataBasket } from "./basket/basket.sagas";
 import { getBookId } from "./about_book/about-book.sagas";

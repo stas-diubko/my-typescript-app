@@ -12,7 +12,8 @@ import Loader from './containers/loader.container';
 import ErrorComponent from './containers/error.container';
 import AdminComponent from './containers/admin.container';
 import BasketComponent from './containers/basket.container';
-import AboutBookComponent from './containers/about-book.container'
+import AboutBookComponent from './containers/about-book.container';
+
 const store: Store<RootState> = configureStore();
 
 export class App extends React.Component {

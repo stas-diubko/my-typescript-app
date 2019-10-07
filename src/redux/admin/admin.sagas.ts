@@ -20,12 +20,12 @@ export function* getUsers(): IterableIterator<any> {
               }
 
             let dataRequest = yield call(request, `users`, 'PUT', { page: page, pageSize: pageSize });
-                             
+                                           
             yield put ({
                 type: "GOT_USERS",
                 payload: {
                   users: dataRequest.data,
-                  usersLength: dataRequest.usersLength
+                  usersLength: dataRequest.usersLength 
                 }
               })  
               yield put ({

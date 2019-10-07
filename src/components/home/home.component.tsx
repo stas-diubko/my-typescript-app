@@ -169,11 +169,12 @@ adminComponent:any
                         alignItems: 'center',
                         flexDirection: "column",
                         padding: "10px",
-                        borderRadius: "20px"
+                        borderRadius: "20px",
+                        border: "1px solid rgb(216, 155, 63)"
                       }}
                         >
                         <div className="user-img">
-                            <img src={this.props.img} style={{height: "250px", width: "200px", }}/>
+                            <img src={this.props.img} style={{maxHeight: "250px", width: "200px", borderRadius:"20px", border:"1px solid rgb(216, 155, 63)" }}/>
                         </div>
                         <div><b>User's name: </b>{this.props.name}</div>
                         <button onClick={this.onChangeData} style={{margin: "10px"}}>Change user's data</button>

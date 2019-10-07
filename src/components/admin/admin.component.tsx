@@ -38,7 +38,7 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
       decoded = jwt_decode(dataUserToken);
     }
 
-    if( decoded === null || !decoded.isAdmin) {
+    if( decoded === null || decoded.role !== "admin") {
         return <Redirect to="/home"/>
     } 
     
@@ -61,3 +61,4 @@ export class AdminComponent extends React.Component<AdminProps, AdminState>  {
 }
 
 export default AdminComponent;
+

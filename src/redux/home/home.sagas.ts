@@ -45,10 +45,11 @@ export function* doLogout(): IterableIterator<any> {
                 }
               })
                                          
-              if (dataUserToken !== null) {                     
+              if (dataUserToken !== null) {
+                            
                 const API_PATH = decoded.id
                 let dataUsers = yield call(request, `users/avatar/${API_PATH}`, 'GET');
-                                                         
+                                                                         
                 yield put ({
                   type: 'GET_AVA',
                   payload: {
@@ -76,7 +77,7 @@ export function* doLogout(): IterableIterator<any> {
         let decoded:any = jwt_decode(dataUserToken);
 
         let dataUsers = yield call(request, `users/avatar/${decoded.id}`, 'PUT', { name: name, image: imgChange });
-                          
+                                  
         localStorage.removeItem('token');
         localStorage.setItem('token', dataUsers.data);
 

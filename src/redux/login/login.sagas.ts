@@ -10,7 +10,7 @@ export function* doLogin(): IterableIterator<any> {
              username: action.data.email,
              password: action.data.pass
            }
-              
+           
         let dataRequest = yield call(request, `login`, 'POST', user);
 
             yield put({
