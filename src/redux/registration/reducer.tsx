@@ -17,10 +17,10 @@ export const initialState: RegisterState = {
 
 export function registerReducer (state: RegisterState = initialState, action: any) {
     switch (action.type) {
-        case '@@register/DO_REGISTER': {
+        case 'DO_REGISTER': {
             return initialState;
         }
-        case '@@register/SUCCESSFULL': {
+        case 'REGISTER_SUCCESSFULL': {
             const data = action.payload;
            
             return {
@@ -31,7 +31,7 @@ export function registerReducer (state: RegisterState = initialState, action: an
                 
             };
         }
-        case '@@register/ERROR_OCCURED': {
+        case 'ERROR_OCCURED': {
             const { error } = action.payload;
             return {
                 ...state,

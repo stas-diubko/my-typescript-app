@@ -14,14 +14,14 @@ import { addBook, getBooks, deleteBook, changeDataBook } from "./books_table/boo
 import { getDataBasket } from "./basket/basket.sagas";
 import { getBookId } from "./about_book/about-book.sagas";
 import { getBooksToMain } from "./book_list/book-list.sagas";
-
+import thunk from 'redux-thunk';
 
 export default function configureStore(
     initialState?: RootState
   ): Store<RootState> {
     
     const sagaMiddleware = createSagaMiddleware();
-    const middlewares = [sagaMiddleware];
+    const middlewares = [sagaMiddleware, thunk];
 
     const composeEnhancers = composeWithDevTools({});
 

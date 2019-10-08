@@ -87,6 +87,14 @@ export function basketReducer(state: BasketState = initialState, action: any) {
                 
             }
         }
+
+        case "GET_BOOKS_TO_TRY_THUNK": {
+            
+            return {
+                ...state,
+                
+            }
+        }
         
         default:
             return state;

@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import Button from '@material-ui/core/Button';
 import './basket.component.css';
 import { Redirect } from 'react-router';
+// import { dispatch } from "react-redux";
+import {getBooks} from "../../redux/basket/actions";
 
 export interface  BasketProps {
     getDataBasket: () => object;
@@ -15,6 +17,7 @@ export interface  BasketProps {
     basket: Array<any>; 
     countItem: string;
     dataStore: object[];
+    getBooks: ()=>any
 }
 
 export class BasketComponent extends React.Component<BasketProps, BasketState> {
@@ -37,6 +40,11 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
         getDataBasket()
     }
 
+    // onGetBooks = () => {
+    //     console.log('test');
+    //     getBooks()
+    // }
+
     render () {
         let dataBasketStr:any = localStorage.getItem('basket')
         
@@ -58,6 +66,8 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
             getDataBasket()
         }
 
+        
+
         let arrBasket = this.props.basket
                 
         if(arrBasket == null) {
@@ -70,7 +80,10 @@ export class BasketComponent extends React.Component<BasketProps, BasketState> {
             cartSumm = +cartSumm + +this.props.basket[i].totalPrice
         }
         
-        let buyBlock = <div style={{display: "flex"}}><div style={{margin: "20px auto 20px"}}><Button style={{ backgroundColor: "lime", width: "200px"}}>Buy</Button></div></div> 
+        let buyBlock = <div style={{display: "flex"}}><div style={{margin: "20px auto 20px"}}>
+            <Button  style={{ backgroundColor: "lime", width: "200px"}}  onClick={this.props.getBooks}>
+                Buy
+            </Button></div></div> 
         let message = '';
 
         if (this.props.basket.length == 0){

@@ -19,3 +19,21 @@ export function getDataBasket () {
 export function removeFromCart (data:string) {
     return { type:BasketActions.REMOVE_FROM_CART, data }
 }
+
+export const getBooksTryThunk = (data:any) => {
+    return { type:BasketActions.GET_BOOKS_TO_TRY_THUNK, data }
+}
+
+// просто пробую thunk :)
+
+export const getBooks = () => {
+    return (dispatch:any) => {
+        fetch('http://localhost:4200/books')
+            .then(res => res.json())
+            .then(
+                data => (
+                    dispatch(getBooksTryThunk(data))
+                ),
+            );
+    }
+  }

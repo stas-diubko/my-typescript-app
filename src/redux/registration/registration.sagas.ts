@@ -3,7 +3,7 @@ import { delay } from "q";
 import { request } from '../../help/request';
 
 export function* doInit({}): IterableIterator<any> {
-    yield takeEvery(`@@register/DO_REGISTER`, function*(action: any) {
+    yield takeEvery(`DO_REGISTER`, function*(action: any) {
      let {name, email, pass, imgChange} =  action.data;
      let password = pass
      try {
@@ -23,7 +23,7 @@ export function* doInit({}): IterableIterator<any> {
             });
 
             yield put({
-              type: `@@register/SUCCESSFULL`,
+              type: `REGISTER_SUCCESSFULL`,
               payload: {
                 email: email,
                 pass: pass,
